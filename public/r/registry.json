@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "satori-ui",
+  "homepage": "https://satoriui.com",
+  "items": [
+    {
+      "name": "hello-world",
+      "type": "registry:block",
+      "title": "Hello World",
+      "description": "A simple hello world component.",
+      "files": [
+        {
+          "path": "registry/satori/hello-world.tsx",
+          "type": "registry:component"
+        }
+      ]
+    }
+  ]
+}

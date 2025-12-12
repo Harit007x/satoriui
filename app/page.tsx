@@ -1,65 +1,174 @@
-import Image from "next/image";
+import Image, { type ImageProps } from "next/image";
+import { Icons } from "./components/icons";
+import Footer from "./components/footer";
+import Showcase01 from "./components/showcase-01";
+
+type Props = Omit<ImageProps, "src"> & {
+  srcLight: string;
+  srcDark: string;
+};
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="antialiased min-h-screen flex flex-col selection:bg-slate-200 selection:text-slate-900">
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 bg-white"></div>
+        <div className="absolute inset-0 bg-grid [mask-image:linear-gradient(to_bottom,white,transparent)]"></div>
+      </div>
+
+      <nav className="fixed w-full z-50 top-0 border-b border-slate-200/80 bg-white/80 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-2 group cursor-pointer">
+            <div className="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center shadow-md shadow-slate-200">
+              <Icons.layers className="h-4 w-4" />
+            </div>
+            <span className="font-display font-semibold text-lg tracking-tight text-slate-900">
+              Satori<span className="text-slate-400 font-normal">UI</span>
+            </span>
+          </div>
+
+          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-500">
+            <a href="#" className="hover:text-slate-900 transition-colors">
+              Components
+            </a>
+            <a href="#" className="hover:text-slate-900 transition-colors">
+              Interactions
+            </a>
+            <a href="#" className="hover:text-slate-900 transition-colors">
+              Foundations
+            </a>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <button className="hidden sm:flex text-slate-400 hover:text-slate-900 transition-colors">
+              <Icons.search className="h-4 w-4" />
+            </button>
+            <button className="text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-lg transition-all shadow-sm hover:shadow-md">
+              Get Access
+            </button>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </nav>
+
+      <main className="relative z-10 flex-grow pt-32 pb-20 lg:pt-40 px-6">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 lg:gap-20 items-center mb-16">
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-8 fade-in-up">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-slate-200 bg-white shadow-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-600"></span>
+              </span>
+              <span className="text-xs font-semibold text-slate-600 tracking-wide uppercase">
+                Core System v2.4
+              </span>
+            </div>
+
+            <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05] text-slate-900">
+              Refined <br />
+              <span className="bg-clip-text text-transparent bg-gradient-to-br from-slate-900 via-slate-600 to-slate-400">
+                Micro-Moves.
+              </span>
+            </h1>
+
+            <p className="text-lg text-slate-500 leading-relaxed max-w-lg">
+              A comprehensive suite of high-fidelity interaction components.
+              Designed with physics-based transitions for a natural, tactile
+              feel.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto pt-2">
+              <button className="group cursor-pointer w-full sm:w-auto px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-lg font-semibold text-sm shadow-xl shadow-slate-200/50 flex items-center justify-center gap-2">
+                Browse Components
+                <Icons.arrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-[2px]" />
+              </button>
+
+              <button className="w-full sm:w-auto px-6 py-3 rounded-lg font-semibold text-sm text-slate-600 border border-slate-200 hover:bg-slate-50 hover:text-slate-900 transition-all flex items-center justify-center gap-2 bg-white">
+                <Icons.terminal className="h-4 w-4" />
+                Documentation
+              </button>
+            </div>
+            <div className="flex items-center gap-8 pt-4">
+              <div className="flex flex-col">
+                <span className="text-2xl font-display font-bold text-foreground">
+                  50+
+                </span>
+                <span className="text-xs text-muted-foreground">
+                  Components
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-2xl font-display font-bold text-foreground">
+                  100%
+                </span>
+                <span className="text-xs text-muted-foreground">
+                  Accessible
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-2xl font-display font-bold text-foreground">
+                  MIT
+                </span>
+                <span className="text-xs text-muted-foreground">License</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative w-full max-w-md mx-auto fade-in-up delay-100">
+            <Showcase01 />
+          </div>
         </div>
       </main>
+      <section className="relative z-10 py-24 px-6 border-t border-border bg-muted/20">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="font-display text-3xl sm:text-4xl font-semibold text-foreground mb-4">
+              Built for developers
+            </h2>
+            <p className="text-muted-foreground max-w-lg mx-auto">
+              Everything you need to build beautiful interfaces, faster.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                icon: Icons.code,
+                title: "Copy & Paste",
+                description:
+                  "Just copy the code and paste it into your project. No complex setup required.",
+              },
+              {
+                icon: Icons.palette,
+                title: "Fully Customizable",
+                description:
+                  "Every component is designed to be customized to match your brand.",
+              },
+              {
+                icon: Icons.pointer,
+                title: "Physics-Based Motion",
+                description:
+                  "Smooth, natural animations powered by spring physics for a tactile feel.",
+              },
+            ].map((feature, index) => (
+              <div
+                key={index}
+                className="group p-6 rounded-xl border border-border bg-card hover:shadow-elevation-medium transition-all duration-300"
+              >
+                <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center mb-4 group-hover:bg-foreground group-hover:text-background transition-colors">
+                  <feature.icon className="h-5 w-5" />
+                </div>
+                <h3 className="font-display font-semibold text-foreground mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {feature.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <Footer />
     </div>
   );
 }
