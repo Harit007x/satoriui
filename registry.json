@@ -10,7 +10,7 @@
       "description": "Base card component",
       "files": [
         {
-          "path": "https://satoriui.harit.online/r/card.json",
+          "path": "packages/card/card.tsx",
           "type": "registry:component"
         }
       ]
