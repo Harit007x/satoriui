@@ -1,0 +1,11 @@
+{
+  "name": "@satoriui/card",
+  "version": "0.0.2",
+  "private": false,
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "registry.json",
+    "card.tsx"
+  ]
+}
