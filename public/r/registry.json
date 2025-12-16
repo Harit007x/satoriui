@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "satori-ui",
-  "homepage": "https://satoriui.com",
+  "homepage": "https://satoriui.harit.online",
   "items": [
     {
       "name": "card",
