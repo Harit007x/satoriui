@@ -1,7 +1,7 @@
+import Footer from "@/components/footer";
+import { Icons } from "@/components/icons";
+import Showcase01 from "@/components/showcase-01";
 import Image, { type ImageProps } from "next/image";
-import { Icons } from "./components/icons";
-import Footer from "./components/footer";
-import Showcase01 from "./components/showcase-01";
 
 type Props = Omit<ImageProps, "src"> & {
   srcLight: string;
