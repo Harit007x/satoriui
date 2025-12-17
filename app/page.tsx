@@ -2,6 +2,7 @@ import Footer from "@/components/footer";
 import { Icons } from "@/components/icons";
 import Showcase01 from "@/components/showcase-01";
 import Image, { type ImageProps } from "next/image";
+import Link from "next/link";
 
 type Props = Omit<ImageProps, "src"> & {
   srcLight: string;
@@ -28,15 +29,26 @@ export default function Home() {
           </div>
 
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-500">
-            <a href="#" className="hover:text-slate-900 transition-colors">
+            <Link
+              href="/components"
+              className="hover:text-slate-900 transition-colors"
+            >
               Components
-            </a>
-            <a href="#" className="hover:text-slate-900 transition-colors">
+            </Link>
+
+            <Link
+              href="/interactions"
+              className="hover:text-slate-900 transition-colors"
+            >
               Interactions
-            </a>
-            <a href="#" className="hover:text-slate-900 transition-colors">
+            </Link>
+
+            <Link
+              href="/foundations"
+              className="hover:text-slate-900 transition-colors"
+            >
               Foundations
-            </a>
+            </Link>
           </div>
 
           <div className="flex items-center gap-4">
@@ -77,10 +89,13 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto pt-2">
-              <button className="group cursor-pointer w-full sm:w-auto px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-lg font-semibold text-sm shadow-xl shadow-slate-200/50 flex items-center justify-center gap-2">
+              <Link
+                href="/components"
+                className="group w-full sm:w-auto px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-lg font-semibold text-sm shadow-xl shadow-slate-200/50 flex items-center justify-center gap-2"
+              >
                 Browse Components
                 <Icons.arrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-[2px]" />
-              </button>
+              </Link>
 
               <button className="w-full sm:w-auto px-6 py-3 rounded-lg font-semibold text-sm text-slate-600 border border-slate-200 hover:bg-slate-50 hover:text-slate-900 transition-all flex items-center justify-center gap-2 bg-white">
                 <Icons.terminal className="h-4 w-4" />

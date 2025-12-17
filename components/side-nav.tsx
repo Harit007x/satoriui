@@ -1,21 +1,18 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { RefObject, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import clsx from "clsx";
 
-import {
-  sidebarAtom,
-  useHandleClickOutside,
-  useSidebarMediaQuery,
-} from "@repo/common/common-library";
 import MenuItem from "./menu-item";
 import { Icons } from "./icons";
-import { SIDENAV_ITEMS } from "@/app/utils/constants";
+import { SIDENAV_ITEMS } from "@/utils/constants";
 import Header from "./header";
 import { SideNavToggleBtn } from "./side-nav-toggle-btn";
+import { useSidebarMediaQuery } from "@/hooks/useSidebarMediaQuery";
+import { useHandleClickOutside } from "@/hooks/useHandleClickOutside";
 
 interface SideNavProps {
   children: React.ReactNode;
@@ -25,12 +22,14 @@ const SideNav = ({ children }: SideNavProps) => {
   const sideNavRef = useRef<HTMLDivElement | null>(null);
 
   const { isSmallScreen, sidebarOpen, setSidebarOpen } = useSidebarMediaQuery(
-    "(min-width: 1100px)",
-    sidebarAtom
+    "(min-width: 1100px)"
   );
 
-  useHandleClickOutside(sideNavRef, isSmallScreen, () => setSidebarOpen(false));
-
+  useHandleClickOutside(
+    sideNavRef as RefObject<HTMLDivElement>,
+    isSmallScreen,
+    () => setSidebarOpen(false)
+  );
   const toggleCollapse = () => {
     setSidebarOpen(!sidebarOpen);
   };
@@ -63,7 +62,7 @@ const SideNav = ({ children }: SideNavProps) => {
             />
 
             <div className="w-full flex justify-between items-center text-xl font-bold">
-              Aleracare
+              {/* Aleracare */}
               <SideNavToggleBtn
                 toggleCollapse={toggleCollapse}
                 collapsed={sidebarOpen}

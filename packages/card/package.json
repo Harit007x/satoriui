@@ -7,8 +7,5 @@
   "files": [
     "registry.json",
     "card.tsx"
-  ],
-  "shadcn": {
-    "registry": "https://satoriui.harit.online/r/{name}.json"
-  }
+  ]
 }

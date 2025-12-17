@@ -16,3 +16,8 @@ export type Error = {
     };
   };
 };
+
+export interface SideNavState {
+  sidebarOpen: boolean;
+  setSidebarOpen: (val: boolean) => void;
+}

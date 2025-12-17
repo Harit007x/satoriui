@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
-import { SideNavItem } from "@/app/utils/types";
+import { SideNavItem } from "@/utils/types";
 import { Icons } from "./icons";
 
 const MenuItem = ({ item }: { item: SideNavItem }) => {
