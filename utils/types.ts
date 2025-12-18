@@ -21,3 +21,8 @@ export interface SideNavState {
   sidebarOpen: boolean;
   setSidebarOpen: (val: boolean) => void;
 }
+
+export type SideNavbar = {
+  title: string;
+  items: SideNavItem[];
+};

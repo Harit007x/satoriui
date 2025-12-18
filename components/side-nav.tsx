@@ -1,9 +1,6 @@
 "use client";
 
-import { RefObject, useRef, useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-
+import { RefObject, useRef } from "react";
 import clsx from "clsx";
 
 import MenuItem from "./menu-item";
@@ -12,14 +9,14 @@ import Header from "./header";
 import { SideNavToggleBtn } from "./side-nav-toggle-btn";
 import { useSidebarMediaQuery } from "@/hooks/useSidebarMediaQuery";
 import { useHandleClickOutside } from "@/hooks/useHandleClickOutside";
-import { SideNavItem } from "@/utils/types";
+import { SideNavbar } from "@/utils/types";
 
 interface SideNavProps {
   children: React.ReactNode;
-  sidenavItems: SideNavItem[];
+  navBar: SideNavbar[];
 }
 
-const SideNav = ({ sidenavItems, children }: SideNavProps) => {
+const SideNav = ({ navBar, children }: SideNavProps) => {
   const sideNavRef = useRef<HTMLDivElement | null>(null);
 
   const { isSmallScreen, sidebarOpen, setSidebarOpen } = useSidebarMediaQuery(
@@ -53,7 +50,7 @@ const SideNav = ({ sidenavItems, children }: SideNavProps) => {
           }
         )}
       >
-        <div className="flex bg-background flex-col gap-4 w-[14rem] h-full">
+        <div className="flex bg-background flex-col gap-4 w-[18rem] h-full">
           {/* Logo */}
           <div className="flex gap-4 items-center min-w-[8rem] h-16 p-3 border-b border-muted-background hidden sm:flex">
             <div className="w-full flex justify-between items-center text-xl font-bold">
@@ -68,7 +65,7 @@ const SideNav = ({ sidenavItems, children }: SideNavProps) => {
           </div>
 
           {/* Menu */}
-          <div className="flex flex-col space-y-1 px-4 flex-grow">
+          <div className="flex flex-col px-5 flex-grow">
             <div className="h-16 flex items-center sm:hidden">
               <SideNavToggleBtn
                 toggleCollapse={toggleCollapse}
@@ -79,8 +76,17 @@ const SideNav = ({ sidenavItems, children }: SideNavProps) => {
               </SideNavToggleBtn>
             </div>
 
-            {sidenavItems.map((item, idx) => (
-              <MenuItem key={idx} item={item} />
+            {navBar.map((category, idx) => (
+              <div key={idx} className="mt-4">
+                <p className="px-2 mb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                  {category.title}
+                </p>
+                <div className="flex flex-col gap-1">
+                  {category.items.map((item, itemIdx) => (
+                    <MenuItem key={itemIdx} item={item} />
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
 
