@@ -24,13 +24,13 @@ const MenuItem = ({ item }: { item: SideNavItem }) => {
         <button
           onClick={toggleSubMenu}
           className={clsx(
-            "flex items-center p-2 rounded-md w-full justify-between hover:bg-primary",
+            "flex items-center p-2 rounded-md w-full justify-between text-muted-foreground hover:bg-accent hover:cursor-pointer",
             {
               "bg-zinc-100": pathname.includes(item.path),
             }
           )}
         >
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center gap-2">
             {item.icon}
             <span className="font-medium text-sm">{item.title}</span>
           </div>
@@ -51,10 +51,12 @@ const MenuItem = ({ item }: { item: SideNavItem }) => {
                 key={idx}
                 href={subItem.path}
                 className={clsx(
-                  "flex items-center space-x-3 text-sm p-2 px-4 rounded-md",
+                  "flex items-center gap-2 text-sm p-2 px-4 rounded-md",
                   {
                     "bg-primary text-white": isActive(subItem.path),
-                    "hover:bg-primary/20": !isActive(subItem.path),
+                    "hover:bg-accent text-muted-foreground": !isActive(
+                      subItem.path
+                    ),
                   }
                 )}
               >
@@ -75,7 +77,7 @@ const MenuItem = ({ item }: { item: SideNavItem }) => {
         "flex items-center gap-2 min-w-[10rem] p-2 py-2.5 rounded-lg text-sm",
         {
           "bg-primary text-white": isActive(item.path),
-          "text-muted-foreground hover:bg-primary/20": !isActive(item.path),
+          "text-muted-foreground hover:bg-accent": !isActive(item.path),
         }
       )}
     >

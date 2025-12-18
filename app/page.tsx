@@ -4,11 +4,6 @@ import Showcase01 from "@/components/showcase-01";
 import Image, { type ImageProps } from "next/image";
 import Link from "next/link";
 
-type Props = Omit<ImageProps, "src"> & {
-  srcLight: string;
-  srcDark: string;
-};
-
 export default function Home() {
   return (
     <div className="antialiased min-h-screen flex flex-col selection:bg-slate-200 selection:text-slate-900">
@@ -30,7 +25,7 @@ export default function Home() {
 
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-500">
             <Link
-              href="/components"
+              href="/components/button"
               className="hover:text-slate-900 transition-colors"
             >
               Components
@@ -90,7 +85,7 @@ export default function Home() {
 
             <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto pt-2">
               <Link
-                href="/components"
+                href="/components/button"
                 className="group w-full sm:w-auto px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-lg font-semibold text-sm shadow-xl shadow-slate-200/50 flex items-center justify-center gap-2"
               >
                 Browse Components
