@@ -8,17 +8,18 @@ import clsx from "clsx";
 
 import MenuItem from "./menu-item";
 import { Icons } from "./icons";
-import { SIDENAV_ITEMS } from "@/utils/constants";
 import Header from "./header";
 import { SideNavToggleBtn } from "./side-nav-toggle-btn";
 import { useSidebarMediaQuery } from "@/hooks/useSidebarMediaQuery";
 import { useHandleClickOutside } from "@/hooks/useHandleClickOutside";
+import { SideNavItem } from "@/utils/types";
 
 interface SideNavProps {
   children: React.ReactNode;
+  sidenavItems: SideNavItem[];
 }
 
-const SideNav = ({ children }: SideNavProps) => {
+const SideNav = ({ sidenavItems, children }: SideNavProps) => {
   const sideNavRef = useRef<HTMLDivElement | null>(null);
 
   const { isSmallScreen, sidebarOpen, setSidebarOpen } = useSidebarMediaQuery(
@@ -55,12 +56,6 @@ const SideNav = ({ children }: SideNavProps) => {
         <div className="flex bg-background flex-col gap-4 w-[14rem] h-full">
           {/* Logo */}
           <div className="flex gap-4 items-center min-w-[8rem] h-16 p-3 border-b border-muted-background hidden sm:flex">
-            <img
-              src="/png/alera-logo.png"
-              alt="Aleracare"
-              className="object-cover h-6"
-            />
-
             <div className="w-full flex justify-between items-center text-xl font-bold">
               {/* Aleracare */}
               <SideNavToggleBtn
@@ -84,14 +79,12 @@ const SideNav = ({ children }: SideNavProps) => {
               </SideNavToggleBtn>
             </div>
 
-            {SIDENAV_ITEMS.map((item, idx) => (
+            {sidenavItems.map((item, idx) => (
               <MenuItem key={idx} item={item} />
             ))}
           </div>
 
-          <p className="text-sm font-normal m-auto p-4 tracking-wide">
-            Patient Portal
-          </p>
+          <p className="text-sm font-normal m-auto p-4 tracking-wide"></p>
         </div>
       </div>
 

@@ -72,15 +72,19 @@ const MenuItem = ({ item }: { item: SideNavItem }) => {
     <Link
       href={item.path}
       className={clsx(
-        "flex items-center space-x-3 min-w-[10rem] p-2 rounded-md",
+        "flex items-center gap-2 min-w-[10rem] p-2 py-2.5 rounded-lg text-sm",
         {
           "bg-primary text-white": isActive(item.path),
-          "hover:bg-primary/20": !isActive(item.path),
+          "text-muted-foreground hover:bg-primary/20": !isActive(item.path),
         }
       )}
     >
-      {item.icon}
-      <span className="font-medium text-sm">{item.title}</span>
+      {item.icon && (
+        <span className="h-4 w-4 shrink-0 flex items-center justify-center">
+          {item.icon}
+        </span>
+      )}
+      <span className="leading-4">{item.title}</span>
     </Link>
   );
 };

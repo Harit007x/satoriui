@@ -1,20 +1,21 @@
 import { Icons } from "@/components/icons";
 import { SideNavItem } from "./types";
 
-export const SIDENAV_ITEMS: SideNavItem[] = [
+const prefix: string = "/components";
+export const ComponentsNavbarItems: SideNavItem[] = [
   {
-    title: "Dashboard",
-    path: "/dashboard",
+    title: "Button",
+    path: `${prefix}/button`,
     icon: <Icons.home width="16" height="16" />,
   },
   {
-    title: "Account Info",
-    path: "/account-info",
+    title: "Backgorunds",
+    path: `${prefix}/backgrounds`,
     icon: <Icons.home width="16" height="16" />,
   },
   {
-    title: "Prescription",
-    path: "/prescription",
+    title: "Showcase",
+    path: `${prefix}/showcase`,
     icon: <Icons.pill width="16" height="16" />,
   },
   {
@@ -58,16 +59,15 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     path: "/settings",
     icon: <Icons.settings width="16" height="16" />,
   },
-  // {
-  //   title: 'Projects',
-  //   path: '/projects',
-  //   icon: <Icons.folder width="16" height="16" />,
-  //   submenu: true,
-  //   subMenuItems: [
-  //     { title: 'All', path: '/projects' },
-  //     { title: 'Web Design', path: '/projects/web-design' },
-  //     { title: 'Graphic Design', path: '/projects/graphic-design' },
-
-  //   ],
-  // },
+  {
+    title: "Projects",
+    path: "/projects",
+    icon: <Icons.folder width="16" height="16" />,
+    submenu: true,
+    subMenuItems: [
+      { title: "All", path: "/projects" },
+      { title: "Web Design", path: "/projects/web-design" },
+      { title: "Graphic Design", path: "/projects/graphic-design" },
+    ],
+  },
 ];

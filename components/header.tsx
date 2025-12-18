@@ -22,8 +22,8 @@ function Header(props: IHeader) {
   return (
     <div
       className={clsx(
-        "flex justify-end border-b border-muted-background h-16 px-4 items-center",
-        { "justify-between": !props.collapsed }
+        "flex justify-between border-b border-muted-background h-16 px-4 items-center",
+        { "justify-end": props.collapsed }
       )}
     >
       <SideNavToggleBtn
