@@ -75,7 +75,7 @@ const DottedModern = () => {
 
         <MotionWrapper>
           <p className="text-lg text-slate-500 leading-relaxed text-center max-w-xl">
-            Plug-and-play snippets—just copy, paste, and use in your next
+            Plug-and-play snippets-just copy, paste, and use in your next
             project. Built with Tailwind CSS and Vanilla CSS for seamless
             integration.
           </p>
