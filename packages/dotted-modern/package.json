@@ -1,0 +1,16 @@
+{
+  "name": "@satoriui/dotted-modern",
+  "version": "0.0.1",
+  "private": false,
+  "type": "module",
+  "sideEffects": false,
+  "license": "MIT",
+  "files": [
+    "registry.json",
+    "dotted-modern.tsx"
+  ],
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  }
+}

@@ -25,7 +25,7 @@ export default function Home() {
 
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-500">
             <Link
-              href="/components/button"
+              href="/components/dotted-modern"
               className="hover:text-slate-900 transition-colors"
             >
               Components
@@ -85,7 +85,7 @@ export default function Home() {
 
             <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto pt-2">
               <Link
-                href="/components/button"
+                href="/components/dotted-modern"
                 className="group w-full sm:w-auto px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-lg font-semibold text-sm shadow-xl shadow-slate-200/50 flex items-center justify-center gap-2"
               >
                 Browse Components

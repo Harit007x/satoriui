@@ -51,9 +51,9 @@ const SideNav = ({ navBar, children }: SideNavProps) => {
         )}
       >
         <div className="flex bg-background flex-col gap-4 w-[18rem] h-full">
-          {/* Logo */}
-          <div className="flex gap-4 items-center min-w-[8rem] h-16 p-4 border-b border-muted-background hidden sm:flex">
-            <div className="w-full flex justify-between items-center text-xl font-bold">
+          {/* Logo - Fixed height with consistent padding */}
+          <div className="flex gap-4 items-center min-h-[4rem] h-16 border-b border-muted-background">
+            <div className="w-full  flex justify-between items-center text-xl font-bold pl-4">
               {/* Aleracare */}
               <SideNavToggleBtn
                 toggleCollapse={toggleCollapse}
@@ -66,16 +66,6 @@ const SideNav = ({ navBar, children }: SideNavProps) => {
 
           {/* Menu */}
           <div className="flex flex-col px-5 flex-grow">
-            <div className="h-16 flex items-center bg-red-400 sm:hidden">
-              <SideNavToggleBtn
-                toggleCollapse={toggleCollapse}
-                collapsed={sidebarOpen}
-                className={clsx({ hidden: !sidebarOpen })}
-              >
-                <Icons.panelLeftClose className="h-5 w-5" />
-              </SideNavToggleBtn>
-            </div>
-
             {navBar.map((category, idx) => (
               <div key={idx} className="mt-4">
                 <p className="px-2 mb-2 text-sm font-medium ui-text text-foreground">

@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "card",
-  "type": "registry:component",
   "title": "Card",
   "description": "Base card component",
   "files": [
@@ -10,5 +9,6 @@
       "content": "// card.tsx\nimport * as React from \"react\";\nimport clsx from \"clsx\";\n\nexport function Card({\n  children,\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) {\n  return (\n    <div\n      className={clsx(\n        \"rounded-xl border border-gray-200 bg-white shadow-sm\",\n        \"dark:border-white/10 dark:bg-[#1a1a1a]\",\n        className\n      )}\n      {...props}\n    >\n      {children}\n    </div>\n  );\n}\n",
       "type": "registry:component"
     }
-  ]
+  ],
+  "type": "registry:component"
 }
