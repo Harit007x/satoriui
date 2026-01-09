@@ -162,7 +162,7 @@ export default function Home() {
             ].map((feature, index) => (
               <div
                 key={index}
-                className="group p-6 rounded-xl border border-border bg-card hover:shadow-elevation-medium transition-all duration-300"
+                className="group p-6 rounded-md border border-border bg-card hover:shadow-elevation-medium transition-all duration-300"
               >
                 <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center mb-4 group-hover:bg-foreground group-hover:text-background transition-colors">
                   <feature.icon className="h-5 w-5" />
