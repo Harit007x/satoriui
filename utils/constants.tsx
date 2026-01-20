@@ -35,22 +35,12 @@ export const ComponentsNavbar: SideNavbar[] = [
     ],
   },
   {
-    title: "UI Elements",
+    title: "Showcases",
     items: [
       {
-        title: "Button",
-        path: `${prefix}/button`,
-        icon: <Icons.home width="16" height="16" />,
-      },
-      {
-        title: "Backgorunds",
-        path: `${prefix}/backgrounds`,
-        icon: <Icons.home width="16" height="16" />,
-      },
-      {
-        title: "Showcase",
-        path: `${prefix}/showcase`,
-        icon: <Icons.pill width="16" height="16" />,
+        title: "Keyboard UI",
+        path: `${prefix}/keyboard-ui`,
+        icon: <Icons.keyboard width="16" height="16" />,
       },
     ],
   },

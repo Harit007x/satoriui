@@ -1,0 +1,11 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "keyboard",
+  "type": "registry:component",
+  "files": [
+    {
+      "path": "keyboard.tsx",
+      "type": "registry:component"
+    }
+  ]
+}
