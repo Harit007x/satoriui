@@ -9,6 +9,7 @@ export default function Page() {
         title="Dotted Background"
         description="Modern, elegant hero, with subtle dotted background."
         preview={<DottedModern />}
+        scale={0.9}
         tsxCode={`"use client";
 import Link from "next/link";
 import React from "react";

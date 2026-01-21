@@ -1,5 +1,4 @@
 import { CodeBlock } from "./code-block";
-import { PreviewCard } from "./preview-card";
 
 type ComponentShowcaseProps = {
   title: string;
@@ -7,6 +6,7 @@ type ComponentShowcaseProps = {
   preview: React.ReactNode;
   tsxCode: string;
   jsxCode?: string;
+  scale?: number;
 };
 
 export function ComponentShowcase({
@@ -15,6 +15,7 @@ export function ComponentShowcase({
   preview,
   tsxCode,
   jsxCode,
+  scale = 0,
 }: ComponentShowcaseProps) {
   return (
     <section className="space-y-6 mx-auto max-w-[700px]">
@@ -28,8 +29,24 @@ export function ComponentShowcase({
 
       <div>
         {/* Preview */}
-        <PreviewCard>{preview}</PreviewCard>
-
+        <div className="relative rounded-tl-md rounded-tr-md border border-slate-200 border-b-0 bg-white overflow-hidden">
+          <div className="min-h-[360px] w-full flex items-center justify-center p-4">
+            {/* Add this wrapper div */}
+            <div className="relative w-full h-full flex items-center justify-center">
+              <div
+                className="origin-center"
+                style={{
+                  transform: `scale(${scale})`,
+                  transformOrigin: "center",
+                  width: `${100 / scale}%`, // This is the key fix
+                  maxWidth: "none", // Override any max-width
+                }}
+              >
+                {preview}
+              </div>
+            </div>
+          </div>
+        </div>
         {/* Code */}
         <div className="space-y-4">
           <CodeBlock title="TSX" code={tsxCode} />

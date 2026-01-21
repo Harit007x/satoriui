@@ -9,6 +9,7 @@ export default function Page() {
         title="Keyboard UI"
         description="Modern, elegant hero, with subtle dotted background."
         preview={<KeyboardUI />}
+        scale={0.8}
         tsxCode={`"use client";
 import Link from "next/link";
 import React from "react";
