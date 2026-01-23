@@ -17,7 +17,7 @@ export default function Home() {
           <div className="flex items-center gap-2 group cursor-pointer">
             <div className="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center shadow-md shadow-slate-200">
               <Image
-                src="/logo/logo-svg.svg"
+                src="/logo/logo-svg-dark.svg"
                 alt="Simplification logo"
                 width={32}
                 height={32}

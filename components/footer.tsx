@@ -19,7 +19,7 @@ const Footer = () => {
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-lg bg-foreground text-background flex items-center justify-center shadow-md">
                 <Image
-                  src="/logo/logo-svg.svg"
+                  src="/logo/logo-svg-dark.svg"
                   alt="Simplification logo"
                   width={32}
                   height={32}
