@@ -105,26 +105,22 @@ export default function Home() {
             </div>
             <div className="flex items-center gap-8 pt-4">
               <div className="flex flex-col">
-                <span className="text-2xl font-display font-bold text-foreground">
+                <span className="text-2xl font-display font-bold text-slate-900">
                   50+
                 </span>
-                <span className="text-xs text-muted-foreground">
-                  Components
-                </span>
+                <span className="text-xs text-slate-500">Components</span>
               </div>
               <div className="flex flex-col">
-                <span className="text-2xl font-display font-bold text-foreground">
+                <span className="text-2xl font-display font-bold text-slate-900">
                   100%
                 </span>
-                <span className="text-xs text-muted-foreground">
-                  Accessible
-                </span>
+                <span className="text-xs text-slate-500">Accessible</span>
               </div>
               <div className="flex flex-col">
-                <span className="text-2xl font-display font-bold text-foreground">
+                <span className="text-2xl font-display font-bold text-slate-900">
                   MIT
                 </span>
-                <span className="text-xs text-muted-foreground">License</span>
+                <span className="text-xs text-slate-500">License</span>
               </div>
             </div>
           </div>
@@ -134,13 +130,13 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <section className="relative z-10 py-24 px-6 border-t border-border bg-muted/20">
+      <section className="relative z-10 py-24 px-6 border-t border-slate-200 bg-slate-50/20">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="font-display text-3xl sm:text-4xl font-semibold text-foreground mb-4">
+            <h2 className="font-display text-3xl sm:text-4xl font-semibold text-slate-900 mb-4">
               Built for developers
             </h2>
-            <p className="text-muted-foreground max-w-lg mx-auto">
+            <p className="text-slate-600 max-w-lg mx-auto">
               Everything you need to build beautiful interfaces, faster.
             </p>
           </div>
@@ -168,15 +164,15 @@ export default function Home() {
             ].map((feature, index) => (
               <div
                 key={index}
-                className="group p-6 rounded-md border border-border bg-card hover:shadow-elevation-medium transition-all duration-300"
+                className="group p-6 rounded-md border border-slate-200 bg-white hover:shadow-lg transition-all duration-300"
               >
-                <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center mb-4 group-hover:bg-foreground group-hover:text-background transition-colors">
+                <div className="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center mb-4 group-hover:bg-slate-900 group-hover:text-white transition-colors">
                   <feature.icon className="h-5 w-5" />
                 </div>
-                <h3 className="font-display font-semibold text-foreground mb-2">
+                <h3 className="font-display font-semibold text-slate-900 mb-2">
                   {feature.title}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-sm text-slate-600 leading-relaxed">
                   {feature.description}
                 </p>
               </div>
