@@ -1,6 +1,6 @@
 "use client";
 import { ComponentShowcase } from "@/components/component-showcase";
-import KeyboardUI from "@/packages/keyboard/keyboard-ui";
+import KeyboardUI from "@/packages/keyboard/keyboard";
 
 export default function Page() {
   return (
@@ -12,7 +12,6 @@ export default function Page() {
         scale={0.8}
         mobilePreviewImage="/snapshots/keyboard.png"
         tsxCode={`"use client";
-
 const KeyboardUI = () => {
   return (
     <div className="w-[800px] max-w-4xl mx-auto px-2 sm:px-4">

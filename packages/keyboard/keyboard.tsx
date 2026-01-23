@@ -77,7 +77,7 @@ const KeyboardUI = () => {
           ))}
           <div className="flex-[2.3] bg-[#348feb] rounded sm:rounded-md md:rounded-lg flex items-end justify-end pr-1 sm:pr-2 md:pr-4 pb-1 sm:pb-2 md:pb-3 text-neutral-900 text-xs sm:text-sm md:text-lg font-normal relative hover:bg-[#2682de] transition-colors cursor-default">
             <div className="absolute top-1 right-1 w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full opacity-90" />
-            <span className="truncate">return</span>
+            <span className="truncate text-white">return</span>
           </div>
         </div>
 

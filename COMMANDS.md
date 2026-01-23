@@ -14,7 +14,7 @@
 
   "registries": {
   "@aceternity": "https://ui.aceternity.com/registry/{name}.json",
-  "@satoriui": "https://satoriui.harit.online/r/{name}.json"
+  "@satoriui": "https://satoriui.site/r/{name}.json"
   }
 
 npx shadcn@latest add @satoriui/dotted-modern

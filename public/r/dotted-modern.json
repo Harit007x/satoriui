@@ -2,8 +2,10 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "dotted-modern",
   "title": "Dotted Modern",
-  "description": "Modern dotted background hero component with animated open-source badge",
-  "dependencies": ["motion"],
+  "description": "Modern dotted background hero component with animated open-source badge.",
+  "dependencies": [
+    "motion"
+  ],
   "files": [
     {
       "path": "packages/dotted-modern/dotted-modern.tsx",

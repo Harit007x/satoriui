@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "satori-ui",
-  "homepage": "https://satoriui.harit.online",
+  "homepage": "https://satoriui.site",
   "items": [
     {
       "name": "card",
@@ -19,11 +19,23 @@
       "name": "dotted-modern",
       "type": "registry:component",
       "title": "Dotted Modern",
-      "description": "Modern dotted background hero component with animated open-source badge",
+      "description": "Modern dotted background hero component with animated open-source badge.",
       "dependencies": ["motion"],
       "files": [
         {
           "path": "packages/dotted-modern/dotted-modern.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "keyboard",
+      "type": "registry:component",
+      "title": "Keyboard UI",
+      "description": "Slick minimalistic, keyboard UI.",
+      "files": [
+        {
+          "path": "packages/keyboard/keyboard.tsx",
           "type": "registry:component"
         }
       ]

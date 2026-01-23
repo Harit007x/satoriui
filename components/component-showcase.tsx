@@ -31,49 +31,51 @@ export function ComponentShowcase({
         <p className="text-sm text-slate-500 max-w-xl">{description}</p>
       </header>
 
-      {/* Preview */}
-      <div className="relative rounded-t-md border border-slate-200 bg-white overflow-hidden">
-        {/* 📱 Mobile snapshot (ONLY if provided) */}
-        {hasMobilePreview && (
-          <div className="block md:hidden">
-            <img
-              src={mobilePreviewImage}
-              alt={`${title} preview`}
-              className="w-full h-auto object-contain bg-white"
-              loading="lazy"
-            />
-          </div>
-        )}
+      <div>
+        {/* Preview */}
+        <div className="relative rounded-t-md border border-slate-200 bg-white overflow-hidden">
+          {/* 📱 Mobile snapshot (ONLY if provided) */}
+          {hasMobilePreview && (
+            <div className="block md:hidden">
+              <img
+                src={mobilePreviewImage}
+                alt={`${title} preview`}
+                className="w-full h-auto object-contain bg-white"
+                loading="lazy"
+              />
+            </div>
+          )}
 
-        {/* 🧠 Interactive preview */}
-        <div
-          className={[
-            "w-full items-center justify-center p-4",
-            hasMobilePreview
-              ? "hidden md:flex min-h-[360px]"
-              : "flex min-h-[360px]",
-          ].join(" ")}
-        >
-          <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
-            <div
-              className="origin-center"
-              style={{
-                transform: `scale(${scale})`,
-                transformOrigin: "center",
-                width: `${100 / scale}%`,
-                maxWidth: "none",
-              }}
-            >
-              {preview}
+          {/* 🧠 Interactive preview */}
+          <div
+            className={[
+              "w-full items-center justify-center p-4",
+              hasMobilePreview
+                ? "hidden md:flex min-h-[360px]"
+                : "flex min-h-[360px]",
+            ].join(" ")}
+          >
+            <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+              <div
+                className="origin-center"
+                style={{
+                  transform: `scale(${scale})`,
+                  transformOrigin: "center",
+                  width: `${100 / scale}%`,
+                  maxWidth: "none",
+                }}
+              >
+                {preview}
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Code */}
-      <div className="space-y-4">
-        <CodeBlock title="TSX" code={tsxCode} />
-        {jsxCode && <CodeBlock title="JSX" code={jsxCode} />}
+        {/* Code */}
+        <div className="space-y-4">
+          <CodeBlock title="TSX" code={tsxCode} />
+          {jsxCode && <CodeBlock title="JSX" code={jsxCode} />}
+        </div>
       </div>
     </section>
   );
