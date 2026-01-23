@@ -1,7 +1,7 @@
 import Footer from "@/components/footer";
 import { Icons } from "@/components/icons";
 import Showcase01 from "@/components/showcase-01";
-import Image, { type ImageProps } from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
@@ -16,7 +16,13 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2 group cursor-pointer">
             <div className="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center shadow-md shadow-slate-200">
-              <Icons.layers className="h-4 w-4" />
+              <Image
+                src="/logo/logo-svg.svg"
+                alt="Simplification logo"
+                width={32}
+                height={32}
+                className="rounded-md"
+              />
             </div>
             <span className="font-display font-semibold text-lg tracking-tight text-slate-900">
               Satori<span className="text-slate-400 font-normal">UI</span>

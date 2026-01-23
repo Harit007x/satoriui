@@ -1,4 +1,5 @@
 import { Icons } from "./icons";
+import Image from "next/image";
 
 const Footer = () => {
   const footerLinks = {
@@ -17,7 +18,13 @@ const Footer = () => {
           <div className="col-span-2 space-y-4">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-lg bg-foreground text-background flex items-center justify-center shadow-md">
-                <Icons.layers className="h-4 w-4" />
+                <Image
+                  src="/logo/logo-svg.svg"
+                  alt="Simplification logo"
+                  width={32}
+                  height={32}
+                  className="rounded-md"
+                />
               </div>
               <span className="font-display font-semibold text-lg tracking-tight text-foreground">
                 Satori
