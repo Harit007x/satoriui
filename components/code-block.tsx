@@ -1,6 +1,6 @@
 "use client";
 
-import { Copy } from "lucide-react";
+import { Check, Copy } from "lucide-react";
 import React, { useState } from "react";
 import { Button } from "./ui/button";
 
@@ -17,7 +17,13 @@ export function CodeBlock({
 }: CodeBlockProps) {
   const [open, setOpen] = useState(false);
   const lines = code.trimEnd().split("\n");
+  const [copied, setCopied] = useState(false);
 
+  const copyToClipboard = async () => {
+    await navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
   return (
     <div className="relative rounded-b-md border border-t-0 bg-accent text-accent-foreground overflow-hidden">
       {/* Copy button */}
@@ -27,10 +33,14 @@ export function CodeBlock({
           {title}
         </span>
         <button
-          onClick={() => navigator.clipboard.writeText(code)}
+          onClick={copyToClipboard}
           className="text-muted-foreground hover:text-foreground transition"
         >
-          <Copy className="h-4 w-4" />
+          {copied ? (
+            <Check className="h-4 w-4 text-blue-400" />
+          ) : (
+            <Copy className="h-4 w-4" />
+          )}
         </button>
       </div>
 
@@ -67,7 +77,12 @@ export function CodeBlock({
       {/* View Code button */}
       {!open && (
         <div className="absolute inset-0 flex items-center justify-center z-10">
-          <Button onClick={() => setOpen(true)} variant={"outline"} size={"xs"}>
+          <Button
+            onClick={() => setOpen(true)}
+            variant={"outline"}
+            size={"xs"}
+            className="font-semibold text-slate-600"
+          >
             View Code
           </Button>
         </div>

@@ -20,13 +20,13 @@ const SideNav = ({ navBar, children }: SideNavProps) => {
   const sideNavRef = useRef<HTMLDivElement | null>(null);
 
   const { isSmallScreen, sidebarOpen, setSidebarOpen } = useSidebarMediaQuery(
-    "(min-width: 1100px)"
+    "(min-width: 1100px)",
   );
 
   useHandleClickOutside(
     sideNavRef as RefObject<HTMLDivElement>,
     isSmallScreen,
-    () => setSidebarOpen(false)
+    () => setSidebarOpen(false),
   );
   const toggleCollapse = () => {
     setSidebarOpen(!sidebarOpen);
@@ -43,11 +43,11 @@ const SideNav = ({ navBar, children }: SideNavProps) => {
           scrollbarWidth: "none",
         }}
         className={clsx(
-          "md:w-60 min-w-fit max-w-fit bg-white z-10 flex-1 border-r border-muted-background absolute sm:static h-screen overflow-y-auto",
+          "md:w-60 min-w-fit max-w-fit bg-white z-50 flex-1 border-r border-muted-background absolute sm:static h-screen overflow-y-auto",
           {
             "md:flex": sidebarOpen,
             hidden: !sidebarOpen,
-          }
+          },
         )}
       >
         <div className="flex bg-background flex-col gap-4 w-[18rem] h-full">
@@ -59,7 +59,7 @@ const SideNav = ({ navBar, children }: SideNavProps) => {
                 toggleCollapse={toggleCollapse}
                 collapsed={sidebarOpen}
               >
-                <Icons.panelLeftClose className="h-5 w-5" />
+                <Icons.panelLeftClose className="h-5 w-5 text-foreground" />
               </SideNavToggleBtn>
             </div>
           </div>

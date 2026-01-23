@@ -1,13 +1,14 @@
 "use client";
 import { ComponentShowcase } from "@/components/component-showcase";
+import InstallationCommand from "@/components/installation-commands";
 import KeyboardUI from "@/packages/keyboard/keyboard";
 
 export default function Page() {
   return (
-    <>
+    <div className="space-y-12">
       <ComponentShowcase
         title="Keyboard UI"
-        description="Modern, elegant hero, with subtle dotted background."
+        description="Slick, minimalistic & interactive keyboard UI."
         preview={<KeyboardUI />}
         scale={0.8}
         mobilePreviewImage="/snapshots/keyboard.png"
@@ -139,6 +140,7 @@ const KeyboardUI = () => {
 export default KeyboardUI;
 `}
       />
-    </>
+      <InstallationCommand component={"keyboard"} />
+    </div>
   );
 }

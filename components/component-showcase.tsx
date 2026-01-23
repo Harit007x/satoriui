@@ -22,7 +22,7 @@ export function ComponentShowcase({
   const hasMobilePreview = Boolean(mobilePreviewImage);
 
   return (
-    <section className="space-y-6 mx-auto max-w-[700px]">
+    <section className="space-y-6 mx-auto max-w-2xl">
       {/* Header */}
       <header className="space-y-1">
         <h1 className="text-3xl font-semibold tracking-tight text-slate-900">
