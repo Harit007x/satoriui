@@ -10,110 +10,134 @@ export default function Page() {
         description="Modern, elegant hero, with subtle dotted background."
         preview={<KeyboardUI />}
         scale={0.8}
+        mobilePreviewImage="/snapshots/keyboard.png"
         tsxCode={`"use client";
-import Link from "next/link";
-import React from "react";
-import { motion } from "motion/react";
-import { ArrowRight, Terminal } from "lucide-react";
 
-type MotionWrapperProps = {
-  children: React.ReactNode;
-};
-const MotionWrapper = ({ children }: MotionWrapperProps) => {
+const KeyboardUI = () => {
   return (
-    <motion.span
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: 0.4,
-        ease: "easeOut",
-        delay: 0.3,
-      }}
-      className="relative inline-block overflow-hidden p-[1px]"
-    >
-      {children}
-    </motion.span>
-  );
-};
-
-const DottedModern = () => {
-  return (
-    <div className="flex flex-col relative h-full w-full">
-      <div className="absolute h-full w-full -z-10 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#212121_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
-
-      <div className="mx-auto h-full flex flex-col gap-6 items-center justify-center">
-        {/* Animated badge */}
-        <MotionWrapper>
-          <a
-            href="https://github.com/ibelick/background-snippets"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex"
-          >
-            <span
-              className="relative inline-block overflow-hidden rounded-full p-[1px] border border-slate-800 border-1"
-              style={{ animationDelay: "0.3s", animationFillMode: "forwards" }}
+    <div className="w-[800px] max-w-4xl mx-auto px-2 sm:px-4">
+      <div className="w-full flex flex-col gap-1 sm:gap-2 md:gap-3 select-none">
+        {/* Row 1 */}
+        <div className="flex w-full gap-0.5 sm:gap-1 md:gap-2 h-8 sm:h-10 md:h-12">
+          {[
+            "\`",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "0",
+            "-",
+            "=",
+          ].map((k) => (
+            <div
+              key={k}
+              className="flex-1 bg-white rounded sm:rounded-md md:rounded-lg shadow-sm flex items-center justify-center text-neutral-900 text-xs sm:text-sm md:text-xl font-normal hover:bg-neutral-50 transition-colors cursor-default min-w-0"
             >
-              <div
-                className="
-                inline-flex h-full w-full cursor-pointer items-center justify-center
-                rounded-full bg-white px-3 py-1 text-xs font-medium leading-5
-                text-slate-700 backdrop-blur-xl
-                dark:bg-black dark:text-slate-200
-              "
-              >
-                We are open source 🚀
-                <span className="inline-flex items-center pl-1 font-semibold text-black dark:text-white">
-                  Github
-                  <ArrowRight
-                    className="pl-0.5 text-black dark:text-white"
-                    size={16}
-                  />
-                </span>
-              </div>
-            </span>
-          </a>
-        </MotionWrapper>
-
-        <MotionWrapper>
-          <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-medium tracking-tight leading-[1.05] text-slate-900">
-            Action - oriented
-            <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-br from-slate-900 via-slate-600 to-slate-400">
-              Modern snippets
-            </span>
-          </h1>
-        </MotionWrapper>
-
-        <MotionWrapper>
-          <p className="text-lg text-slate-500 leading-relaxed text-center max-w-xl">
-            Plug-and-play snippets-just copy, paste, and use in your next
-            project. Built with Tailwind CSS and Vanilla CSS for seamless
-            integration.
-          </p>
-        </MotionWrapper>
-        <MotionWrapper>
-          <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto pt-2">
-            <Link
-              href="/components/button"
-              className="group w-full sm:w-auto px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-sm font-semibold text-sm shadow-xl shadow-slate-200/50 flex items-center justify-center gap-2"
-            >
-              Go to Github
-              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-[2px]" />
-            </Link>
-
-            <button className="w-full sm:w-auto px-6 py-3 rounded-sm font-semibold text-sm text-slate-600 border border-slate-200 hover:bg-slate-50 hover:text-slate-900 transition-all flex items-center justify-center gap-2 bg-accent">
-              <Terminal className="h-4 w-4" />
-              Documentation
-            </button>
+              <span className="truncate">{k}</span>
+            </div>
+          ))}
+          <div className="flex-[1.6] bg-neutral-200/80 rounded sm:rounded-md md:rounded-lg flex items-center justify-end pr-1 sm:pr-2 md:pr-4 text-neutral-900 text-xs sm:text-sm md:text-lg font-normal hover:bg-neutral-300/80 transition-colors cursor-default">
+            <span className="truncate">del</span>
           </div>
-        </MotionWrapper>
+        </div>
+
+        {/* Row 2 */}
+        <div className="flex w-full gap-0.5 sm:gap-1 md:gap-2 h-8 sm:h-10 md:h-12">
+          <div className="flex-[1.6] bg-neutral-200/80 rounded sm:rounded-md md:rounded-lg flex items-center justify-start pl-1 sm:pl-2 md:pl-4 text-neutral-900 text-xs sm:text-sm md:text-lg font-normal hover:bg-neutral-300/80 transition-colors cursor-default">
+            <span className="truncate">tab</span>
+          </div>
+          {[
+            "Q",
+            "W",
+            "E",
+            "R",
+            "T",
+            "Y",
+            "U",
+            "I",
+            "O",
+            "P",
+            "[",
+            "]",
+            "\\\\",
+          ].map((k) => (
+            <div
+              key={k}
+              className="flex-1 bg-white rounded sm:rounded-md md:rounded-lg shadow-sm flex items-center justify-center text-neutral-900 text-xs sm:text-sm md:text-xl font-normal hover:bg-neutral-50 transition-colors cursor-default min-w-0"
+            >
+              <span className="truncate">{k}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Row 3 */}
+        <div className="flex w-full gap-0.5 sm:gap-1 md:gap-2 h-8 sm:h-10 md:h-12">
+          <div className="flex-[1.9] bg-neutral-200/80 rounded sm:rounded-md md:rounded-lg flex items-center justify-start pl-1 sm:pl-2 md:pl-4 text-neutral-900 text-xs sm:text-sm md:text-lg font-normal hover:bg-neutral-300/80 transition-colors cursor-default">
+            <span className="truncate">caps</span>
+          </div>
+          {["A", "S", "D", "F", "G", "H", "J", "K", "L", ";", "'"].map((k) => (
+            <div
+              key={k}
+              className="flex-1 bg-white rounded sm:rounded-md md:rounded-lg shadow-sm flex items-center justify-center text-neutral-900 text-xs sm:text-sm md:text-xl font-normal hover:bg-neutral-50 transition-colors cursor-default min-w-0"
+            >
+              <span className="truncate">{k}</span>
+            </div>
+          ))}
+          <div className="flex-[2.3] bg-[#348feb] rounded sm:rounded-md md:rounded-lg flex items-end justify-end pr-1 sm:pr-2 md:pr-4 pb-1 sm:pb-2 md:pb-3 text-neutral-900 text-xs sm:text-sm md:text-lg font-normal relative hover:bg-[#2682de] transition-colors cursor-default">
+            <div className="absolute top-1 right-1 w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full opacity-90" />
+            <span className="truncate">return</span>
+          </div>
+        </div>
+
+        {/* Row 4 */}
+        <div className="flex w-full gap-0.5 sm:gap-1 md:gap-2 h-8 sm:h-10 md:h-12">
+          <div className="flex-[2.5] bg-neutral-200/80 rounded sm:rounded-md md:rounded-lg flex items-center justify-start pl-1 sm:pl-2 md:pl-4 text-neutral-900 text-xs sm:text-sm md:text-lg font-normal hover:bg-neutral-300/80 transition-colors cursor-default">
+            <span className="truncate">shift</span>
+          </div>
+          {["Z", "X", "C", "V", "B", "N", "M", ",", ".", "/"].map((k) => (
+            <div
+              key={k}
+              className="flex-1 bg-white rounded sm:rounded-md md:rounded-lg shadow-sm flex items-center justify-center text-neutral-900 text-xs sm:text-sm md:text-xl font-normal hover:bg-neutral-50 transition-colors cursor-default min-w-0"
+            >
+              <span className="truncate">{k}</span>
+            </div>
+          ))}
+          <div className="flex-[2.5] bg-neutral-200/80 rounded sm:rounded-md md:rounded-lg flex items-center justify-end pr-1 sm:pr-2 md:pr-4 text-neutral-900 text-xs sm:text-sm md:text-lg font-normal hover:bg-neutral-300/80 transition-colors cursor-default">
+            <span className="truncate">shift</span>
+          </div>
+        </div>
+
+        {/* Row 5 */}
+        <div className="flex w-full gap-0.5 sm:gap-1 md:gap-2 h-8 sm:h-10 md:h-12">
+          {["ctrl", "opt", "hpOS"].map((k) => (
+            <div
+              key={k}
+              className="flex-[1.25] bg-neutral-200/80 rounded sm:rounded-md md:rounded-lg flex items-center justify-start pl-1 sm:pl-2 md:pl-4 pr-2 text-neutral-900 text-xs sm:text-sm md:text-lg font-normal hover:bg-neutral-300/80 transition-colors cursor-default"
+            >
+              <span className="truncate">{k}</span>
+            </div>
+          ))}
+          <div className="flex-[6.5] bg-white rounded sm:rounded-md md:rounded-lg shadow-sm hover:bg-neutral-50 transition-colors cursor-default" />
+          {["hpOS", "opt", "ctrl"].map((k) => (
+            <div
+              key={k}
+              className="flex-[1.25] bg-neutral-200/80 rounded sm:rounded-md md:rounded-lg flex items-center justify-start pl-1 sm:pl-2 md:pl-4 pr-2 text-neutral-900 text-xs sm:text-sm md:text-lg font-normal hover:bg-neutral-300/80 transition-colors cursor-default"
+            >
+              <span className="truncate">{k}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
 };
 
-export default DottedModern;
+export default KeyboardUI;
 `}
       />
     </>
