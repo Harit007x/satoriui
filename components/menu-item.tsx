@@ -27,7 +27,7 @@ const MenuItem = ({ item }: { item: SideNavItem }) => {
             "flex items-center p-2 rounded-md w-full justify-between text-muted-foreground hover:bg-accent hover:cursor-pointer",
             {
               "bg-zinc-100": pathname.includes(item.path),
-            }
+            },
           )}
         >
           <div className="flex items-center gap-2">
@@ -55,9 +55,9 @@ const MenuItem = ({ item }: { item: SideNavItem }) => {
                   {
                     "bg-primary text-white": isActive(subItem.path),
                     "hover:bg-accent text-muted-foreground": !isActive(
-                      subItem.path
+                      subItem.path,
                     ),
-                  }
+                  },
                 )}
               >
                 {subItem.icon}
@@ -78,7 +78,7 @@ const MenuItem = ({ item }: { item: SideNavItem }) => {
         {
           "bg-primary text-white": isActive(item.path),
           "text-muted-foreground hover:bg-accent": !isActive(item.path),
-        }
+        },
       )}
     >
       {item.icon && (

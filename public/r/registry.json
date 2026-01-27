@@ -4,18 +4,6 @@
   "homepage": "https://satoriui.site",
   "items": [
     {
-      "name": "card",
-      "type": "registry:component",
-      "title": "Card",
-      "description": "Base card component",
-      "files": [
-        {
-          "path": "packages/card/card.tsx",
-          "type": "registry:component"
-        }
-      ]
-    },
-    {
       "name": "dotted-modern",
       "type": "registry:component",
       "title": "Dotted Modern",
@@ -36,6 +24,18 @@
       "files": [
         {
           "path": "packages/keyboard/keyboard.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "security-card",
+      "type": "registry:component",
+      "title": "Security Card",
+      "description": "A sleek security card component with 3D shield visualization.",
+      "files": [
+        {
+          "path": "packages/security-card/security-card.tsx",
           "type": "registry:component"
         }
       ]

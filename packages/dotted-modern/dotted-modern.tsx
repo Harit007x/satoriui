@@ -30,7 +30,6 @@ const DottedModern = () => {
       <div className="absolute h-full w-full -z-10 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#212121_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
 
       <div className="mx-auto h-full flex flex-col gap-6 items-center justify-center">
-        {/* Animated badge */}
         <MotionWrapper>
           <a
             href="https://github.com/ibelick/background-snippets"

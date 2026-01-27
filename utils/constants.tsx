@@ -4,21 +4,16 @@ import { SideNavbar } from "./types";
 const prefix: string = "/components";
 
 export const ComponentsNavbar: SideNavbar[] = [
-  {
-    title: "Hero Sections",
-    items: [
-      {
-        title: "Rolling Text",
-        path: `${prefix}/rolling-text`,
-        icon: <Icons.home width="16" height="16" />,
-      },
-      // {
-      //   title: "Stacked Cards",
-      //   path: `${prefix}/stacked_cards`,
-      //   icon: <Icons.home width="16" height="16" />,
-      // },
-    ],
-  },
+  // {
+  //   title: "Hero Sections",
+  //   items: [
+  //     {
+  //       title: "Rolling Text",
+  //       path: `${prefix}/rolling-text`,
+  //       icon: <Icons.home width="16" height="16" />,
+  //     },
+  //   ],
+  // },
   {
     title: "Backgrounds",
     items: [
@@ -41,6 +36,11 @@ export const ComponentsNavbar: SideNavbar[] = [
         title: "Keyboard UI",
         path: `${prefix}/keyboard-ui`,
         icon: <Icons.keyboard width="16" height="16" />,
+      },
+      {
+        title: "Security Card",
+        path: `${prefix}/security-card`,
+        icon: <Icons.shield width="16" height="16" />,
       },
     ],
   },
