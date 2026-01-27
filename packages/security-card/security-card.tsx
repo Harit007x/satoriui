@@ -45,8 +45,8 @@ export default function SecurityCard() {
         </div>
 
         <div className="relative z-10 flex flex-col items-center pt-16 pb-10 px-8 h-full">
-          <div className="relative w-36 h-36 flex items-center justify-center mb-10">
-            <div className="absolute w-24 h-24 bg-blue-500 rounded-full blur-[50px] opacity-20 translate-y-2"></div>
+          <div className="relative w-44 h-44 flex items-center justify-center mb-10">
+            <div className="absolute w-24 h-24 bg-blue-700 rounded-full blur-[50px] opacity-90 translate-y-2"></div>
 
             <svg
               viewBox="0 0 24 24"

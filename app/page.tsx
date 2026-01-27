@@ -53,9 +53,9 @@ export default function Home() {
           </div>
 
           <div className="flex items-center gap-4">
-            <button className="hidden sm:flex text-slate-400 hover:text-slate-900 transition-colors">
+            {/* <button className="hidden sm:flex text-slate-400 hover:text-slate-900 transition-colors">
               <Icons.search className="h-4 w-4" />
-            </button>
+            </button> */}
             <button className="text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-lg transition-all shadow-sm hover:shadow-md">
               Get Access
             </button>
@@ -84,9 +84,8 @@ export default function Home() {
             </h1>
 
             <p className="text-lg text-slate-500 leading-relaxed max-w-lg">
-              A comprehensive suite of high-fidelity interaction components.
-              Designed with physics-based transitions for a natural, tactile
-              feel.
+              A comprehensive suite of high-fidelity, interactive, accessible
+              and extensible components to use with shadcn/ui.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto pt-2">
