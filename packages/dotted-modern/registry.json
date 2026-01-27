@@ -1,11 +1,12 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
-  "name": "card",
+  "name": "dotted-modern",
   "type": "registry:component",
   "files": [
     {
-      "path": "card.tsx",
-      "type": "registry:component"
+      "path": "dotted-modern.tsx",
+      "type": "registry:component",
+      "target": "components/satori-ui/dotted-modern.tsx"
     }
   ]
 }

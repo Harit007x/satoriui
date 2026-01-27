@@ -12,7 +12,8 @@
       "files": [
         {
           "path": "packages/dotted-modern/dotted-modern.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/satori-ui/dotted-modern.tsx"
         }
       ]
     },
@@ -25,7 +26,7 @@
         {
           "path": "packages/keyboard/keyboard.tsx",
           "type": "registry:component",
-          "target": "components/satoriui/keyboard.tsx"
+          "target": "components/satori-ui/keyboard.tsx"
         }
       ]
     },
@@ -37,7 +38,8 @@
       "files": [
         {
           "path": "packages/security-card/security-card.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/satori-ui/security-card.tsx"
         }
       ]
     }

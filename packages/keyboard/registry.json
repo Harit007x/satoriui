@@ -6,7 +6,7 @@
     {
       "path": "keyboard.tsx",
       "type": "registry:component",
-      "target": "components/satoriui/keyboard.tsx"
+      "target": "components/satori-ui/keyboard.tsx"
     }
   ]
 }
