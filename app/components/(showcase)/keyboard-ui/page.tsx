@@ -8,7 +8,7 @@ export default function Page() {
     <div className="space-y-12">
       <ComponentShowcase
         title="Keyboard UI"
-        description="Slick, minimalistic & interactive keyboard UI."
+        description="Sleek, minimalistic & interactive keyboard UI."
         preview={<KeyboardUI />}
         scale={0.8}
         mobilePreviewImage="/snapshots/keyboard.png"

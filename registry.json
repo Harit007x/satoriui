@@ -21,7 +21,7 @@
       "name": "keyboard",
       "type": "registry:component",
       "title": "Keyboard UI",
-      "description": "Slick minimalistic, keyboard UI.",
+      "description": "Sleek, minimalistic & interactive keyboard UI.",
       "files": [
         {
           "path": "packages/keyboard/keyboard.tsx",

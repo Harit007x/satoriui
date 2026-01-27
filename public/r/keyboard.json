@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "keyboard",
   "title": "Keyboard UI",
-  "description": "Slick minimalistic, keyboard UI.",
+  "description": "Sleek, minimalistic & interactive keyboard UI.",
   "files": [
     {
       "path": "packages/keyboard/keyboard.tsx",
