@@ -24,7 +24,8 @@
       "files": [
         {
           "path": "packages/keyboard/keyboard.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "components/satoriui/keyboard.tsx"
         }
       ]
     },
