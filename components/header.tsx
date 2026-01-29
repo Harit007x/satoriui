@@ -2,13 +2,6 @@ import clsx from "clsx";
 import { useTheme } from "next-themes";
 import { Icons } from "./icons";
 import { Button } from "./ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
 import { SideNavToggleBtn } from "./side-nav-toggle-btn";
 
 interface IHeader {
@@ -22,14 +15,16 @@ function Header(props: IHeader) {
   return (
     <div
       className={clsx(
-        "flex justify-between border-b border-muted-background bg-background h-16 px-4 items-center",
+        "flex justify-between border-b border-sidebar-border bg-sidebar h-16 px-4 items-center",
         { "justify-end": props.collapsed },
       )}
     >
       <SideNavToggleBtn
         toggleCollapse={props.toggleCollapse}
         collapsed={props.collapsed}
-        children={<Icons.panelLeftOpen className="h-5 w-5 text-foreground" />}
+        children={
+          <Icons.panelLeftOpen className="h-4.5 w-4.5 m-[0.1rem] text-muted-foreground group-hover:text-text" />
+        }
         className={clsx({ hidden: props.collapsed })}
       />
       {theme == "light" ? (

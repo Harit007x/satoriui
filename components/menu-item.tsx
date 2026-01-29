@@ -76,7 +76,7 @@ const MenuItem = ({ item }: { item: SideNavItem }) => {
       className={clsx(
         "flex items-center gap-2 min-w-[10rem] p-2 py-2.5 rounded-lg text-sm",
         {
-          "bg-primary text-white": isActive(item.path),
+          "bg-muted-primary text-primary": isActive(item.path),
           "text-muted-foreground hover:bg-accent": !isActive(item.path),
         },
       )}

@@ -3,6 +3,7 @@
 import { Check, Copy } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
+import clsx from "clsx";
 
 type CodeBlockProps = {
   title: string;
@@ -25,14 +26,17 @@ export function CodeBlock({
     setTimeout(() => setCopied(false), 1500);
   };
   return (
-    <div className="relative rounded-b-md border border-t-0 bg-accent text-accent-foreground overflow-hidden">
-      <div className="flex items-center justify-between px-4 py-2 border-b bg-accent">
+    <div className="relative rounded-b-md border border-t-0 bg-sidebar text-accent-foreground overflow-hidden">
+      <div className="flex items-center justify-between px-4 py-2 border-b">
         <span className="text-xs font-medium text-muted-foreground">
           {title}
         </span>
         <button
           onClick={copyToClipboard}
-          className="text-muted-foreground hover:text-foreground transition"
+          className={clsx(
+            "rounded-md p-1.5 text-neutral-400 hover:bg-neutral-800 hover:text-white",
+            copied && "!bg-blueBackground",
+          )}
         >
           {copied ? (
             <Check className="h-4 w-4 text-blue-400" />
@@ -75,7 +79,7 @@ export function CodeBlock({
             onClick={() => setOpen(true)}
             variant={"outline"}
             size={"xs"}
-            className="font-semibold text-slate-600"
+            className="font-semibold text-muted-foreground"
           >
             View Code
           </Button>

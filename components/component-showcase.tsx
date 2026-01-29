@@ -25,10 +25,10 @@ export function ComponentShowcase({
     <section className="space-y-6 mx-auto max-w-2xl">
       {/* Header */}
       <header className="space-y-1">
-        <h1 className="text-3xl font-semibold tracking-tight text-slate-900">
+        <h1 className="text-3xl font-semibold tracking-tight text-text">
           {title}
         </h1>
-        <p className="text-sm text-slate-500 max-w-xl">{description}</p>
+        <p className="text-sm text-muted-foreground max-w-xl">{description}</p>
       </header>
 
       <div>

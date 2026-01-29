@@ -17,7 +17,7 @@ const Showcase01 = () => {
       category: "Interactive",
       code: `<Button variant="glow" />`,
       preview: (
-        <button className="px-4 py-2 bg-slate-900 text-white rounded-lg font-medium text-sm shadow-lg hover:scale-105 transition-transform duration-200">
+        <button className="px-4 py-2 text-white rounded-lg font-medium text-sm shadow-lg bg-primary hover:bg-sky-500 hover:scale-105 transition-transform duration-200">
           Get Started
         </button>
       ),
@@ -27,7 +27,7 @@ const Showcase01 = () => {
       category: "Form",
       code: `<Toggle checked={true} />`,
       preview: (
-        <div className="w-11 h-6 bg-slate-900 rounded-full p-0.5 cursor-pointer">
+        <div className="w-11 h-6 bg-primary rounded-full p-0.5 cursor-pointer">
           <div className="w-5 h-5 bg-white rounded-full shadow-md transform translate-x-5 transition-transform" />
         </div>
       ),
@@ -38,9 +38,9 @@ const Showcase01 = () => {
       code: `<AvatarStack users={[]} />`,
       preview: (
         <div className="flex -space-x-2">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-slate-300 to-slate-400 ring-2 ring-white" />
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-slate-400 to-slate-500 ring-2 ring-white" />
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-slate-500 to-slate-600 ring-2 ring-white" />
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-sky-300 to-sky-400 ring-2 ring-white" />
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-sky-400 to-sky-500 ring-2 ring-white" />
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-sky-500 to-sky-600 ring-2 ring-white" />
           <div className="w-8 h-8 rounded-full bg-slate-100 ring-2 ring-white flex items-center justify-center text-[10px] font-medium text-slate-500">
             +5
           </div>
@@ -81,8 +81,8 @@ const Showcase01 = () => {
               >
                 {copiedIndex === index ? (
                   <>
-                    <Icons.check className="h-3 w-3 text-emerald-500" />
-                    <span className="text-emerald-500">Copied!</span>
+                    <Icons.check className="h-3 w-3 text-primary" />
+                    <span className="text-primary">Copied!</span>
                   </>
                 ) : (
                   <>
@@ -114,7 +114,7 @@ const Showcase01 = () => {
       {/* Floating badge */}
       <div className="absolute -right-4 top-8 bg-slate-900 text-white p-3 rounded-xl shadow-xl flex items-center gap-3 animate-float hidden lg:flex">
         <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-emerald-400">
-          <Icons.sparkles className="h-4 w-4" />
+          <Icons.sparkles className="h-4 w-4 text-primary" />
         </div>
         <div className="flex flex-col pr-2">
           <span className="text-xs font-semibold">50+ Components</span>

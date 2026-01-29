@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Check, Copy, Terminal } from "lucide-react";
+import clsx from "clsx";
 
 type InstallationCommandProps = {
   component: string;
@@ -13,6 +14,19 @@ const getCommands = (component: string) => ({
   yarn: `yarn shadcn@latest add  @satoriui/${component}`,
   bun: `bunx --bun shadcn@latest add  @satoriui/${component}`,
 });
+
+const highlightCommand = (cmd: string) => {
+  const parts = cmd.split(" ");
+  const packageManager = parts[0];
+  const rest = parts.slice(1).join(" ");
+
+  return (
+    <code className="font-mono text-sm">
+      <span className="text-primary">{packageManager}</span>
+      <span className="text-emerald-600 dark:text-green-300"> {rest}</span>
+    </code>
+  );
+};
 
 type PackageManager = "pnpm" | "npm" | "yarn" | "bun";
 
@@ -33,32 +47,26 @@ export default function InstallationCommand({
   };
 
   return (
-    <div className="w-full mx-auto max-w-2xl rounded-lg border border-neutral-200 bg-white">
+    <div className="w-full mx-auto max-w-2xl">
       {/* Header */}
-      <div className="border-b border-neutral-200 px-4 pt-4 text-slate-700">
-        <h3 className="mb-4 text-lg font-semibold">Installation</h3>
-
-        {/* Tabs */}
-        <div className="flex gap-6 text-sm">
-          <button className="border-b-2 border-black pb-2 font-medium">
-            Command
-          </button>
-          {/* <button className="pb-2 text-neutral-500">Manual</button> */}
-        </div>
+      <div className="">
+        <h3 className="mb-4 text-lg font-semibold text-foreground">
+          Installation
+        </h3>
       </div>
 
       {/* Body */}
-      <div className="p-4">
+      <div className="bg-sidebar rounded-lg border">
         {/* Package Manager Tabs */}
-        <div className="mb-3 flex flex-wrap gap-2">
+        <div className="px-4 flex flex-wrap gap-4 bg-background rounded-t-lg">
           {(["pnpm", "npm", "yarn", "bun"] as PackageManager[]).map((pm) => (
             <button
               key={pm}
               onClick={() => setActivePM(pm)}
-              className={`rounded-md px-3 py-1.5 text-sm font-medium transition ${
+              className={`py-2 text-sm font-medium transition ${
                 activePM === pm
-                  ? "bg-neutral-100 text-black"
-                  : "text-neutral-500 hover:bg-neutral-100"
+                  ? "border-b-2 border-primary text-primary"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
               {pm}
@@ -67,18 +75,21 @@ export default function InstallationCommand({
         </div>
 
         {/* Command Box */}
-        <div className="relative flex items-center gap-3 rounded-lg bg-neutral-950 px-4 py-3 text-neutral-100">
-          <Terminal className="h-4 w-4 shrink-0 text-neutral-400" />
+        <div className="relative flex items-center gap-3 rounded-lg px-4 py-3 text-foreground">
+          <Terminal className="h-4 w-4 shrink-0 text-foreground" />
 
           {/* Scrollable command on mobile */}
           <code className="flex-1 overflow-x-auto whitespace-nowrap text-sm">
-            {command}
+            {highlightCommand(command)}
           </code>
 
           {/* Copy Button */}
           <button
             onClick={copyToClipboard}
-            className="rounded-md p-1.5 text-neutral-400 hover:bg-neutral-800 hover:text-white"
+            className={clsx(
+              "rounded-md p-1.5 text-neutral-400 hover:bg-neutral-800 hover:text-white",
+              copied && "!bg-blueBackground",
+            )}
           >
             {copied ? (
               <Check className="h-4 w-4 text-blue-400" />
