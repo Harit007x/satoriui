@@ -79,7 +79,7 @@ export function CodeBlock({
             onClick={() => setOpen(true)}
             variant={"outline"}
             size={"xs"}
-            className="font-semibold text-muted-foreground"
+            className="font-semibold text-muted-foreground !bg-background shadow-[-1px_4px_19px_-6px_rgba(255,_255,_255,_1)]"
           >
             View Code
           </Button>
