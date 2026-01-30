@@ -4,8 +4,9 @@ import { useState } from "react";
 import { Check, Copy, Terminal } from "lucide-react";
 import clsx from "clsx";
 
-type InstallationCommandProps = {
+type CommandSectionProps = {
   component: string;
+  title: string;
 };
 
 const getCommands = (component: string) => ({
@@ -30,9 +31,10 @@ const highlightCommand = (cmd: string) => {
 
 type PackageManager = "pnpm" | "npm" | "yarn" | "bun";
 
-export default function InstallationCommand({
+export default function CommandSection({
   component,
-}: InstallationCommandProps) {
+  title,
+}: CommandSectionProps) {
   const COMMANDS = getCommands(component);
 
   const [activePM, setActivePM] = useState<PackageManager>("pnpm");
@@ -50,9 +52,7 @@ export default function InstallationCommand({
     <div className="w-full mx-auto max-w-2xl">
       {/* Header */}
       <div className="">
-        <h3 className="mb-4 text-lg font-semibold text-foreground">
-          Installation
-        </h3>
+        <h3 className="mb-4 text-lg font-semibold text-foreground">{title}</h3>
       </div>
 
       {/* Body */}

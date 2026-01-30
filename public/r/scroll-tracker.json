@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "scroll-tracker",
+  "title": "Scroll Tracker",
+  "description": "Track scroll progress with a visual indicator.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/scroll-tracker/scroll-tracker.tsx",
+      "content": "\"use client\";\n\nimport { motion, useScroll } from \"motion/react\";\nimport { cn } from \"@/lib/utils\";\n\ninterface ScrollTrackerProps extends React.ComponentProps<typeof motion.div> {\n  /**\n   * Thickness of the progress indicator\n   * @default 4\n   */\n  thickness?: number;\n  /**\n   * Tailwind color class for the tracker\n   * @default \"bg-primary\"\n   */\n  trackerColor?: string;\n  /**\n   * Where to position the tracker\n   * @default \"top\"\n   */\n  position?: \"top\" | \"bottom\";\n  /**\n   * Reference to scrollable element\n   * If not specified, uses window\n   */\n  targetContainer?: React.RefObject<HTMLElement | null>;\n}\n\nfunction ScrollTracker({\n  thickness = 4,\n  trackerColor = \"bg-primary\",\n  position = \"top\",\n  className,\n  targetContainer,\n  ...rest\n}: ScrollTrackerProps) {\n  const { scrollYProgress } = useScroll({\n    container: targetContainer as any,\n  });\n\n  const positionalClasses = cn(\n    \"absolute left-0 right-0 z-50 origin-left\",\n    !targetContainer && \"fixed\",\n    position === \"top\" ? \"top-0\" : \"bottom-0\",\n    trackerColor,\n    className,\n  );\n\n  const inlineStyles = {\n    scaleX: scrollYProgress,\n    height: `${thickness}px`,\n  };\n\n  return (\n    <motion.div\n      data-ui=\"scroll-tracker\"\n      className={positionalClasses}\n      style={inlineStyles}\n      {...rest}\n    />\n  );\n}\n\nexport { ScrollTracker };\n",
+      "type": "registry:component",
+      "target": "components/satori-ui/scroll-tracker.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

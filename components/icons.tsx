@@ -112,6 +112,7 @@ import {
   Pointer,
   Keyboard,
   Shield,
+  Scroll,
   Twitter,
 } from "lucide-react";
 
@@ -227,6 +228,7 @@ export const Icons = {
   pointer: Pointer,
   keyboard: Keyboard,
   shield: Shield,
+  scroll: Scroll,
   twitter: Twitter,
   github: ({ ...props }: LucideProps) => (
     <svg

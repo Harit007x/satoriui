@@ -1,6 +1,6 @@
 "use client";
 import { ComponentShowcase } from "@/components/component-showcase";
-import InstallationCommand from "@/components/installation-commands";
+import InstallationCommand from "@/components/command-section";
 import SecurityCard from "@/packages/security-card/security-card";
 
 export default function Page() {
@@ -136,7 +136,7 @@ export default function SecurityCard() {
   );
 }`}
       />
-      <InstallationCommand component={"security-card"} />
+      <InstallationCommand title="Installation" component={"security-card"} />
     </div>
   );
 }

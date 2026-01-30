@@ -42,6 +42,20 @@
           "target": "components/satori-ui/security-card.tsx"
         }
       ]
+    },
+    {
+      "name": "scroll-tracker",
+      "type": "registry:component",
+      "title": "Scroll Tracker",
+      "description": "Track scroll progress with a visual indicator.",
+      "dependencies": ["motion"],
+      "files": [
+        {
+          "path": "packages/scroll-tracker/scroll-tracker.tsx",
+          "type": "registry:component",
+          "target": "components/satori-ui/scroll-tracker.tsx"
+        }
+      ]
     }
   ]
 }

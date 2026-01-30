@@ -1,0 +1,16 @@
+{
+  "name": "@satoriui/scroll-tracker",
+  "version": "0.0.1",
+  "private": false,
+  "type": "module",
+  "sideEffects": false,
+  "license": "MIT",
+  "files": [
+    "registry.json",
+    "scroll-tracker.tsx"
+  ],
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  }
+}

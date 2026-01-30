@@ -44,4 +44,14 @@ export const ComponentsNavbar: SideNavbar[] = [
       },
     ],
   },
+  {
+    title: "UI",
+    items: [
+      {
+        title: "Sroll Tracker",
+        path: `${prefix}/scroll-tracker`,
+        icon: <Icons.scroll width="16" height="16" />,
+      },
+    ],
+  },
 ];
