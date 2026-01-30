@@ -8,7 +8,13 @@ export const useSidebarMediaQuery = (minWidth: string) => {
     const mediaQuery = window.matchMedia(minWidth);
     const handleMediaQueryChange = (e: MediaQueryListEvent) => {
       setIsSmallScreen(!e.matches);
-      setSidebarOpen(e.matches);
+      // On large screens, sidebar is open by default
+      // On small screens, sidebar starts closed
+      if (e.matches) {
+        setSidebarOpen(true);
+      } else {
+        setSidebarOpen(false);
+      }
     };
     mediaQuery.addEventListener("change", handleMediaQueryChange);
     setIsSmallScreen(!mediaQuery.matches);

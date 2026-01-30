@@ -1,11 +1,13 @@
 "use client";
 import { ComponentShowcase } from "@/components/component-showcase";
 import InstallationCommand from "@/components/installation-commands";
+// import { ScrollTracker } from "@/components/scroll-tracker";
 import DottedModern from "@/packages/dotted-modern/dotted-modern";
 
 export default function Page() {
   return (
     <div className="space-y-12">
+      {/* <ScrollTracker /> */}
       <ComponentShowcase
         title="Dotted Background"
         description="Modern, elegant hero, with subtle dotted background."

@@ -27,7 +27,7 @@ const MotionWrapper = ({ children }: MotionWrapperProps) => {
 const DottedModern = () => {
   return (
     <div className="flex flex-col relative h-full w-full">
-      <div className="absolute h-full w-full -z-10 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#212121_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
+      <div className="absolute h-full w-full -z-10 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
 
       <div className="mx-auto h-full flex flex-col gap-6 items-center justify-center">
         <MotionWrapper>
@@ -46,16 +46,13 @@ const DottedModern = () => {
                 inline-flex h-full w-full cursor-pointer items-center justify-center
                 rounded-full bg-white px-3 py-1 text-xs font-medium leading-5
                 text-slate-700 backdrop-blur-xl
-                dark:bg-black dark:text-slate-200
+                bg-white
               "
               >
                 We are open source 🚀
-                <span className="inline-flex items-center pl-1 font-semibold text-black dark:text-white">
+                <span className="inline-flex items-center pl-1 font-semibold text-black">
                   Github
-                  <ArrowRight
-                    className="pl-0.5 text-black dark:text-white"
-                    size={16}
-                  />
+                  <ArrowRight className="pl-0.5 text-black" size={16} />
                 </span>
               </div>
             </span>
@@ -89,7 +86,7 @@ const DottedModern = () => {
               <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-[2px]" />
             </Link>
 
-            <button className="w-full sm:w-auto px-6 py-3 rounded-sm font-semibold text-sm text-slate-600 border border-slate-200 hover:bg-slate-50 hover:text-slate-900 transition-all flex items-center justify-center gap-2 bg-accent">
+            <button className="w-full sm:w-auto px-6 py-3 rounded-sm font-semibold text-sm text-slate-600 border border-slate-200 hover:bg-slate-50 hover:text-slate-900 transition-all flex items-center justify-center gap-2 bg-white">
               <Terminal className="h-4 w-4" />
               Documentation
             </button>

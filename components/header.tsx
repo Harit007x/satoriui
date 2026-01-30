@@ -15,17 +15,17 @@ function Header(props: IHeader) {
   return (
     <div
       className={clsx(
-        "flex justify-between border-b border-sidebar-border bg-sidebar h-16 px-4 items-center",
-        { "justify-end": props.collapsed },
+        "sticky top-0 z-30 flex justify-between h-16 justify-between items-center border-b border-sidebar-border bg-sidebar px-4",
+        { "justify-end": !props.collapsed },
       )}
     >
       <SideNavToggleBtn
         toggleCollapse={props.toggleCollapse}
-        collapsed={props.collapsed}
+        collapsed={!props.collapsed}
         children={
           <Icons.panelLeftOpen className="h-4.5 w-4.5 m-[0.1rem] text-muted-foreground group-hover:text-text" />
         }
-        className={clsx({ hidden: props.collapsed })}
+        className={clsx({ hidden: !props.collapsed })}
       />
       {theme == "light" ? (
         <Button

@@ -20,47 +20,51 @@ const MenuItem = ({ item }: { item: SideNavItem }) => {
 
   if (item.submenu) {
     return (
-      <div className="min-w-[10rem]">
+      <div className="w-full">
         <button
           onClick={toggleSubMenu}
           className={clsx(
-            "flex items-center p-2 rounded-md w-full justify-between text-muted-foreground hover:bg-accent hover:cursor-pointer",
+            "relative flex flex-row items-center gap-2 rounded-lg p-2 w-full text-start transition-colors hover:bg-accent hover:text-accent-foreground/80 [&_svg]:size-4 [&_svg]:shrink-0",
             {
-              "bg-zinc-100": pathname.includes(item.path),
+              "bg-primary/10 text-primary": pathname.includes(item.path),
+              "text-muted-foreground": !pathname.includes(item.path),
             },
           )}
         >
-          <div className="flex items-center gap-2">
-            {item.icon}
-            <span className="font-medium text-sm">{item.title}</span>
-          </div>
-
-          <div
-            className={clsx("transition-transform", {
+          {item.icon && (
+            <span className="size-4 shrink-0 flex items-center justify-center">
+              {item.icon}
+            </span>
+          )}
+          <span className="font-medium text-sm flex-1 text-start">
+            {item.title}
+          </span>
+          <Icons.chevronDown
+            className={clsx("transition-transform size-4 shrink-0", {
               "rotate-180": subMenuOpen,
             })}
-          >
-            <Icons.chevronDown width={16} height={16} />
-          </div>
+          />
         </button>
 
         {subMenuOpen && (
-          <div className="ml-5 flex flex-col gap-1">
+          <div className="ml-2 mt-1 flex flex-col gap-1">
             {item.subMenuItems?.map((subItem, idx) => (
               <Link
                 key={idx}
                 href={subItem.path}
                 className={clsx(
-                  "flex items-center gap-2 text-sm p-2 px-4 rounded-md",
+                  "relative flex flex-row items-center gap-2 rounded-lg p-2 ps-8 text-sm transition-colors hover:bg-accent hover:text-accent-foreground/80 [&_svg]:size-4 [&_svg]:shrink-0",
                   {
-                    "bg-primary text-white": isActive(subItem.path),
-                    "hover:bg-accent text-muted-foreground": !isActive(
-                      subItem.path,
-                    ),
+                    "bg-primary/10 text-primary": isActive(subItem.path),
+                    "text-muted-foreground": !isActive(subItem.path),
                   },
                 )}
               >
-                {subItem.icon}
+                {subItem.icon && (
+                  <span className="size-4 shrink-0 flex items-center justify-center">
+                    {subItem.icon}
+                  </span>
+                )}
                 <span>{subItem.title}</span>
               </Link>
             ))}
@@ -74,19 +78,19 @@ const MenuItem = ({ item }: { item: SideNavItem }) => {
     <Link
       href={item.path}
       className={clsx(
-        "flex items-center gap-2 min-w-[10rem] p-2 py-2.5 rounded-lg text-sm",
+        "relative flex flex-row items-center gap-2 rounded-lg p-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground/80 [overflow-wrap:anywhere] [&_svg]:size-4 [&_svg]:shrink-0",
         {
-          "bg-muted-primary text-primary": isActive(item.path),
-          "text-muted-foreground hover:bg-accent": !isActive(item.path),
+          "bg-primary/10 text-primary": isActive(item.path),
+          "text-muted-foreground": !isActive(item.path),
         },
       )}
     >
       {item.icon && (
-        <span className="h-4 w-4 shrink-0 flex items-center justify-center">
+        <span className="size-4 shrink-0 flex items-center justify-center">
           {item.icon}
         </span>
       )}
-      <span className="leading-4">{item.title}</span>
+      <span className="text-sm">{item.title}</span>
     </Link>
   );
 };
