@@ -1,6 +1,6 @@
 "use client";
 import { ComponentShowcase } from "@/components/component-showcase";
-import InstallationCommand from "@/components/command-section";
+import InstallationSection from "@/components/installation-section";
 import KeyboardUI from "@/packages/keyboard/keyboard";
 
 export default function Page() {
@@ -140,7 +140,7 @@ const KeyboardUI = () => {
 export default KeyboardUI;
 `}
       />
-      <InstallationCommand title="Installation" component={"keyboard"} />
+      <InstallationSection title="Installation" component={"keyboard"} />
     </div>
   );
 }

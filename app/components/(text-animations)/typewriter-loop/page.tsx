@@ -1,6 +1,6 @@
 "use client";
 import { ComponentShowcase } from "@/components/component-showcase";
-import InstallationCommand from "@/components/command-section";
+import InstallationSection from "@/components/installation-section";
 import ProButton from "@/packages/pro-button/pro-button";
 import TypewriterLoop from "@/packages/typewriter-loop/typewriter-loop";
 
@@ -156,7 +156,7 @@ const TypewriterLoop = ({
 
 export default TypewriterLoop;`}
       />
-      <InstallationCommand title="Installation" component={"typewriter-loop"} />
+      <InstallationSection title="Installation" component={"typewriter-loop"} />
     </div>
   );
 }

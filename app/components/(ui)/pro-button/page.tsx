@@ -1,6 +1,6 @@
 "use client";
 import { ComponentShowcase } from "@/components/component-showcase";
-import InstallationCommand from "@/components/command-section";
+import InstallationSection from "@/components/installation-section";
 import ProButton from "@/packages/pro-button/pro-button";
 
 export default function Page() {
@@ -167,7 +167,7 @@ const Box = ({ pixelColor, size }: BoxProps) => {
 export default ProButton;
 `}
       />
-      <InstallationCommand title="Installation" component={"pro-button"} />
+      <InstallationSection title="Installation" component={"pro-button"} />
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Check, Copy, Terminal } from "lucide-react";
 import clsx from "clsx";
 
-type CommandSectionProps = {
+type InstallationSectionProps = {
   component: string;
   title: string;
 };
@@ -31,10 +31,10 @@ const highlightCommand = (cmd: string) => {
 
 type PackageManager = "pnpm" | "npm" | "yarn" | "bun";
 
-export default function CommandSection({
+export default function InstallationSection({
   component,
   title,
-}: CommandSectionProps) {
+}: InstallationSectionProps) {
   const COMMANDS = getCommands(component);
 
   const [activePM, setActivePM] = useState<PackageManager>("pnpm");
@@ -87,7 +87,7 @@ export default function CommandSection({
           <button
             onClick={copyToClipboard}
             className={clsx(
-              "rounded-md p-1.5 text-neutral-400 hover:bg-neutral-800 hover:text-white",
+              "rounded-md p-1.5 hover:bg-accent hover:dark:text-white",
               copied && "!bg-blueBackground",
             )}
           >

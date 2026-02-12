@@ -1,6 +1,6 @@
 "use client";
 import { ComponentShowcase } from "@/components/component-showcase";
-import InstallationCommand from "@/components/command-section";
+import InstallationSection from "@/components/installation-section";
 import DottedModern from "@/packages/dotted-modern/dotted-modern";
 
 export default function Page() {
@@ -118,7 +118,7 @@ const DottedModern = () => {
 export default DottedModern;
 `}
       />
-      <InstallationCommand title="Installation" component={"dotted-modern"} />
+      <InstallationSection title="Installation" component={"dotted-modern"} />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 import { ComponentShowcase } from "@/components/component-showcase";
-import InstallationCommand from "@/components/command-section";
+import InstallationSection from "@/components/installation-section";
 import { ScrollTracker } from "@/packages/scroll-tracker/scroll-tracker";
 
 const ScrollTrackerPreview = () => {
@@ -87,7 +87,7 @@ export { ScrollTracker };
 `}
       />
 
-      <InstallationCommand title="Installation" component={"scroll-tracker"} />
+      <InstallationSection title="Installation" component={"scroll-tracker"} />
     </div>
   );
 }

@@ -34,7 +34,7 @@ export function CodeBlock({
         <button
           onClick={copyToClipboard}
           className={clsx(
-            "rounded-md p-1.5 text-neutral-400 hover:bg-neutral-800 hover:text-white",
+            "rounded-md p-1.5 hover:bg-accent hover:dark:text-white",
             copied && "!bg-blueBackground",
           )}
         >
