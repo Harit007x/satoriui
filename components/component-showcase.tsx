@@ -57,7 +57,7 @@ export function ComponentShowcase({
           >
             <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
               <div
-                className="origin-center"
+                className="origin-center flex justify-center items-center"
                 style={{
                   transform: `scale(${scale})`,
                   transformOrigin: "center",

@@ -19,3 +19,6 @@
 
 npx shadcn@latest add @satoriui/dotted-modern
 npx shadcn@latest add http://localhost:3000/r/dotted-modern.json
+
+-> Github login in wsl or linx
+gh auth login

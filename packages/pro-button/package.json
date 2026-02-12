@@ -1,0 +1,16 @@
+{
+  "name": "@satoriui/pro-button",
+  "version": "0.0.4",
+  "private": false,
+  "type": "module",
+  "sideEffects": false,
+  "license": "MIT",
+  "files": [
+    "registry.json",
+    "pro-button.tsx"
+  ],
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  }
+}
