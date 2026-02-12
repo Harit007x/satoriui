@@ -74,7 +74,7 @@ const ProButton = ({
     <button
       onClick={onClick}
       className={cn(
-        "relative flex items-center cursor-pointer",
+        "relative flex items-center cursor-pointer shadow-sm shadow-gray-100/10",
         "bg-gradient-to-b from-[#303030] to-black",
         s.shadow,
         s.button,

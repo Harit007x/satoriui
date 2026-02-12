@@ -2,7 +2,7 @@
 
 export default function SecurityCard() {
   return (
-    <div className="bg-white flex items-center justify-center select-none">
+    <div className="bg-white flex items-center justify-center select-none rounded-lg">
       <div className="relative w-full max-w-[360px] bg-[#F7F9FF] rounded-lg border border-blue-100/80 shadow-[0_24px_48px_-12px_rgba(37,99,235,0.1)] overflow-hidden">
         <div
           className="absolute inset-0 h-[70%] z-0 pointer-events-none"

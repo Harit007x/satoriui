@@ -36,7 +36,7 @@ export function ComponentShowcase({
 
       <div>
         {/* Preview */}
-        <div className="relative rounded-t-md border border-slate-200 bg-white overflow-hidden">
+        <div className="relative rounded-t-md border border-sidebar-200 bg-background overflow-hidden">
           {/* 📱 Mobile snapshot (ONLY if provided) */}
           {hasMobilePreview && (
             <div className="block md:hidden">

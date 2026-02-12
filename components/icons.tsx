@@ -113,6 +113,7 @@ import {
   Keyboard,
   Shield,
   Scroll,
+  TypeOutline,
   Twitter,
 } from "lucide-react";
 
@@ -229,6 +230,7 @@ export const Icons = {
   keyboard: Keyboard,
   shield: Shield,
   scroll: Scroll,
+  typeOutline: TypeOutline,
   twitter: Twitter,
   github: ({ ...props }: LucideProps) => (
     <svg

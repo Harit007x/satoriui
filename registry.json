@@ -69,6 +69,20 @@
           "target": "components/satori-ui/pro-button.tsx"
         }
       ]
+    },
+    {
+      "name": "typewriter-loop",
+      "type": "registry:component",
+      "title": "Typewriter Loop",
+      "description": "A looping typewriter CTA with a gradient support, premium touch.",
+      "dependencies": ["motion"],
+      "files": [
+        {
+          "path": "packages/typewriter-loop/typewriter-loop.tsx",
+          "type": "registry:component",
+          "target": "components/satori-ui/typewriter-loop.tsx"
+        }
+      ]
     }
   ]
 }

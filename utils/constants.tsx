@@ -59,4 +59,14 @@ export const ComponentsNavbar: SideNavbar[] = [
       },
     ],
   },
+  {
+    title: "Text Animations",
+    items: [
+      {
+        title: "Typewriter Loop",
+        path: `${prefix}/typewriter-loop`,
+        icon: <Icons.typeOutline width="16" height="16" />,
+      },
+    ],
+  },
 ];
