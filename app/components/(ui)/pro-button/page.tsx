@@ -8,113 +8,163 @@ export default function Page() {
     <div className="space-y-12">
       <ComponentShowcase
         title="Pro Button"
-        description="responsive grid that reacts smoothly to interaction and motion."
+        description="A high-impact call-to-action with a signature pixel icon and premium finish."
         preview={<ProButton />}
         scale={0.9}
         tsxCode={`"use client";
-import Link from "next/link";
-import React from "react";
-import { motion } from "motion/react";
-import { ArrowRight, Terminal } from "lucide-react";
 
-type MotionWrapperProps = {
-  children: React.ReactNode;
+import { cn } from "@/lib/utils";
+import { useState, useEffect } from "react";
+
+type PixelColor = "emerald" | "sky" | "rose";
+type ButtonSize = "sm" | "md" | "lg";
+
+interface ProButtonProps {
+  text?: string;
+  className?: string;
+  pixelColor?: PixelColor;
+  size?: ButtonSize;
+  onClick?: () => void;
+}
+
+interface BoxProps {
+  pixelColor: PixelColor;
+  size: ButtonSize;
+}
+
+const colorMap: Record<PixelColor, string> = {
+  rose: "bg-gradient-to-b from-[#f03030] to-[#e11d2e]",
+  sky: "bg-gradient-to-b from-[#007bff] to-blue-600",
+  emerald: "bg-gradient-to-b from-emerald-600 to-emerald-700",
 };
-const MotionWrapper = ({ children }: MotionWrapperProps) => {
+
+const sizeConfig = {
+  sm: {
+    button: "rounded-[16px] py-1.5 pl-1.5 pr-6 gap-4",
+    text: "text-[16px]",
+    box: "w-12 h-12 rounded-[10px]",
+    pixel: "w-[4px] h-[4px]",
+    gridGap: "gap-[3px]",
+    shadow:
+      "shadow-[inset_0_2px_4px_rgba(0,0,0,0.2),0_16px_20px_-5px_rgba(0,0,0,0.1),0_8px_8px_-5px_rgba(0,0,0,0.04)]",
+    boxShadow:
+      "shadow-[inset_0_2px_2px_rgba(255,255,255,0.5),0_8px_12px_rgba(0,0,0,0.35)]",
+  },
+  md: {
+    button: "rounded-[20px] py-1.5 pl-1.5 pr-10 gap-8",
+    text: "text-[22px]",
+    box: "w-16 h-16 rounded-[14px]",
+    pixel: "w-[5px] h-[5px]",
+    gridGap: "gap-[4px]",
+    shadow:
+      "shadow-[inset_0_2px_4px_rgba(0,0,0,0.2),0_20px_25px_-5px_rgba(0,0,0,0.1),0_10px_10px_-5px_rgba(0,0,0,0.04)]",
+    boxShadow:
+      "shadow-[inset_0_2px_2px_rgba(255,255,255,0.5),0_10px_16px_rgba(0,0,0,0.35)]",
+  },
+  lg: {
+    button: "rounded-[28px] py-2 pl-2 pr-14 gap-10",
+    text: "text-[32px]",
+    box: "w-24 h-24 rounded-[20px]",
+    pixel: "w-[7px] h-[7px]",
+    gridGap: "gap-[6px]",
+    shadow:
+      "shadow-[inset_0_3px_6px_rgba(0,0,0,0.25),0_25px_30px_-5px_rgba(0,0,0,0.15),0_12px_12px_-5px_rgba(0,0,0,0.06)]",
+    boxShadow:
+      "shadow-[inset_0_3px_3px_rgba(255,255,255,0.5),0_14px_20px_rgba(0,0,0,0.4)]",
+  },
+};
+
+const ProButton = ({
+  text = "Pro Button",
+  className,
+  pixelColor = "sky",
+  size = "md",
+  onClick,
+}: ProButtonProps) => {
+  const s = sizeConfig[size];
+
   return (
-    <motion.span
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: 0.4,
-        ease: "easeOut",
-        delay: 0.3,
-      }}
-      className="relative inline-block overflow-hidden p-[1px]"
+    <button
+      onClick={onClick}
+      className={cn(
+        "relative flex items-center cursor-pointer",
+        "bg-gradient-to-b from-[#303030] to-black",
+        s.shadow,
+        s.button,
+        className,
+      )}
     >
-      {children}
-    </motion.span>
+      <Box pixelColor={pixelColor} size={size} />
+      <span className={cn("text-white font-normal tracking-[0.025em]", s.text)}>
+        {text}
+      </span>
+    </button>
   );
 };
 
-const DottedModern = () => {
+const Box = ({ pixelColor, size }: BoxProps) => {
+  const [frame, setFrame] = useState(0);
+  const s = sizeConfig[size];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setFrame((prev) => (prev + 1) % 9);
+    }, 150);
+    return () => clearInterval(timer);
+  }, []);
+
+  const getPattern = (offset: number) => {
+    const pattern: boolean[][] = [];
+    for (let i = 0; i < 5; i++) {
+      const row: boolean[] = [];
+      for (let j = 0; j < 5; j++) {
+        const pos = j - offset;
+        const isArrow =
+          (i === 2 && pos >= 0 && pos <= 4) ||
+          (i === 1 && pos === 3) ||
+          (i === 0 && pos === 2) ||
+          (i === 3 && pos === 3) ||
+          (i === 4 && pos === 2);
+        row.push(isArrow && pos >= 0 && pos <= 4);
+      }
+      pattern.push(row);
+    }
+    return pattern;
+  };
+
+  const currentPattern = getPattern(frame - 5);
+
   return (
-    <div className="flex flex-col relative h-full w-full">
-      <div className="absolute h-full w-full -z-10 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#212121_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
-
-      <div className="mx-auto h-full flex flex-col gap-6 items-center justify-center">
-        {/* Animated badge */}
-        <MotionWrapper>
-          <a
-            href="https://github.com/ibelick/background-snippets"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex"
-          >
-            <span
-              className="relative inline-block overflow-hidden rounded-full p-[1px] border border-slate-800 border-1"
-              style={{ animationDelay: "0.3s", animationFillMode: "forwards" }}
-            >
+    <div
+      className={cn(
+        "flex items-center justify-center",
+        s.boxShadow,
+        s.box,
+        colorMap[pixelColor],
+      )}
+    >
+      <div className={cn("grid grid-cols-5 grid-rows-5", s.gridGap)}>
+        {[0, 1, 2, 3, 4].map((row) =>
+          [0, 1, 2, 3, 4].map((col) => {
+            const isActive = currentPattern[row][col];
+            return (
               <div
-                className="
-                inline-flex h-full w-full cursor-pointer items-center justify-center
-                rounded-full bg-white px-3 py-1 text-xs font-medium leading-5
-                text-slate-700 backdrop-blur-xl
-                dark:bg-black dark:text-slate-200
-              "
-              >
-                We are open source 🚀
-                <span className="inline-flex items-center pl-1 font-semibold text-black dark:text-white">
-                  Github
-                  <ArrowRight
-                    className="pl-0.5 text-black dark:text-white"
-                    size={16}
-                  />
-                </span>
-              </div>
-            </span>
-          </a>
-        </MotionWrapper>
-
-        <MotionWrapper>
-          <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-medium tracking-tight leading-[1.05] text-slate-900">
-            Action - oriented
-            <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-br from-slate-900 via-slate-600 to-slate-400">
-              Modern snippets
-            </span>
-          </h1>
-        </MotionWrapper>
-
-        <MotionWrapper>
-          <p className="text-lg text-slate-500 leading-relaxed text-center max-w-xl">
-            Plug-and-play snippets-just copy, paste, and use in your next
-            project. Built with Tailwind CSS and Vanilla CSS for seamless
-            integration.
-          </p>
-        </MotionWrapper>
-        <MotionWrapper>
-          <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto pt-2">
-            <Link
-              href="/components/button"
-              className="group w-full sm:w-auto px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-sm font-semibold text-sm shadow-xl shadow-slate-200/50 flex items-center justify-center gap-2"
-            >
-              Go to Github
-              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-[2px]" />
-            </Link>
-
-            <button className="w-full sm:w-auto px-6 py-3 rounded-sm font-semibold text-sm text-slate-600 border border-slate-200 hover:bg-slate-50 hover:text-slate-900 transition-all flex items-center justify-center gap-2 bg-accent">
-              <Terminal className="h-4 w-4" />
-              Documentation
-            </button>
-          </div>
-        </MotionWrapper>
+                key={\`\${row}-\${col}\`}
+                className={cn(
+                  "transition-colors duration-150 ease-in",
+                  s.pixel,
+                  isActive ? "bg-white/95" : "bg-white/15",
+                )}
+              />
+            );
+          }),
+        )}
       </div>
     </div>
   );
 };
 
-export default DottedModern;
+export default ProButton;
 `}
       />
       <InstallationCommand title="Installation" component={"pro-button"} />

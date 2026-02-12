@@ -22,11 +22,6 @@ export const ComponentsNavbar: SideNavbar[] = [
         path: `${prefix}/dotted-modern`,
         icon: <Icons.pill width="16" height="16" />,
       },
-      {
-        title: "Reactive Grid",
-        path: `${prefix}/reactive-grid`,
-        icon: <Icons.pill width="16" height="16" />,
-      },
       // {
       //   title: "Gradient",
       //   path: `${prefix}/gradient`,
@@ -60,11 +55,6 @@ export const ComponentsNavbar: SideNavbar[] = [
       {
         title: "Pro Button",
         path: `${prefix}/pro-button`,
-        icon: <Icons.pill width="16" height="16" />,
-      },
-      {
-        title: "Gauge",
-        path: `${prefix}/gauge`,
         icon: <Icons.pill width="16" height="16" />,
       },
     ],

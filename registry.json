@@ -56,6 +56,19 @@
           "target": "components/satori-ui/scroll-tracker.tsx"
         }
       ]
+    },
+    {
+      "name": "pro-button",
+      "type": "registry:component",
+      "title": "Pro Button",
+      "description": "A high-impact call-to-action with a signature pixel icon and premium finish.",
+      "files": [
+        {
+          "path": "packages/pro-button/pro-button.tsx",
+          "type": "registry:component",
+          "target": "components/satori-ui/pro-button.tsx"
+        }
+      ]
     }
   ]
 }

@@ -10,7 +10,7 @@ export default function Page() {
         title="Keyboard UI"
         description="Sleek, minimalistic & interactive keyboard UI."
         preview={<KeyboardUI />}
-        scale={0.8}
+        scale={0.7}
         mobilePreviewImage="/snapshots/keyboard.png"
         tsxCode={`"use client";
 const KeyboardUI = () => {

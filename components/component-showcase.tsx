@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { CodeBlock } from "./code-block";
 
 type ComponentShowcaseProps = {
@@ -7,6 +8,7 @@ type ComponentShowcaseProps = {
   tsxCode: string;
   jsxCode?: string;
   scale?: number;
+  innerStretch?: boolean;
   mobilePreviewImage?: string;
 };
 
@@ -17,6 +19,7 @@ export function ComponentShowcase({
   tsxCode,
   jsxCode,
   scale = 1,
+  innerStretch,
   mobilePreviewImage,
 }: ComponentShowcaseProps) {
   const hasMobilePreview = Boolean(mobilePreviewImage);
@@ -48,22 +51,24 @@ export function ComponentShowcase({
 
           {/* 🧠 Interactive preview */}
           <div
-            className={[
-              "w-full items-center justify-center p-4",
+            className={cn(
+              "w-full items-stretch justify-center p-4",
               hasMobilePreview
                 ? "hidden md:flex min-h-[360px]"
                 : "flex min-h-[360px]",
-            ].join(" ")}
+            )}
           >
-            <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+            <div
+              className={cn(
+                "relative w-full flex justify-center overflow-hidden",
+                innerStretch ? "items-stretch" : "items-center",
+              )}
+            >
               <div
-                className="origin-center flex justify-center items-center"
                 style={{
-                  transform: `scale(${scale})`,
-                  transformOrigin: "center",
-                  width: `${100 / scale}%`,
-                  maxWidth: "none",
+                  zoom: scale,
                 }}
+                className="w-full flex justify-center"
               >
                 {preview}
               </div>

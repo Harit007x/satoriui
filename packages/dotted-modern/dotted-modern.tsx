@@ -27,8 +27,7 @@ const MotionWrapper = ({ children }: MotionWrapperProps) => {
 const DottedModern = () => {
   return (
     <div className="flex flex-col relative h-full w-full">
-      <div className="absolute h-full w-full -z-10 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
-
+      <div className="absolute inset-0 z-0 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
       <div className="mx-auto h-full flex flex-col gap-6 items-center justify-center">
         <MotionWrapper>
           <a
