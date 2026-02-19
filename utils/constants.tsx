@@ -53,8 +53,18 @@ export const ComponentsNavbar: SideNavbar[] = [
         icon: <Icons.scroll width="16" height="16" />,
       },
       {
+        title: "Flip Clock",
+        path: `${prefix}/flip-clock`,
+        icon: <Icons.typeOutline width="16" height="16" />,
+      },
+      {
         title: "Pro Button",
         path: `${prefix}/pro-button`,
+        icon: <Icons.pill width="16" height="16" />,
+      },
+      {
+        title: "Cyberpunk Button",
+        path: `${prefix}/cyberpunk-button`,
         icon: <Icons.pill width="16" height="16" />,
       },
     ],
