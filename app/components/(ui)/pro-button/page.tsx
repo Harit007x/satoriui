@@ -9,7 +9,7 @@ export default function Page() {
       <ComponentShowcase
         title="Pro Button"
         description="A high-impact call-to-action with a signature pixel icon and premium finish."
-        preview={<ProButton />}
+        preview={<ProButton size={"sm"} />}
         scale={0.9}
         tsxCode={`"use client";
 

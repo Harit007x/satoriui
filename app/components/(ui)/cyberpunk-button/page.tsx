@@ -1,7 +1,7 @@
 "use client";
 import { ComponentShowcase } from "@/components/component-showcase";
 import InstallationSection from "@/components/installation-section";
-import CyberPunkButton from "@/packages/cyberpunk-button/cyberpunk-button";
+import CyberpunkButton from "@/packages/cyberpunk-button/cyberpunk-button";
 
 export default function Page() {
   return (
@@ -9,7 +9,7 @@ export default function Page() {
       <ComponentShowcase
         title="Cyberpunk Button"
         description="Neat and clean functional clock ui with buttery smooth flip animations."
-        preview={<CyberPunkButton />}
+        preview={<CyberpunkButton buttonColor="sky" pixelColor="white" />}
         scale={0.9}
         tsxCode={`"use client";
 import Link from "next/link";

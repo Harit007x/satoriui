@@ -1,37 +1,77 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { ArrowRight } from "lucide-react";
 
-const PixelButton = () => {
+import { useState, useEffect } from "react";
+
+type PixelColor = "lime" | "bloodred" | "sky";
+type PixelShade = "white" | "black";
+
+interface CyberpunkButtonProps {
+  buttonColor?: PixelColor;
+  pixelColor?: PixelShade;
+  buttonText?: string;
+}
+
+const colorMap: Record<PixelColor, string> = {
+  lime: "#ccff00",
+  bloodred: "#f03030",
+  sky: "#007bff",
+};
+
+const gradientMap: Record<PixelColor, string> = {
+  lime: "linear-gradient(to bottom, #ccff00, #b3e600)",
+  bloodred: "linear-gradient(to bottom, #f03030, #e11d2e)",
+  sky: "linear-gradient(to bottom, #007bff, #0056b3)",
+};
+
+const pixelShadeMap: Record<PixelShade, { active: string; inactive: string }> =
+  {
+    white: {
+      active: "rgba(255,255,255,1)",
+      inactive: "rgba(255,255,255,0.55)",
+    },
+    black: {
+      active: "rgba(15,15,15,1)",
+      inactive: "rgba(15,15,15,0.55)",
+    },
+  };
+
+const CyberpunkButton = ({
+  buttonColor = "lime",
+  pixelColor = "black",
+  buttonText = "Book a demo",
+}: CyberpunkButtonProps) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [shimmerPhase, setShimmerPhase] = useState(0);
+  const [activeArrow, setActiveArrow] = useState(0);
 
   const rows = 5;
-  const cols = 44;
-
   const pixelSize = 3;
   const gap = 2;
   const spacing = 5;
+  const centerRow = 2;
+  const colsHovered = 30;
+  const arrowCols = spacing;
 
-  const totalArrows = Math.floor(cols / spacing);
-
-  // Smooth scanning animation
   useEffect(() => {
-    if (!isHovered) return;
-
+    if (isHovered) return;
     const timer = setInterval(() => {
-      setProgress((prev) => (prev + 0.5) % totalArrows);
-    }, 60);
-
+      setShimmerPhase((prev) => (prev + 1) % (spacing + 3));
+    }, 110);
     return () => clearInterval(timer);
   }, [isHovered]);
 
-  // Arrow pixel logic
-  const isPixelActive = (r: number, c: number) => {
-    const centerRow = 2;
+  useEffect(() => {
+    if (!isHovered) return;
+    const totalArrows = Math.floor(colsHovered / spacing);
+    const timer = setInterval(() => {
+      setActiveArrow((prev) => (prev + 1) % totalArrows);
+    }, 120);
+    return () => clearInterval(timer);
+  }, [isHovered]);
+
+  const isPixelActiveHovered = (r: number, c: number) => {
     const rowOffset = r - centerRow;
     const diagonalShift = Math.abs(rowOffset);
-
     const arrowIndex = Math.floor(c / spacing);
     const phase = c % spacing;
 
@@ -43,232 +83,131 @@ const PixelButton = () => {
       (phase === spacing - 1 - diagonalShift ||
         phase === spacing - 2 - diagonalShift);
 
-    return {
-      active: isHead || isDiagonal,
-      arrowIndex,
-    };
+    return { active: isHead || isDiagonal, arrowIndex };
   };
+
+  const pixelColors = pixelShadeMap[pixelColor];
 
   return (
     <button
-      className="relative flex items-center bg-neutral-950 rounded-xl p-1 border border-neutral-800 transition-all duration-300 hover:border-neutral-700 active:scale-[0.98]"
-      style={{ width: "220px", height: "64px" }}
+      style={{
+        position: "relative",
+        display: "flex",
+        alignItems: "center",
+        backgroundColor: "#0a0a0a",
+        borderRadius: "12px",
+        padding: "4px",
+        border: "1px solid #262626",
+        height: "64px",
+        cursor: "pointer",
+        transition: "border-color 0.3s",
+        outline: "none",
+        overflow: "hidden",
+      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Static Text */}
+      {/* TEXT (now flexible) */}
       <div
-        className={`absolute left-[72px] transition-all duration-300 ${
-          isHovered ? "opacity-0 -translate-x-2" : "opacity-100"
-        }`}
+        style={{
+          paddingLeft: "72px",
+          paddingRight: "24px",
+          whiteSpace: "nowrap",
+          transition: "opacity 0.3s, transform 0.3s",
+          opacity: isHovered ? 0 : 1,
+          transform: isHovered ? "translateX(-8px)" : "translateX(0)",
+        }}
       >
-        <span className="text-white text-lg font-medium tracking-tight">
-          Book a demo
+        <span
+          style={{
+            color: "white",
+            fontSize: "18px",
+            fontWeight: 500,
+            letterSpacing: "-0.02em",
+            fontFamily: "system-ui",
+          }}
+        >
+          {buttonText}
         </span>
       </div>
 
-      {/* Lime Animated Box */}
+      {/* COLORED BOX */}
       <div
-        className={`relative h-full flex items-center justify-center overflow-hidden rounded-lg transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
-          isHovered ? "w-full bg-[#ccff00]" : "w-[56px] bg-[#ccff00]"
-        }`}
+        style={{
+          position: "absolute",
+          left: "4px",
+          top: "4px",
+          bottom: "4px",
+          width: isHovered ? "calc(100% - 8px)" : "56px",
+          transition: "width 0.5s cubic-bezier(0.2,0,0,1)",
+          borderRadius: "8px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          overflow: "hidden",
+          backgroundColor: colorMap[buttonColor],
+          backgroundImage: isHovered ? gradientMap[buttonColor] : "none",
+        }}
       >
-        <div className="absolute inset-0 border border-[#b3e600] rounded-lg pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent pointer-events-none" />
+        {isHovered ? (
+          <div style={{ display: "grid", gap: `${gap}px` }}>
+            {Array.from({ length: rows }).map((_, r) => (
+              <div key={r} style={{ display: "flex", gap: `${gap}px` }}>
+                {Array.from({ length: colsHovered }).map((_, c) => {
+                  const { active, arrowIndex } = isPixelActiveHovered(r, c);
+                  const isHighlighted = arrowIndex === activeArrow;
+                  return (
+                    <div
+                      key={`${r}-${c}`}
+                      style={{
+                        width: `${pixelSize}px`,
+                        height: `${pixelSize}px`,
+                        borderRadius: "1px",
+                        backgroundColor: active
+                          ? isHighlighted
+                            ? pixelColors.active
+                            : pixelColors.inactive
+                          : "transparent",
+                      }}
+                    />
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div style={{ display: "grid", gap: `${gap}px` }}>
+            {Array.from({ length: rows }).map((_, r) => (
+              <div key={r} style={{ display: "flex", gap: `${gap}px` }}>
+                {Array.from({ length: arrowCols }).map((_, c) => {
+                  const { active } = isPixelActiveHovered(r, c);
+                  const shimCol = shimmerPhase % spacing;
+                  const phase = c % spacing;
+                  const isShimmering = active && phase === shimCol;
 
-        {/* Pixel Grid */}
-        <div style={{ display: "grid", gap: `${gap}px` }}>
-          {Array.from({ length: rows }).map((_, r) => (
-            <div key={r} style={{ display: "flex", gap: `${gap}px` }}>
-              {Array.from({ length: cols }).map((_, c) => {
-                const { active, arrowIndex } = isPixelActive(r, c);
-
-                // Distance from scanning head
-                const distance = progress - arrowIndex;
-                const normalized =
-                  distance >= 0 ? distance : totalArrows + distance;
-
-                // Trail length (how many arrows fade behind)
-                const trailLength = 4;
-
-                let intensity = 0;
-
-                if (normalized >= 0 && normalized <= trailLength) {
-                  intensity = 1 - normalized / trailLength;
-                }
-
-                return (
-                  <div
-                    key={`${r}-${c}`}
-                    style={{
-                      width: `${pixelSize}px`,
-                      height: `${pixelSize}px`,
-                      borderRadius: "1px",
-                      transition: "background-color 120ms linear",
-                      backgroundColor: active
-                        ? `rgba(15,15,15,${0.3 + intensity * 0.7})`
-                        : "rgba(15,15,15,0.06)",
-                    }}
-                  />
-                );
-              })}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* External Arrow */}
-      <div
-        className={`absolute -right-12 transition-opacity duration-300 ${
-          isHovered ? "opacity-0" : "opacity-100"
-        }`}
-      >
-        <ArrowRight className="text-neutral-400 w-5 h-5" strokeWidth={1.5} />
+                  return (
+                    <div
+                      key={`${r}-${c}`}
+                      style={{
+                        width: `${pixelSize}px`,
+                        height: `${pixelSize}px`,
+                        borderRadius: "1px",
+                        backgroundColor: active
+                          ? isShimmering
+                            ? pixelColors.active
+                            : pixelColors.inactive
+                          : "transparent",
+                      }}
+                    />
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </button>
   );
 };
 
-export default PixelButton;
-
-// 'use client'
-// import React, { useState, useEffect } from 'react'
-// import { ArrowRight } from 'lucide-react'
-
-// const PixelButton = () => {
-//   const [isHovered, setIsHovered] = useState(false)
-//   const [activeArrow, setActiveArrow] = useState(0)
-
-//   const rows = 5
-//   const cols = 44
-
-//   const pixelSize = 3   // smaller pixels
-//   const gap = 2         // tighter spacing
-//   const spacing = 5     // width per arrow block
-
-//   // Animate arrow sequence
-//   useEffect(() => {
-//     if (!isHovered) return
-
-//     const totalArrows = Math.floor(cols / spacing)
-
-//     const timer = setInterval(() => {
-//       setActiveArrow(prev => (prev + 1) % totalArrows)
-//     }, 120)
-
-//     return () => clearInterval(timer)
-//   }, [isHovered])
-
-//   // Arrow pixel logic (2px thick head + wings)
-//   const isPixelActive = (r: number, c: number) => {
-//     const centerRow = 2
-//     const rowOffset = r - centerRow
-//     const diagonalShift = Math.abs(rowOffset)
-
-//     const arrowIndex = Math.floor(c / spacing)
-//     const phase = c % spacing
-
-//     // Head (2px wide)
-//     const isHead =
-//       r === centerRow &&
-//       (phase === spacing - 1 || phase === spacing - 2)
-
-//     // Diagonal wings (2px thick)
-//     const isDiagonal =
-//       r !== centerRow &&
-//       (phase === spacing - 1 - diagonalShift ||
-//         phase === spacing - 2 - diagonalShift)
-
-//     return {
-//       active: isHead || isDiagonal,
-//       arrowIndex,
-//     }
-//   }
-
-//   return (
-//     <button
-//       className="relative flex items-center bg-neutral-950 rounded-xl p-1 border border-neutral-800 transition-all duration-300 hover:border-neutral-700 active:scale-[0.98]"
-//       style={{ width: '220px', height: '64px' }}
-//       onMouseEnter={() => setIsHovered(true)}
-//       onMouseLeave={() => setIsHovered(false)}
-//     >
-//       {/* Static Text */}
-//       <div
-//         className={`absolute left-[72px] transition-all duration-300 ${
-//           isHovered ? 'opacity-0 -translate-x-2' : 'opacity-100'
-//         }`}
-//       >
-//         <span className="text-white text-lg font-medium tracking-tight">
-//           Book a demo
-//         </span>
-//       </div>
-
-//       {/* Lime Animated Box */}
-//       <div
-//         className={`relative h-full flex items-center justify-center overflow-hidden rounded-lg transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
-//           isHovered ? 'w-full bg-[#ccff00]' : 'w-[56px] bg-[#ccff00]'
-//         }`}
-//       >
-//         {/* subtle border + shine */}
-//         <div className="absolute inset-0 border border-[#b3e600] rounded-lg pointer-events-none" />
-//         <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent pointer-events-none" />
-
-//         {/* Pixel Grid */}
-//         <div
-//           style={{
-//             display: 'grid',
-//             gap: `${gap}px`,
-//           }}
-//         >
-//           {Array.from({ length: rows }).map((_, r) => (
-//             <div
-//               key={r}
-//               style={{
-//                 display: 'flex',
-//                 gap: `${gap}px`,
-//               }}
-//             >
-//               {Array.from({ length: cols }).map((_, c) => {
-//                 const { active, arrowIndex } = isPixelActive(r, c)
-
-//                 const isHighlighted =
-//                   isHovered && arrowIndex === activeArrow
-
-//                 return (
-//                   <div
-//                     key={`${r}-${c}`}
-//                     style={{
-//                       width: `${pixelSize}px`,
-//                       height: `${pixelSize}px`,
-//                       borderRadius: '1px',
-//                       transition: 'background-color 150ms ease',
-//                       backgroundColor: active
-//                         ? isHighlighted
-//                           ? 'rgba(15,15,15,1)'
-//                           : 'rgba(15,15,15,0.55)'
-//                         : 'rgba(15,15,15,0.06)',
-//                     }}
-//                   />
-//                 )
-//               })}
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-
-//       {/* External Arrow */}
-//       <div
-//         className={`absolute -right-12 transition-opacity duration-300 ${
-//           isHovered ? 'opacity-0' : 'opacity-100'
-//         }`}
-//       >
-//         <ArrowRight
-//           className="text-neutral-400 w-5 h-5"
-//           strokeWidth={1.5}
-//         />
-//       </div>
-//     </button>
-//   )
-// }
-
-// export default PixelButton
+export default CyberpunkButton;

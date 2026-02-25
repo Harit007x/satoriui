@@ -2,14 +2,34 @@
 import { ComponentShowcase } from "@/components/component-showcase";
 import InstallationSection from "@/components/installation-section";
 import FlipClock from "@/packages/flip-clock/flip-clock";
+import { useEffect, useState } from "react";
+
+function useIsMdUp() {
+  const [isMdUp, setIsMdUp] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 768px)");
+
+    const handleChange = () => setIsMdUp(mediaQuery.matches);
+
+    handleChange(); // set initial value
+    mediaQuery.addEventListener("change", handleChange);
+
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  return isMdUp;
+}
 
 export default function Page() {
+  const isMdUp = useIsMdUp();
+
   return (
     <div className="space-y-12">
       <ComponentShowcase
         title="Flip Clock"
         description="Neat and clean functional clock ui with buttery smooth flip animations."
-        preview={<FlipClock />}
+        preview={isMdUp ? <FlipClock /> : <FlipClock size="sm" />}
         scale={0.9}
         tsxCode={`"use client";
 import Link from "next/link";
