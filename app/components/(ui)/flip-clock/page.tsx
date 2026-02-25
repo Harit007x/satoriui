@@ -32,110 +32,368 @@ export default function Page() {
         preview={isMdUp ? <FlipClock /> : <FlipClock size="sm" />}
         scale={0.9}
         tsxCode={`"use client";
-import Link from "next/link";
-import React from "react";
-import { motion } from "motion/react";
-import { ArrowRight, Terminal } from "lucide-react";
 
-type MotionWrapperProps = {
-  children: React.ReactNode;
-};
-const MotionWrapper = ({ children }: MotionWrapperProps) => {
+import { cn } from "@/lib/utils";
+import { cva, VariantProps } from "class-variance-authority";
+import {
+  FC,
+  HTMLAttributes,
+  memo,
+  ReactNode,
+  useEffect,
+  useState,
+} from "react";
+
+const flipUnitVariants = cva(
+  "relative subpixel-antialiased perspective-[1000px] rounded-md overflow-hidden",
+  {
+    variants: {
+      size: {
+        sm: "w-10 min-w-10 h-14 text-3xl", // Small (Compact UI)
+        md: "w-14 min-w-14 h-20 text-5xl", // Medium (Standard sidebar/header)
+        lg: "w-17 min-w-17 h-24 text-6xl", // Large (Focus/Hero)
+        xl: "w-22 min-w-22 h-32 text-8xl", // Extra Large (Dashboard/Landing)
+      },
+      variant: {
+        default: "bg-primary text-primary-foreground",
+        secondary: "bg-secondary text-secondary-foreground",
+        destructive: "bg-destructive text-destructive-foreground",
+        outline: "border border-input bg-background text-foreground",
+        muted: "bg-muted text-muted-foreground",
+      },
+    },
+    defaultVariants: {
+      size: "md",
+      variant: "default",
+    },
+  },
+);
+
+interface FlipUnitProps
+  extends
+    HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof flipUnitVariants> {
+  digit: number | string;
+}
+
+const commonCardStyle = cn(
+  "absolute inset-x-0 overflow-hidden h-1/2 bg-inherit text-inherit",
+);
+
+const FlipUnit: FC<FlipUnitProps> = memo(function FlipUnit({
+  digit,
+  size,
+  variant,
+  className,
+}: FlipUnitProps) {
+  const [prevDigit, setPrevDigit] = useState(digit);
+  const [flipping, setFlipping] = useState(false);
+
+  useEffect(() => {
+    if (digit !== prevDigit) {
+      setFlipping(true);
+      // Wait for the full animation (0.3s top + 0.3s bottom) before resetting
+      const timer = setTimeout(() => {
+        setFlipping(false);
+        setPrevDigit(digit);
+      }, 550); // Slightly less than 600ms to ensure smoothness
+      return () => clearTimeout(timer);
+    }
+  }, [digit, prevDigit]);
+
   return (
-    <motion.span
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: 0.4,
-        ease: "easeOut",
-        delay: 0.3,
+    <div className={cn(flipUnitVariants({ size, variant }), className)}>
+      {/* 1. Background Top (The NEW digit waiting) */}
+      <div className={cn(commonCardStyle, "rounded-t-lg top-0")}>
+        <DigitSpan position="top">{digit}</DigitSpan>
+      </div>
+
+      {/* 2. Background Bottom (The OLD digit staying) */}
+      <div className={cn(commonCardStyle, "rounded-b-lg translate-y-full")}>
+        <DigitSpan position="bottom">{prevDigit}</DigitSpan>
+      </div>
+
+      {/* 3. Top Flap (The OLD digit falling down) */}
+      <div
+        className={cn(
+          commonCardStyle,
+          "z-20 origin-bottom backface-hidden rounded-t-lg",
+          flipping && "animate-flip-top",
+        )}
+      >
+        <DigitSpan position="top">{prevDigit}</DigitSpan>
+      </div>
+
+      {/* 4. Bottom Flap (The NEW digit appearing) */}
+      <div
+        className={cn(
+          commonCardStyle,
+          "z-10 origin-top backface-hidden rounded-b-lg translate-y-full",
+          flipping && "animate-flip-bottom",
+        )}
+        style={{ transform: "rotateX(90deg)" }}
+      >
+        <DigitSpan position="bottom">{digit}</DigitSpan>
+      </div>
+
+      {/* Center Divider Shadow */}
+      <div className="absolute top-1/2 left-0 w-full h-px -translate-y-1/2 bg-background/50 z-30" />
+    </div>
+  );
+});
+
+interface DigitSpanProps {
+  children: ReactNode;
+  position?: "top" | "bottom";
+}
+
+function DigitSpan({ children, position }: DigitSpanProps) {
+  return (
+    <span
+      className={cn(
+        "absolute left-0 right-0 w-full flex items-center justify-center",
+        // The span should be the full height of the PARENT FlipUnit (200% of the half-card)
+        "h-[200%]",
+      )}
+      style={{
+        // If it's the top half, align the full span to the top
+        // If it's the bottom half, shift the full span up so its bottom half shows
+        top: position === "top" ? "0%" : "-100%",
       }}
-      className="relative inline-block overflow-hidden p-[1px]"
     >
       {children}
-    </motion.span>
+    </span>
   );
+}
+
+const flipClockVariants = cva(
+  "relative flex justify-center items-center font-mono font-medium",
+  {
+    variants: {
+      size: {
+        sm: "text-3xl space-x-1",
+        md: "text-5xl space-x-2",
+        lg: "text-6xl space-x-2",
+        xl: "text-8xl space-x-3",
+      },
+      variant: {
+        default: "",
+        secondary: "",
+        destructive: "",
+        outline: "",
+        muted: "",
+      },
+    },
+    defaultVariants: {
+      size: "md",
+      variant: "default",
+    },
+  },
+);
+
+interface FlipClockProps
+  extends
+    VariantProps<typeof flipClockVariants>,
+    HTMLAttributes<HTMLDivElement> {
+  countdown?: boolean;
+  targetDate?: Date;
+  showDays?: "auto" | "always" | "never";
+}
+
+interface TimeLeft {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
+
+type FlipClockSize = NonNullable<
+  VariantProps<typeof flipClockVariants>["size"]
+>;
+
+const heightMap: Record<FlipClockSize, string> = {
+  sm: "text-4xl",
+  md: "text-5xl",
+  lg: "text-6xl",
+  xl: "text-8xl",
 };
 
-const DottedModern = () => {
+function ClockSeparator({ size }: { size?: FlipClockSize }) {
   return (
-    <div className="flex flex-col relative h-full w-full">
-      <div className="absolute h-full w-full -z-10 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#212121_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
+    <span
+      className={cn(
+        "text-center -translate-y-[8%]",
+        size ? heightMap[size] : heightMap["md"],
+      )}
+    >
+      :
+    </span>
+  );
+}
 
-      <div className="mx-auto h-full flex flex-col gap-6 items-center justify-center">
-        {/* Animated badge */}
-        <MotionWrapper>
-          <a
-            href="https://github.com/ibelick/background-snippets"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex"
-          >
-            <span
-              className="relative inline-block overflow-hidden rounded-full p-[1px] border border-slate-800 border-1"
-              style={{ animationDelay: "0.3s", animationFillMode: "forwards" }}
-            >
-              <div
-                className="
-                inline-flex h-full w-full cursor-pointer items-center justify-center
-                rounded-full bg-white px-3 py-1 text-xs font-medium leading-5
-                text-slate-700 backdrop-blur-xl
-                dark:bg-black dark:text-slate-200
-              "
-              >
-                We are open source 🚀
-                <span className="inline-flex items-center pl-1 font-semibold text-black dark:text-white">
-                  Github
-                  <ArrowRight
-                    className="pl-0.5 text-black dark:text-white"
-                    size={16}
-                  />
-                </span>
-              </div>
-            </span>
-          </a>
-        </MotionWrapper>
+const FlipClock = ({
+  countdown = false,
+  targetDate,
+  size,
+  variant,
+  showDays = "auto",
+  className,
+  ...props
+}: FlipClockProps) => {
+  const [time, setTime] = useState<TimeLeft>(getTime(countdown, targetDate));
 
-        <MotionWrapper>
-          <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-medium tracking-tight leading-[1.05] text-slate-900">
-            Action - oriented
-            <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-br from-slate-900 via-slate-600 to-slate-400">
-              Modern snippets
-            </span>
-          </h1>
-        </MotionWrapper>
+  useEffect(() => {
+    // Run a faster heartbeat (250ms) to catch the second rollover immediately
+    const timer = setInterval(() => {
+      const nextTime = getTime(countdown, targetDate);
 
-        <MotionWrapper>
-          <p className="text-lg text-slate-500 leading-relaxed text-center max-w-xl">
-            Plug-and-play snippets-just copy, paste, and use in your next
-            project. Built with Tailwind CSS and Vanilla CSS for seamless
-            integration.
-          </p>
-        </MotionWrapper>
-        <MotionWrapper>
-          <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto pt-2">
-            <Link
-              href="/components/button"
-              className="group w-full sm:w-auto px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-sm font-semibold text-sm shadow-xl shadow-slate-200/50 flex items-center justify-center gap-2"
-            >
-              Go to Github
-              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-[2px]" />
-            </Link>
+      // Only update state if the seconds actually changed to prevent unnecessary re-renders
+      setTime((prev) => {
+        if (
+          prev.seconds === nextTime.seconds &&
+          prev.minutes === nextTime.minutes
+        ) {
+          return prev;
+        }
+        return nextTime;
+      });
+    }, 250); // 4fps check is plenty
 
-            <button className="w-full sm:w-auto px-6 py-3 rounded-sm font-semibold text-sm text-slate-600 border border-slate-200 hover:bg-slate-50 hover:text-slate-900 transition-all flex items-center justify-center gap-2 bg-accent">
-              <Terminal className="h-4 w-4" />
-              Documentation
-            </button>
-          </div>
-        </MotionWrapper>
-      </div>
+    return () => clearInterval(timer);
+  }, [countdown, targetDate]);
+
+  const daysStr = String(time.days).padStart(3, "0");
+  const hoursStr = String(time.hours).padStart(2, "0");
+  const minutesStr = String(time.minutes).padStart(2, "0");
+  const secondsStr = String(time.seconds).padStart(2, "0");
+
+  const shouldShowDays =
+    countdown &&
+    (showDays === "always" || (showDays === "auto" && time.days > 0));
+
+  return (
+    <div
+      className={cn(flipClockVariants({ size, variant }), className)}
+      aria-live="polite"
+      {...props}
+    >
+      <span className="sr-only absolute">
+        {\`\${time.hours}:\${time.minutes}:\${time.seconds}\`}
+      </span>
+
+      {/* Days */}
+      {shouldShowDays && (
+        <>
+          {daysStr.split("").map((digit, i) => (
+            <FlipUnit
+              key={\`d-\${i}\`}
+              digit={digit}
+              size={size}
+              variant={variant}
+            />
+          ))}
+          <ClockSeparator size={size!} />
+        </>
+      )}
+
+      {/* Hours */}
+      {hoursStr.split("").map((digit, index) => (
+        <FlipUnit
+          key={\`hour-\${index}\`}
+          digit={digit}
+          size={size}
+          variant={variant}
+        />
+      ))}
+
+      <ClockSeparator size={size!} />
+
+      {/* Minutes */}
+      {minutesStr.split("").map((digit, index) => (
+        <FlipUnit
+          key={\`minute-\${index}\`}
+          digit={digit}
+          size={size}
+          variant={variant}
+        />
+      ))}
+
+      <ClockSeparator size={size!} />
+
+      {/* Seconds */}
+      {secondsStr.split("").map((digit, index) => (
+        <FlipUnit
+          key={\`second-\${index}\`}
+          digit={digit}
+          size={size}
+          variant={variant}
+        />
+      ))}
+
+      {/* Injected Keyframes (The Shadcn "Cheat Code") */}
+      <style jsx global>{\`
+        /* Use the same duration for both to keep them in sync */
+        .animate-flip-top {
+          animation: flip-top-anim 0.6s ease-in forwards;
+        }
+        .animate-flip-bottom {
+          animation: flip-bottom-anim 0.6s ease-out forwards;
+        }
+
+        @keyframes flip-top-anim {
+          0% {
+            transform: rotateX(0deg);
+            z-index: 30;
+          }
+          50%,
+          100% {
+            transform: rotateX(-90deg);
+            z-index: 10;
+          }
+        }
+
+        @keyframes flip-bottom-anim {
+          0%,
+          50% {
+            transform: rotateX(90deg);
+            z-index: 10;
+          }
+          100% {
+            transform: rotateX(0deg);
+            z-index: 30;
+          }
+        }
+      \`}</style>
     </div>
   );
 };
 
-export default DottedModern;
-`}
+function getTime(countdown: boolean, targetDate?: Date): TimeLeft {
+  const now = new Date();
+
+  // Real-time Clock Mode
+  if (!countdown) {
+    return {
+      days: 0,
+      hours: now.getHours(),
+      minutes: now.getMinutes(),
+      seconds: now.getSeconds(),
+    };
+  }
+
+  // Countdown Mode
+  if (!targetDate) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  const diff = Math.max(0, targetDate.getTime() - now.getTime());
+
+  return {
+    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+    minutes: Math.floor((diff / (1000 * 60)) % 60),
+    seconds: Math.floor((diff / 1000) % 60),
+  };
+}
+
+export default FlipClock;`}
       />
       <InstallationSection title="Installation" component={"flip-clock"} />
     </div>

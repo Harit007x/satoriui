@@ -8,114 +8,222 @@ export default function Page() {
     <div className="space-y-12">
       <ComponentShowcase
         title="Cyberpunk Button"
-        description="Neat and clean functional clock ui with buttery smooth flip animations."
+        description="Futuristic, minimalistic button with smooth animations."
         preview={<CyberpunkButton buttonColor="sky" pixelColor="white" />}
         scale={0.9}
         tsxCode={`"use client";
-import Link from "next/link";
-import React from "react";
-import { motion } from "motion/react";
-import { ArrowRight, Terminal } from "lucide-react";
 
-type MotionWrapperProps = {
-  children: React.ReactNode;
+import { useState, useEffect } from "react";
+
+type PixelColor = "lime" | "bloodred" | "sky";
+type PixelShade = "white" | "black";
+
+interface CyberpunkButtonProps {
+  buttonColor?: PixelColor;
+  pixelColor?: PixelShade;
+  buttonText?: string;
+}
+
+const colorMap: Record<PixelColor, string> = {
+  lime: "#ccff00",
+  bloodred: "#f03030",
+  sky: "#007bff",
 };
-const MotionWrapper = ({ children }: MotionWrapperProps) => {
+
+const gradientMap: Record<PixelColor, string> = {
+  lime: "linear-gradient(to bottom, #ccff00, #b3e600)",
+  bloodred: "linear-gradient(to bottom, #f03030, #e11d2e)",
+  sky: "linear-gradient(to bottom, #007bff, #0056b3)",
+};
+
+const pixelShadeMap: Record<PixelShade, { active: string; inactive: string }> =
+  {
+    white: {
+      active: "rgba(255,255,255,1)",
+      inactive: "rgba(255,255,255,0.55)",
+    },
+    black: {
+      active: "rgba(15,15,15,1)",
+      inactive: "rgba(15,15,15,0.55)",
+    },
+  };
+
+const CyberpunkButton = ({
+  buttonColor = "lime",
+  pixelColor = "black",
+  buttonText = "Book a demo",
+}: CyberpunkButtonProps) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [shimmerPhase, setShimmerPhase] = useState(0);
+  const [activeArrow, setActiveArrow] = useState(0);
+
+  const rows = 5;
+  const pixelSize = 3;
+  const gap = 2;
+  const spacing = 5;
+  const centerRow = 2;
+  const colsHovered = 30;
+  const arrowCols = spacing;
+
+  useEffect(() => {
+    if (isHovered) return;
+    const timer = setInterval(() => {
+      setShimmerPhase((prev) => (prev + 1) % (spacing + 3));
+    }, 110);
+    return () => clearInterval(timer);
+  }, [isHovered]);
+
+  useEffect(() => {
+    if (!isHovered) return;
+    const totalArrows = Math.floor(colsHovered / spacing);
+    const timer = setInterval(() => {
+      setActiveArrow((prev) => (prev + 1) % totalArrows);
+    }, 120);
+    return () => clearInterval(timer);
+  }, [isHovered]);
+
+  const isPixelActiveHovered = (r: number, c: number) => {
+    const rowOffset = r - centerRow;
+    const diagonalShift = Math.abs(rowOffset);
+    const arrowIndex = Math.floor(c / spacing);
+    const phase = c % spacing;
+
+    const isHead =
+      r === centerRow && (phase === spacing - 1 || phase === spacing - 2);
+
+    const isDiagonal =
+      r !== centerRow &&
+      (phase === spacing - 1 - diagonalShift ||
+        phase === spacing - 2 - diagonalShift);
+
+    return { active: isHead || isDiagonal, arrowIndex };
+  };
+
+  const pixelColors = pixelShadeMap[pixelColor];
+
   return (
-    <motion.span
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: 0.4,
-        ease: "easeOut",
-        delay: 0.3,
+    <button
+      style={{
+        position: "relative",
+        display: "flex",
+        alignItems: "center",
+        backgroundColor: "#0a0a0a",
+        borderRadius: "12px",
+        padding: "4px",
+        border: "1px solid #262626",
+        height: "64px",
+        cursor: "pointer",
+        transition: "border-color 0.3s",
+        outline: "none",
+        overflow: "hidden",
       }}
-      className="relative inline-block overflow-hidden p-[1px]"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      {children}
-    </motion.span>
-  );
-};
-
-const DottedModern = () => {
-  return (
-    <div className="flex flex-col relative h-full w-full">
-      <div className="absolute h-full w-full -z-10 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#212121_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
-
-      <div className="mx-auto h-full flex flex-col gap-6 items-center justify-center">
-        {/* Animated badge */}
-        <MotionWrapper>
-          <a
-            href="https://github.com/ibelick/background-snippets"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex"
-          >
-            <span
-              className="relative inline-block overflow-hidden rounded-full p-[1px] border border-slate-800 border-1"
-              style={{ animationDelay: "0.3s", animationFillMode: "forwards" }}
-            >
-              <div
-                className="
-                inline-flex h-full w-full cursor-pointer items-center justify-center
-                rounded-full bg-white px-3 py-1 text-xs font-medium leading-5
-                text-slate-700 backdrop-blur-xl
-                dark:bg-black dark:text-slate-200
-              "
-              >
-                We are open source 🚀
-                <span className="inline-flex items-center pl-1 font-semibold text-black dark:text-white">
-                  Github
-                  <ArrowRight
-                    className="pl-0.5 text-black dark:text-white"
-                    size={16}
-                  />
-                </span>
-              </div>
-            </span>
-          </a>
-        </MotionWrapper>
-
-        <MotionWrapper>
-          <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-medium tracking-tight leading-[1.05] text-slate-900">
-            Action - oriented
-            <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-br from-slate-900 via-slate-600 to-slate-400">
-              Modern snippets
-            </span>
-          </h1>
-        </MotionWrapper>
-
-        <MotionWrapper>
-          <p className="text-lg text-slate-500 leading-relaxed text-center max-w-xl">
-            Plug-and-play snippets-just copy, paste, and use in your next
-            project. Built with Tailwind CSS and Vanilla CSS for seamless
-            integration.
-          </p>
-        </MotionWrapper>
-        <MotionWrapper>
-          <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto pt-2">
-            <Link
-              href="/components/button"
-              className="group w-full sm:w-auto px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-sm font-semibold text-sm shadow-xl shadow-slate-200/50 flex items-center justify-center gap-2"
-            >
-              Go to Github
-              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-[2px]" />
-            </Link>
-
-            <button className="w-full sm:w-auto px-6 py-3 rounded-sm font-semibold text-sm text-slate-600 border border-slate-200 hover:bg-slate-50 hover:text-slate-900 transition-all flex items-center justify-center gap-2 bg-accent">
-              <Terminal className="h-4 w-4" />
-              Documentation
-            </button>
-          </div>
-        </MotionWrapper>
+      {/* TEXT (now flexible) */}
+      <div
+        style={{
+          paddingLeft: "72px",
+          paddingRight: "24px",
+          whiteSpace: "nowrap",
+          transition: "opacity 0.3s, transform 0.3s",
+          opacity: isHovered ? 0 : 1,
+          transform: isHovered ? "translateX(-8px)" : "translateX(0)",
+        }}
+      >
+        <span
+          style={{
+            color: "white",
+            fontSize: "18px",
+            fontWeight: 500,
+            letterSpacing: "-0.02em",
+            fontFamily: "system-ui",
+          }}
+        >
+          {buttonText}
+        </span>
       </div>
-    </div>
+
+      {/* COLORED BOX */}
+      <div
+        style={{
+          position: "absolute",
+          left: "4px",
+          top: "4px",
+          bottom: "4px",
+          width: isHovered ? "calc(100% - 8px)" : "56px",
+          transition: "width 0.5s cubic-bezier(0.2,0,0,1)",
+          borderRadius: "8px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          overflow: "hidden",
+          backgroundColor: colorMap[buttonColor],
+          backgroundImage: isHovered ? gradientMap[buttonColor] : "none",
+        }}
+      >
+        {isHovered ? (
+          <div style={{ display: "grid", gap: \`\${gap}px\` }}>
+            {Array.from({ length: rows }).map((_, r) => (
+              <div key={r} style={{ display: "flex", gap: \`\${gap}px\` }}>
+                {Array.from({ length: colsHovered }).map((_, c) => {
+                  const { active, arrowIndex } = isPixelActiveHovered(r, c);
+                  const isHighlighted = arrowIndex === activeArrow;
+                  return (
+                    <div
+                      key={\`\${r}-\${c}\`}
+                      style={{
+                        width: \`\${pixelSize}px\`,
+                        height: \`\${pixelSize}px\`,
+                        borderRadius: "1px",
+                        backgroundColor: active
+                          ? isHighlighted
+                            ? pixelColors.active
+                            : pixelColors.inactive
+                          : "transparent",
+                      }}
+                    />
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div style={{ display: "grid", gap: \`\${gap}px\` }}>
+            {Array.from({ length: rows }).map((_, r) => (
+              <div key={r} style={{ display: "flex", gap: \`\${gap}px\` }}>
+                {Array.from({ length: arrowCols }).map((_, c) => {
+                  const { active } = isPixelActiveHovered(r, c);
+                  const shimCol = shimmerPhase % spacing;
+                  const phase = c % spacing;
+                  const isShimmering = active && phase === shimCol;
+
+                  return (
+                    <div
+                      key={\`\${r}-\${c}\`}
+                      style={{
+                        width: \`\${pixelSize}px\`,
+                        height: \`\${pixelSize}px\`,
+                        borderRadius: "1px",
+                        backgroundColor: active
+                          ? isShimmering
+                            ? pixelColors.active
+                            : pixelColors.inactive
+                          : "transparent",
+                      }}
+                    />
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </button>
   );
 };
 
-export default DottedModern;
-`}
+export default CyberpunkButton;`}
       />
       <InstallationSection
         title="Installation"

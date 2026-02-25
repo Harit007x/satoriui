@@ -83,6 +83,34 @@
           "target": "components/satori-ui/typewriter-loop.tsx"
         }
       ]
+    },
+    {
+      "name": "cyberpunk-button",
+      "type": "registry:component",
+      "title": "Cyberpunk Button",
+      "description": "Futuristic, minimalistic button with smooth animations.",
+      "dependencies": ["motion"],
+      "files": [
+        {
+          "path": "packages/cyberpunk-button/cyberpunk-button.tsx",
+          "type": "registry:component",
+          "target": "components/satori-ui/cyberpunk-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "flip-clock",
+      "type": "registry:component",
+      "title": "Cyberpunk Button",
+      "description": "Neat and clean functional clock ui with buttery smooth flip animations.",
+      "dependencies": ["motion"],
+      "files": [
+        {
+          "path": "packages/flip-clock/flip-clock.tsx",
+          "type": "registry:component",
+          "target": "components/satori-ui/flip-clock.tsx"
+        }
+      ]
     }
   ]
 }
