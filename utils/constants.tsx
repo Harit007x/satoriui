@@ -67,6 +67,11 @@ export const ComponentsNavbar: SideNavbar[] = [
         path: `${prefix}/cyberpunk-button`,
         icon: <Icons.pill width="16" height="16" />,
       },
+      {
+        title: "Kinetic Grid",
+        path: `${prefix}/kinetic-grid`,
+        icon: <Icons.pill width="16" height="16" />,
+      },
     ],
   },
   {
