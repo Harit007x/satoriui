@@ -111,6 +111,48 @@
           "target": "components/satori-ui/flip-clock.tsx"
         }
       ]
+    },
+    {
+      "name": "encoded-reveal",
+      "type": "registry:component",
+      "title": "Encoded Reveal",
+      "description": "Matrix like animation, reveals text with random characters.",
+      "dependencies": ["motion"],
+      "files": [
+        {
+          "path": "packages/encoded-reveal/encoded-reveal.tsx",
+          "type": "registry:component",
+          "target": "components/satori-ui/encoded-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "slide-up-reveal",
+      "type": "registry:component",
+      "title": "Slide Up Reveal",
+      "description": "Buttery smooth text reveal with slide up reveal animation.",
+      "dependencies": ["motion"],
+      "files": [
+        {
+          "path": "packages/slide-up-reveal/slide-up-reveal.tsx",
+          "type": "registry:component",
+          "target": "components/satori-ui/slide-up-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "blur-reveal",
+      "type": "registry:component",
+      "title": "Blur Reveal",
+      "description": "Mysterious blur reveal animation, just feels awesome.",
+      "dependencies": ["motion"],
+      "files": [
+        {
+          "path": "packages/blur-reveal/blur-reveal.tsx",
+          "type": "registry:component",
+          "target": "components/satori-ui/blur-reveal.tsx"
+        }
+      ]
     }
   ]
 }

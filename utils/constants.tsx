@@ -82,6 +82,21 @@ export const ComponentsNavbar: SideNavbar[] = [
         path: `${prefix}/typewriter-loop`,
         icon: <Icons.typeOutline width="16" height="16" />,
       },
+      {
+        title: "Encoded Reveal",
+        path: `${prefix}/encoded-reveal`,
+        icon: <Icons.typeOutline width="16" height="16" />,
+      },
+      {
+        title: "Slide Up Reveal",
+        path: `${prefix}/slide-up-reveal`,
+        icon: <Icons.typeOutline width="16" height="16" />,
+      },
+      {
+        title: "Blur Reveal",
+        path: `${prefix}/blur-reveal`,
+        icon: <Icons.typeOutline width="16" height="16" />,
+      },
     ],
   },
 ];

@@ -1,0 +1,16 @@
+{
+  "name": "@satoriui/encoded-reveal",
+  "version": "0.0.1",
+  "private": false,
+  "type": "module",
+  "sideEffects": false,
+  "license": "MIT",
+  "files": [
+    "registry.json",
+    "encoded-reveal.tsx"
+  ],
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  }
+}
