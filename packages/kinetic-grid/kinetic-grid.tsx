@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, ReactNode } from "react";
+import { cn } from "@/lib/utils";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -51,7 +52,13 @@ function lerpColor(
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export default function KineticGrid() {
+export default function KineticGrid({
+  children,
+  className,
+}: {
+  children?: ReactNode;
+  className?: string;
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const mouseRef       = useRef<Point>({ x: -9999, y: -9999 });
@@ -311,55 +318,11 @@ export default function KineticGrid() {
   // ── Render ──────────────────────────────────────────────────────────────────
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-[#161618]">
-      <canvas ref={canvasRef} className="fixed inset-0 w-full h-full z-0" />
+    <div className={cn("relative w-full min-h-screen overflow-hidden bg-[#161618]", className)}>
+      <canvas ref={canvasRef} className="fixed inset-0 w-full h-full z-0 pointer-events-none" />
 
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-5">
-        {/* Framer label */}
-        <div className="flex items-center gap-1.5 text-white/70 text-[13px] font-normal tracking-wide mb-3.5">
-          <svg
-            width="16" height="16" viewBox="0 0 24 24"
-            fill="white" className="opacity-80"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M4 0h16v8H4zm0 8h8l8 8H4zm0 8h8v8z" />
-          </svg>
-          <span className="font-semibold text-white">Framer</span>&nbsp;Component
-        </div>
-
-        {/* Headline */}
-        <h1
-          className="flex items-center gap-4 font-semibold text-white mb-[18px] leading-none tracking-tight"
-          style={{ fontSize: "clamp(52px, 8vw, 88px)" }}
-        >
-          Kinetic&nbsp;
-          <span
-            className="border-2 border-[#4a9eff] rounded-[4px] text-white"
-            style={{ padding: "2px 14px 4px" }}
-          >
-            Grid
-          </span>
-        </h1>
-
-        {/* Subtitle */}
-        <p className="text-white/55 text-[15px] leading-relaxed max-w-[320px] mb-7">
-          An interactive grid that reacts to
-          <br />
-          cursor and clicks.
-        </p>
-
-        {/* Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-2.5">
-          <button className="px-5 py-2.5 rounded-lg text-sm font-medium bg-white text-[#111] transition-all duration-150 hover:opacity-85 hover:-translate-y-px active:translate-y-0">
-            Copy component
-          </button>
-          <button className="px-5 py-2.5 rounded-lg text-sm font-medium bg-transparent text-white/75 border border-white/20 transition-all duration-150 hover:text-white hover:border-white/40 hover:-translate-y-px active:translate-y-0">
-            Remix
-          </button>
-          <button className="px-5 py-2.5 rounded-lg text-sm font-medium bg-transparent text-white/75 border border-white/20 transition-all duration-150 hover:text-white hover:border-white/40 hover:-translate-y-px active:translate-y-0">
-            Original
-          </button>
-        </div>
+      <div className="relative z-10 w-full h-full">
+        {children}
       </div>
     </div>
   );

@@ -99,4 +99,14 @@ export const ComponentsNavbar: SideNavbar[] = [
       },
     ],
   },
+  {
+    title: "Shaders",
+    items: [
+      {
+        title: "Fluid Shader",
+        path: `${prefix}/fluid-shader`,
+        icon: <Icons.typeOutline width="16" height="16" />,
+      },
+    ],
+  },
 ];
