@@ -20,8 +20,7 @@ interface Ripple {
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
-const COLS = 22;
-const ROWS = 16;
+const CELL_SIZE = 55; // Desktop-ish size. Will dictate cols/rows
 const INFLUENCE_RADIUS = 260;
 const MAX_WARP = 24;
 const DOT_SPACING = 28;
@@ -76,12 +75,14 @@ export default function KineticGrid({
       col: number,
       row: number,
       mouse: Point,
-      ripples: Ripple[]
+      ripples: Ripple[],
+      cols: number,
+      rows: number
     ): { pt: Point; proximity: number } => {
       // Edge pin — smoothly locks boundary rows/cols in place
       const edgeMargin = 1.5;
-      const colPin = Math.min(col / edgeMargin, (COLS - 1 - col) / edgeMargin, 1);
-      const rowPin = Math.min(row / edgeMargin, (ROWS - 1 - row) / edgeMargin, 1);
+      const colPin = Math.min(col / edgeMargin, (cols - 1 - col) / edgeMargin, 1);
+      const rowPin = Math.min(row / edgeMargin, (rows - 1 - row) / edgeMargin, 1);
       const pinFactor = colPin * colPin * rowPin * rowPin;
 
       const dx   = gx - mouse.x;
@@ -167,17 +168,20 @@ export default function KineticGrid({
       }
 
       // ── Build warped grid ─────────────────────────────────────────────────
-      const cellW = W / (COLS - 1);
-      const cellH = H / (ROWS - 1);
+      const cols = Math.max(2, Math.ceil(W / CELL_SIZE)) + 1;
+      const rows = Math.max(2, Math.ceil(H / CELL_SIZE)) + 1;
+      const cellW = W / (cols - 1);
+      const cellH = H / (rows - 1);
+      
       const pts: Point[][]   = [];
       const prox: number[][] = [];
 
-      for (let row = 0; row < ROWS; row++) {
+      for (let row = 0; row < rows; row++) {
         pts[row]  = [];
         prox[row] = [];
-        for (let col = 0; col < COLS; col++) {
+        for (let col = 0; col < cols; col++) {
           const { pt, proximity } = getWarpedPoint(
-            col * cellW, row * cellH, col, row, mouse, ripples
+            col * cellW, row * cellH, col, row, mouse, ripples, cols, rows
           );
           pts[row][col]  = pt;
           prox[row][col] = proximity;
@@ -198,17 +202,17 @@ export default function KineticGrid({
 
       ctx.lineCap = "butt";
 
-      for (let row = 0; row < ROWS; row++)
-        for (let col = 0; col < COLS - 1; col++)
+      for (let row = 0; row < rows; row++)
+        for (let col = 0; col < cols - 1; col++)
           drawSeg(pts[row][col], pts[row][col + 1], prox[row][col], prox[row][col + 1]);
 
-      for (let col = 0; col < COLS; col++)
-        for (let row = 0; row < ROWS - 1; row++)
+      for (let col = 0; col < cols; col++)
+        for (let row = 0; row < rows - 1; row++)
           drawSeg(pts[row][col], pts[row + 1][col], prox[row][col], prox[row + 1][col]);
 
       // ── Intersection nodes ────────────────────────────────────────────────
-      for (let row = 0; row < ROWS; row++) {
-        for (let col = 0; col < COLS; col++) {
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
           const p  = pts[row][col];
           const pr = prox[row][col];
           const t  = pr * pr * (3 - 2 * pr); // smoothstep
@@ -281,8 +285,8 @@ export default function KineticGrid({
       canvas.height = h;
       sizeRef.current = { w, h };
       if (mouseRef.current.x === -9999) {
-        mouseRef.current       = { x: w / 2, y: h / 2 };
-        targetMouseRef.current = { x: w / 2, y: h / 2 };
+        mouseRef.current       = { x: -9999, y: -9999 };
+        targetMouseRef.current = { x: -9999, y: -9999 };
       }
     };
 

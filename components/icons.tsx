@@ -115,6 +115,9 @@ import {
   Scroll,
   TypeOutline,
   Twitter,
+  Instagram,
+  Youtube,
+  Linkedin,
 } from "lucide-react";
 
 export const Icons = {
@@ -232,6 +235,9 @@ export const Icons = {
   scroll: Scroll,
   typeOutline: TypeOutline,
   twitter: Twitter,
+  instagram: Instagram,
+  youtube: Youtube,
+  linkedin: Linkedin,
   github: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"

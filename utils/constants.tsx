@@ -67,11 +67,11 @@ export const ComponentsNavbar: SideNavbar[] = [
         path: `${prefix}/cyberpunk-button`,
         icon: <Icons.pill width="16" height="16" />,
       },
-      {
-        title: "Kinetic Grid",
-        path: `${prefix}/kinetic-grid`,
-        icon: <Icons.pill width="16" height="16" />,
-      },
+      // {
+      //   title: "Kinetic Grid",
+      //   path: `${prefix}/kinetic-grid`,
+      //   icon: <Icons.pill width="16" height="16" />,
+      // },
     ],
   },
   {
@@ -97,16 +97,21 @@ export const ComponentsNavbar: SideNavbar[] = [
         path: `${prefix}/blur-reveal`,
         icon: <Icons.typeOutline width="16" height="16" />,
       },
-    ],
-  },
-  {
-    title: "Shaders",
-    items: [
       {
-        title: "Fluid Shader",
-        path: `${prefix}/fluid-shader`,
+        title: "Shimmer Text",
+        path: `${prefix}/shimmer-text`,
         icon: <Icons.typeOutline width="16" height="16" />,
       },
     ],
   },
+  // {
+  //   title: "Shaders",
+  //   items: [
+  //     {
+  //       title: "Fluid Shader",
+  //       path: `${prefix}/fluid-shader`,
+  //       icon: <Icons.typeOutline width="16" height="16" />,
+  //     },
+  //   ],
+  // },
 ];

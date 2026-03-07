@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "shimmer-text",
+  "title": "Shimmer Text",
+  "description": "Smooth shimmer animation for premium touch.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "packages/shimmer-text/shimmer-text.tsx",
+      "content": "\"use client\";\r\n\r\nimport { motion } from \"motion/react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\ntype Variant =\r\n  | \"default\"\r\n  | \"secondary\"\r\n  | \"destructive\"\r\n  | \"red\"\r\n  | \"blue\"\r\n  | \"green\"\r\n  | \"yellow\"\r\n  | \"purple\"\r\n  | \"pink\"\r\n  | \"orange\"\r\n  | \"cyan\"\r\n  | \"indigo\"\r\n  | \"violet\"\r\n  | \"rose\"\r\n  | \"amber\"\r\n  | \"lime\"\r\n  | \"emerald\"\r\n  | \"sky\"\r\n  | \"slate\"\r\n  | \"fuchsia\";\r\n\r\ninterface ShimmerTextProps {\r\n  children: React.ReactNode;\r\n  className?: string;\r\n  variant?: Variant;\r\n  duration?: number;\r\n  delay?: number;\r\n  spread?: number;\r\n}\r\n\r\nconst variantMap: Record<Variant, string> = {\r\n  default: \"\",\r\n  secondary: \"text-secondary-foreground\",\r\n  destructive: \"text-destructive dark:text-destructive-foreground\",\r\n  red: \"text-red-600 dark:text-red-400\",\r\n  blue: \"text-blue-600 dark:text-blue-400\",\r\n  green: \"text-green-600 dark:text-green-400\",\r\n  yellow: \"text-yellow-600 dark:text-yellow-400\",\r\n  purple: \"text-purple-600 dark:text-purple-400\",\r\n  pink: \"text-pink-600 dark:text-pink-400\",\r\n  orange: \"text-orange-600 dark:text-orange-400\",\r\n  cyan: \"text-cyan-600 dark:text-cyan-400\",\r\n  indigo: \"text-indigo-600 dark:text-indigo-400\",\r\n  violet: \"text-violet-600 dark:text-violet-400\",\r\n  rose: \"text-rose-600 dark:text-rose-400\",\r\n  amber: \"text-amber-600 dark:text-amber-400\",\r\n  lime: \"text-lime-600 dark:text-lime-400\",\r\n  emerald: \"text-emerald-600 dark:text-emerald-400\",\r\n  sky: \"text-sky-600 dark:text-sky-400\",\r\n  slate: \"text-slate-600 dark:text-slate-400\",\r\n  fuchsia: \"text-fuchsia-600 dark:text-fuchsia-400\",\r\n};\r\n\r\nexport function ShimmerText({\r\n  children,\r\n  className,\r\n  variant = \"default\",\r\n  duration = 1.5,\r\n  delay = 1.5,\r\n}: ShimmerTextProps) {\r\n  return (\r\n    <div className=\"group overflow-hidden\">\r\n      <div>\r\n        <motion.div\r\n          className={cn(\r\n            \"inline-block [--shimmer-contrast:rgba(255,255,255,0.6)] dark:[--shimmer-contrast:rgba(0,0,0,0.5)]\",\r\n            variantMap[variant],\r\n            className,\r\n          )}\r\n          style={\r\n            {\r\n              WebkitTextFillColor: \"transparent\",\r\n              background:\r\n                \"currentColor linear-gradient(to right, currentColor 0%, var(--shimmer-contrast) 40%, var(--shimmer-contrast) 60%, currentColor 100%)\",\r\n              WebkitBackgroundClip: \"text\",\r\n              backgroundClip: \"text\",\r\n              backgroundRepeat: \"no-repeat\",\r\n              backgroundSize: \"50% 200%\",\r\n            } as React.CSSProperties\r\n          }\r\n          initial={{\r\n            backgroundPositionX: \"250%\",\r\n          }}\r\n          animate={{\r\n            backgroundPositionX: [\"-100%\", \"250%\"],\r\n          }}\r\n          transition={{\r\n            duration: duration,\r\n            delay: delay,\r\n            repeat: Infinity,\r\n            repeatDelay: 1.5,\r\n            ease: \"linear\",\r\n          }}\r\n        >\r\n          <span>{children}</span>\r\n        </motion.div>\r\n      </div>\r\n    </div>\r\n  );\r\n}\r\n\r\nexport default ShimmerText;\r\n",
+      "type": "registry:component",
+      "target": "components/satori-ui/shimmer-text.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

@@ -153,6 +153,20 @@
           "target": "components/satori-ui/blur-reveal.tsx"
         }
       ]
+    },
+    {
+      "name": "shimmer-text",
+      "type": "registry:component",
+      "title": "Shimmer Text",
+      "description": "Smooth shimmer animation for premium touch.",
+      "dependencies": ["motion"],
+      "files": [
+        {
+          "path": "packages/shimmer-text/shimmer-text.tsx",
+          "type": "registry:component",
+          "target": "components/satori-ui/shimmer-text.tsx"
+        }
+      ]
     }
   ]
 }
