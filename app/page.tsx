@@ -1,28 +1,24 @@
-"use client";
 import Footer from "@/components/footer";
 import { Icons } from "@/components/icons";
 import Link from "next/link";
 import KineticGrid from "../packages/kinetic-grid/kinetic-grid";
 import TypewriterLoop from "../packages/typewriter-loop/typewriter-loop";
+import EncodedReveal from "../packages/encoded-reveal/encoded-reveal";
 import KeyboardUI from "../packages/keyboard/keyboard";
 import ProButton from "@/packages/pro-button/pro-button";
-import BlurReveal from "@/packages/blur-reveal/blur-reveal";
-import { motion } from "motion/react";
-import ShimmerText from "@/packages/shimmer-text/shimmer-text";
 
 export default function Home() {
   return (
     <KineticGrid className="antialiased flex flex-col selection:bg-[#4a9eff]/30 selection:text-white">
-      {/* ── Floating Capsule Navbar ────────────────────────────────────── */}
-      <div className="fixed w-full z-50 top-6 px-4 flex justify-center transition-all duration-300">
-        <nav className="relative flex items-center justify-between w-full max-w-5xl px-4 py-3 rounded-xl bg-[#111111]/70 backdrop-blur-2xl border border-white/[0.08] shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]">
-          {/* Logo */}
-          <div className="flex items-center gap-2.5 group select-none cursor-pointer pl-2">
-            <div className="w-6 h-6 flex items-center justify-center">
+      {/* ── Navbar ─────────────────────────────────────────────────── */}
+      <nav className="fixed w-full z-50 top-0 border-b border-white/[0.06] bg-[#0e0e10]/60 backdrop-blur-xl">
+        <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+          <div className="flex items-center gap-2 group select-none">
+            <div className="w-6 h-6 mb-[0.1rem]">
               <svg
                 viewBox="0 0 512 512"
                 fill="none"
-                className="w-full h-full rounded-xs"
+                className="rounded-sm"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <g>
@@ -46,7 +42,7 @@ export default function Home() {
                       transform: "scale(1, 0.9)",
                     }}
                     d="M317.438 174.219C351.124 191.062 377.956 220.117 390 256C391.933 262.264 393.589 268.598 395 275C395.188 275.827 395.375 276.654 395.569 277.507C397.152 285.177 397.347 292.684 397.313 300.5C397.309 301.488 397.309 301.488 397.306 302.495C397.099 342.013 381.718 377.524 353.67 405.376C339.427 419.224 322.351 428.68 304 436C302.956 436.42 301.912 436.84 300.836 437.273C290.081 441.214 273.349 445.717 262 443C258.864 440.449 257.193 438.943 256.372 434.927C256.371 433.78 256.37 432.634 256.369 431.453C256.357 430.148 256.344 428.843 256.331 427.499C256.343 426.083 256.357 424.666 256.371 423.25C256.37 421.789 256.368 420.329 256.364 418.868C256.361 415.812 256.376 412.756 256.403 409.699C256.437 405.788 256.431 401.879 256.413 397.968C256.402 394.953 256.411 391.938 256.426 388.924C256.431 387.482 256.431 386.04 256.424 384.599C256.419 382.581 256.442 380.564 256.467 378.547C256.473 377.401 256.479 376.254 256.485 375.073C257.109 371.35 258.409 369.693 261 367C263.94 365.1 266.841 364.551 270.25 363.875C286.824 359.823 300.572 350.274 310 336C318.283 321.916 321.75 304.619 318.094 288.531C315.937 280.279 313.017 272.962 308 266C307.233 264.851 307.233 264.851 306.449 263.68C297.673 251.321 282.274 242.726 267.438 240.125C263.426 239.272 260.951 237.951 258 235C256.607 232.215 256.85 229.91 256.823 226.794C256.81 225.489 256.797 224.183 256.784 222.839C256.776 221.407 256.769 219.975 256.762 218.543C256.758 217.823 256.754 217.103 256.75 216.361C256.729 212.549 256.714 208.737 256.705 204.925C256.694 200.991 256.66 197.057 256.62 193.123C256.594 190.095 256.585 187.068 256.582 184.04C256.577 182.59 256.565 181.14 256.547 179.69C256.522 177.659 256.526 175.626 256.53 173.594C256.524 172.439 256.518 171.284 256.512 170.093C257.107 166.32 258.317 164.674 261 162C276.795 156.735 302.764 167.682 317.438 174.219Z"
-                    fill="#111111"
+                    fill="#ffffff"
                   />
                 </g>
                 <defs>
@@ -56,113 +52,106 @@ export default function Home() {
                 </defs>
               </svg>
             </div>
-            <span className="font-display font-semibold text-[17px] tracking-tight text-white group-hover:text-white/90 transition-colors">
+            <span className="font-display font-semibold text-lg tracking-tight text-white">
               Satori
-              <span className="text-white/50 font-normal ml-[1px] !text-primary">
-                UI
-              </span>
+              <span className="text-primary font-normal">UI</span>
             </span>
           </div>
 
-          {/* Links */}
-          <div className="hidden md:flex items-center gap-7 text-sm font-medium absolute left-1/2 -translate-x-1/2">
-            {[
-              { href: "/components/dotted-modern", label: "Components" },
-              { href: "/interactions", label: "Interactions" },
-              { href: "/foundations", label: "Foundations" },
-            ].map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-white/60 hover:text-white transition-colors duration-200"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-
-          {/* Actions */}
-          <div className="flex items-center gap-3">
-            {/* <Link
-              href="/login"
-              className="text-[13px] font-medium text-white/70 hover:text-white transition-colors px-3 py-2 rounded-full border border-transparent hover:border-white/10 hidden sm:block"
+          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-white/50">
+            <Link
+              href="/components/dotted-modern"
+              className="hover:text-white transition-colors duration-200"
             >
-              Sign In
-            </Link> */}
-            <Link href="/components/dotted-modern">
-              <button className="text-[13px] font-medium bg-white text-black hover:bg-white/90 px-4 py-2 rounded-md transition-all shadow-sm">
-                Get Started
-              </button>
+              Components
+            </Link>
+            <Link
+              href="/interactions"
+              className="hover:text-white transition-colors duration-200"
+            >
+              Interactions
+            </Link>
+            <Link
+              href="/foundations"
+              className="hover:text-white transition-colors duration-200"
+            >
+              Foundations
             </Link>
           </div>
-        </nav>
-      </div>
+
+          <div className="flex items-center gap-3">
+            <Link
+              href="https://github.com"
+              className="text-white/40 hover:text-white transition-colors"
+            >
+              <Icons.github className="h-5 w-5" />
+            </Link>
+            <button className="text-xs font-semibold bg-white text-black hover:bg-white/90 px-4 py-2 rounded-lg transition-all">
+              Get Access
+            </button>
+          </div>
+        </div>
+      </nav>
 
       {/* ── Hero ───────────────────────────────────────────────────── */}
       <main className="relative z-10 flex-grow flex flex-col items-center justify-center min-h-screen px-6 pt-14">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto space-y-6">
           {/* Status badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.5,
-              ease: "easeOut",
-            }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.03] backdrop-blur-sm"
-          >
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.03] backdrop-blur-sm">
             <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-sky-400" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
             </span>
-            <BlurReveal
-              className="text-white text-[11px] tracking-widest uppercase text-white/60"
-              speedReveal={3}
+            <EncodedReveal
+              speed={10}
+              className="text-[11px] tracking-widest uppercase text-white/60"
             >
               50+ Components Available
-            </BlurReveal>
-          </motion.div>
+            </EncodedReveal>
+          </div>
 
           {/* Headline with TypewriterLoop */}
           <div className="flex items-center justify-center">
-            <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.05] text-white">
+            <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] text-white">
               Build
             </h1>
             <TypewriterLoop
               LeadText=""
               morphingText={[
                 "Beautiful.",
-                "Extensible.",
-                "Premium.",
+                "Interactive.",
                 "Accessible.",
+                "Delightful.",
               ]}
               className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight justify-center"
               LeadTextClassName="text-white"
               interval={5000}
-              staticColor="blue"
-              darkGradientBackgroundLock={true}
             />
           </div>
 
           {/* Subtitle with EncodedReveal */}
-
-          <ShimmerText className="text-base sm:text-lg text-white/80 leading-relaxed max-w-xl">
+          <p className="text-base sm:text-lg text-white/45 leading-relaxed max-w-xl">
             A collection of production-ready, interactive UI components with
             physics-based motion. Copy, paste, and ship.
-          </ShimmerText>
+          </p>
 
           {/* CTA row */}
           <div className="flex flex-col sm:flex-row items-center gap-3 pt-4">
             <Link href="/components/dotted-modern">
+              {/* <CyberpunkButton
+                buttonColor="lime"
+                pixelColor="black"
+                buttonText="Browse Components"
+              /> */}
               <ProButton text="Access Components" size="sm" pixelColor="sky" />
             </Link>
-            {/* <Link
+            <Link
               href="/components/dotted-modern"
-              className="px-6 py-4.5 rounded-xl text-sm font-medium text-white/60 border border-white/[0.08] hover:bg-white/[0.04] hover:text-white transition-all flex items-center gap-2 backdrop-blur-sm"
+              className="px-6 py-4 rounded-xl text-sm font-medium text-white/60 border border-white/[0.08] hover:bg-white/[0.04] hover:text-white transition-all flex items-center gap-2"
             >
               <Icons.terminal className="h-4 w-4" />
               Documentation
-            </Link> */}
+            </Link>
           </div>
 
           {/* Stats row */}
@@ -186,7 +175,7 @@ export default function Home() {
       </main>
 
       {/* ── Component Showcase ─────────────────────────────────────── */}
-      <section className="hidden sm:block relative z-10 py-28 px-6">
+      <section className="relative z-10 py-28 px-6">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16 space-y-4">
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight">
@@ -211,7 +200,7 @@ export default function Home() {
                 </span>
               </div>
               <div className="dark">
-                <KeyboardUI keyAnimationToggle animatedString="SATORI" />
+                <KeyboardUI />
               </div>
             </div>
           </div>
@@ -253,7 +242,7 @@ export default function Home() {
             ].map((feature, index) => (
               <div
                 key={index}
-                className="group p-6 rounded-xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-300 backdrop-blur-sm"
+                className="group p-6 rounded-xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-300"
               >
                 <div className="w-9 h-9 rounded-lg bg-white/[0.06] flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors text-white/70 group-hover:text-primary">
                   <feature.icon className="h-4 w-4" />
