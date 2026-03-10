@@ -15,8 +15,7 @@
 
 // // Configuration
 // const UNICORN_STUDIO_CONFIG = {
-//   scriptUrl:
-//     "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js",
+//   scriptUrl: "/unicornStudio.umd.js",
 //   projectId: "HzcaAbRLaALMhHJp8gLY", // New project ID
 //   backgroundColor: "#000000",
 //   overlayColor: "#50C878", // Emerald green
@@ -47,9 +46,7 @@
 //     if (scriptLoadedRef.current) return;
 
 //     const cleanup = () => {
-//       const existingScript = document.querySelector(
-//         'script[src*="unicornstudio"]',
-//       );
+//       const existingScript = document.querySelector('script[src="/unicornStudio.umd.js"]');
 //       if (existingScript) {
 //         existingScript.remove();
 //       }
@@ -118,7 +115,7 @@
 //   return (
 //     <div
 //       ref={containerRef}
-//       className="fixed top-0 left-0 -z-10 w-full h-full"
+//       className="fixed top-0 left-0 z-0 w-full h-full"
 //       style={{
 //         position: "fixed",
 //         overflow: "hidden",
@@ -151,112 +148,133 @@
 
 // // Red Cherry -------------------------------
 
-// "use client";
+"use client";
 
-// import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-// declare global {
-//   interface Window {
-//     UnicornStudio?: {
-//       isInitialized: boolean;
-//       init: () => void;
-//     };
-//   }
-// }
+declare global {
+  interface Window {
+    UnicornStudio?: {
+      isInitialized: boolean;
+      init: () => void;
+    };
+  }
+}
 
-// const AuraBackground = () => {
-//   const [isMounted, setIsMounted] = useState(false);
-//   const containerRef = useRef<HTMLDivElement>(null);
+const AuraBackground = () => {
+  const [isMounted, setIsMounted] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-//   useEffect(() => {
-//     setIsMounted(true);
-//   }, []);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-//   useEffect(() => {
-//     if (!isMounted) return;
+  useEffect(() => {
+    if (!isMounted) return;
 
-//     // Clean up any existing instances
-//     const cleanup = () => {
-//       // Reset UnicornStudio
-//       if (window.UnicornStudio) {
-//         window.UnicornStudio.isInitialized = false;
-//       }
-//     };
+    // Clean up any existing instances
+    const cleanup = () => {
+      // Reset UnicornStudio
+      if (window.UnicornStudio) {
+        window.UnicornStudio.isInitialized = false;
+      }
+      const existingScript = document.querySelector(
+        'script[src="/unicornStudio.umd.js"]',
+      );
+      if (existingScript) {
+        existingScript.remove();
+      }
+    };
 
-//     // Load script locally with error handling
-//     const loadScript = async () => {
-//       if (window.UnicornStudio?.isInitialized) {
-//         return true;
-//       }
+    // Load script locally with error handling
+    const loadScript = () => {
+      return new Promise((resolve, reject) => {
+        if (window.UnicornStudio?.isInitialized) {
+          resolve(true);
+          return;
+        }
 
-//       try {
-//         // @ts-ignore
-//         await import("./unicornStudio.umd.js");
+        const script = document.createElement("script");
+        script.src = "/unicornStudio.umd.js";
+        script.async = true;
+        script.defer = true;
 
-//         // Small delay to ensure everything is ready
-//         await new Promise((resolve) => setTimeout(resolve, 100));
+        script.onload = () => {
+          setTimeout(() => {
+            if (window.UnicornStudio && !window.UnicornStudio.isInitialized) {
+              try {
+                window.UnicornStudio.init();
+                window.UnicornStudio.isInitialized = true;
+                console.log("UnicornStudio initialized successfully");
+                resolve(true);
+              } catch (error) {
+                console.error("Error initializing UnicornStudio:", error);
+                reject(error);
+              }
+            }
+          }, 100);
+        };
 
-//         if (window.UnicornStudio && !window.UnicornStudio.isInitialized) {
-//           window.UnicornStudio.init();
-//           window.UnicornStudio.isInitialized = true;
-//           console.log("UnicornStudio initialized successfully");
-//         }
-//         return true;
-//       } catch (error) {
-//         console.error("Error initializing UnicornStudio:", error);
-//         throw error;
-//       }
-//     };
+        script.onerror = (error) => {
+          console.error("Failed to initialize UnicornStudio:", error);
+          reject(error);
+        };
 
-//     // Add a small delay before loading to ensure DOM is ready
-//     const timer = setTimeout(() => {
-//       cleanup();
-//       loadScript().catch((error) => {
-//         console.error("Failed to initialize UnicornStudio:", error);
-//       });
-//     }, 100);
+        document.head.appendChild(script);
+      });
+    };
 
-//     return () => {
-//       clearTimeout(timer);
-//       cleanup();
-//     };
-//   }, [isMounted]);
+    // Add a small delay before loading to ensure DOM is ready
+    const timer = setTimeout(() => {
+      cleanup();
+      loadScript().catch((error) => {
+        console.error("Failed to initialize UnicornStudio:", error);
+      });
+    }, 100);
 
-//   // Don't render anything on server
-//   if (!isMounted) {
-//     return null;
-//   }
+    return () => {
+      clearTimeout(timer);
+      cleanup();
+    };
+  }, [isMounted]);
 
-//   return (
-//     <div
-//       ref={containerRef}
-//       className="aura-background-component fixed top-0 left-0 -z-10 w-full h-full"
-//       style={{
-//         position: "fixed",
-//         overflow: "hidden",
-//         pointerEvents: "none",
-//       }}
-//     >
-//       {/* Red overlay with blend mode */}
-//       <div
-//         className="absolute top-0 left-0 w-full h-full"
-//         style={{
-//           backgroundColor: "rgba(255, 4, 0, 0.5)",
-//           mixBlendMode: "color",
-//           zIndex: 1,
-//           pointerEvents: "none",
-//         }}
-//       />
+  // Don't render anything on server
+  if (!isMounted) {
+    return null;
+  }
 
-//       {/* UnicornStudio container */}
-//       <div
-//         data-us-project="tPmIIl0vKqHO9yqmtge2"
-//         className="absolute w-full h-full left-0 top-0"
-//         style={{ zIndex: 0 }}
-//       />
-//     </div>
-//   );
-// };
+  return (
+    <div
+      ref={containerRef}
+      className="aura-background-component fixed top-0 left-0 z-0 w-full h-full"
+      style={{
+        position: "fixed",
+        overflow: "hidden",
+        pointerEvents: "none",
+      }}
+    >
+      {/* Red overlay with blend mode */}
+      <div
+        className="absolute top-0 left-0 w-full h-full"
+        style={{
+          backgroundColor: "rgba(0, 89, 255, 0.5)",
+          mixBlendMode: "color",
+          zIndex: 1,
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* UnicornStudio container */}
+      <div
+        data-us-project="tPmIIl0vKqHO9yqmtge2"
+        className="absolute w-full h-full left-0 top-0"
+        style={{ zIndex: 0 }}
+      />
+    </div>
+  );
+};
+
+export default AuraBackground;
 
 // export default AuraBackground;
 
@@ -265,7 +283,6 @@
 // "use client";
 
 // import { useEffect, useState } from "react";
-// import Script from "next/script";
 
 // declare global {
 //   interface Window {
@@ -321,100 +338,133 @@
 //     };
 //   }, [backgroundColor]);
 
-//   const handleScriptLoad = () => {
-//     const initUS = () => {
-//       if (!window.UnicornStudio?.isInitialized && window.UnicornStudio?.init) {
-//         try {
-//           window.UnicornStudio.init();
-//           window.UnicornStudio.isInitialized = true;
-//           setIsInitialized(true);
-//           console.log("✅ UnicornStudio v2 initialized");
-//         } catch (error) {
-//           console.error("❌ Error initializing UnicornStudio:", error);
-//         }
+//   useEffect(() => {
+//     if (!isMounted) return;
+
+//     const cleanup = () => {
+//       const existingScript = document.querySelector('script[src="/unicornStudio.umd.js"]');
+//       if (existingScript) {
+//         existingScript.remove();
+//       }
+//       if (window.UnicornStudio) {
+//         window.UnicornStudio.isInitialized = false;
 //       }
 //     };
 
-//     if (
-//       document.readyState === "complete" ||
-//       document.readyState === "interactive"
-//     ) {
-//       initUS();
-//     } else {
-//       document.addEventListener("DOMContentLoaded", initUS);
-//     }
-//   };
+//     const loadScript = () => {
+//       return new Promise((resolve, reject) => {
+//         if (window.UnicornStudio?.isInitialized) {
+//           setIsInitialized(true);
+//           resolve(true);
+//           return;
+//         }
+
+//         const script = document.createElement("script");
+//         script.src = "/unicornStudio.umd.js";
+//         script.async = true;
+//         script.defer = true;
+
+//         script.onload = () => {
+//           setTimeout(() => {
+//             if (window.UnicornStudio && !window.UnicornStudio.isInitialized) {
+//               try {
+//                 window.UnicornStudio.init();
+//                 window.UnicornStudio.isInitialized = true;
+//                 setIsInitialized(true);
+//                 console.log("✅ UnicornStudio v2 initialized");
+//                 resolve(true);
+//               } catch (error) {
+//                 console.error("❌ Error initializing UnicornStudio:", error);
+//                 reject(error);
+//               }
+//             }
+//           }, 100);
+//         };
+
+//         script.onerror = (error) => {
+//           console.error("❌ Failed to load UnicornStudio:", error);
+//           reject(error);
+//         };
+
+//         document.head.appendChild(script);
+//       });
+//     };
+
+//     const timer = setTimeout(() => {
+//       cleanup();
+//       loadScript().catch((error) => {
+//         console.error("Failed to initialize UnicornStudio:", error);
+//       });
+//     }, 100);
+
+//     return () => {
+//       clearTimeout(timer);
+//       cleanup();
+//     };
+//   }, [isMounted]);
 
 //   if (!isMounted) {
 //     return null;
 //   }
 
 //   return (
-//     <>
-//       <Script
-//         src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.0-1/dist/unicornStudio.umd.js"
-//         strategy="afterInteractive"
-//         onLoad={handleScriptLoad}
-//       />
+//     <div
+//       style={{
+//         position: "relative",
+//         width: "100vw",
+//         height: "100vh",
+//         overflow: "hidden",
+//       }}
+//     >
+//       {/* Background layer */}
+//       <div
+//         style={{
+//           position: "absolute",
+//           top: 0,
+//           left: 0,
+//           width: "100%",
+//           height: "100%",
+//           zIndex: 0,
+//         }}
+//       >
+//         <div
+//           data-us-project={projectId}
+//           style={{
+//             width: "100%",
+//             height: "100%",
+//           }}
+//         />
+//       </div>
 
+//       {/* Content layer */}
 //       <div
 //         style={{
 //           position: "relative",
-//           width: "100vw",
-//           height: "100vh",
-//           overflow: "hidden",
+//           zIndex: 10,
+//           width: "100%",
+//           height: "100%",
+//           overflow: "auto", // Allows scrolling for content if needed
 //         }}
 //       >
-//         {/* Background layer */}
+//         {children}
+//       </div>
+
+//       {/* Loading indicator */}
+//       {!isInitialized && (
 //         <div
 //           style={{
 //             position: "absolute",
-//             top: 0,
-//             left: 0,
-//             width: "100%",
-//             height: "100%",
-//             zIndex: 0,
+//             bottom: 20,
+//             right: 20,
+//             color: "rgba(255,255,255,0.5)",
+//             fontSize: "12px",
+//             zIndex: 20,
 //           }}
 //         >
-//           <div
-//             data-us-project={projectId}
-//             style={{
-//               width: "100%",
-//               height: "100%",
-//             }}
-//           />
+//           Loading background...
 //         </div>
-
-//         {/* Content layer */}
-//         <div
-//           style={{
-//             position: "relative",
-//             zIndex: 10,
-//             width: "100%",
-//             height: "100%",
-//             overflow: "auto", // Allows scrolling for content if needed
-//           }}
-//         >
-//           {children}
-//         </div>
-
-//         {/* Loading indicator */}
-//         {!isInitialized && (
-//           <div
-//             style={{
-//               position: "absolute",
-//               bottom: 20,
-//               right: 20,
-//               color: "rgba(255,255,255,0.5)",
-//               fontSize: "12px",
-//               zIndex: 20,
-//             }}
-//           >
-//             Loading background...
-//           </div>
-//         )}
-//       </div>
-//     </>
+//       )}
+//     </div>
 //   );
 // };
 
@@ -425,7 +475,6 @@
 // "use client";
 
 // import { useEffect, useState } from "react";
-// import Script from "next/script";
 
 // interface UnicornBackgroundProps {
 //   projectId?: string;
@@ -446,44 +495,92 @@
 //     setIsMounted(true);
 //   }, []);
 
-//   const handleScriptLoad = () => {
-//     if (window.UnicornStudio && !window.UnicornStudio.isInitialized) {
-//       window.UnicornStudio.init();
-//       window.UnicornStudio.isInitialized = true;
-//     }
-//   };
+//   useEffect(() => {
+//     if (!isMounted) return;
+
+//     const cleanup = () => {
+//       const existingScript = document.querySelector('script[src="/unicornStudio.umd.js"]');
+//       if (existingScript) {
+//         existingScript.remove();
+//       }
+//       if (window.UnicornStudio) {
+//         window.UnicornStudio.isInitialized = false;
+//       }
+//     };
+
+//     const loadScript = () => {
+//       return new Promise((resolve, reject) => {
+//         if (window.UnicornStudio?.isInitialized) {
+//           resolve(true);
+//           return;
+//         }
+
+//         const script = document.createElement("script");
+//         script.src = "/unicornStudio.umd.js";
+//         script.async = true;
+//         script.defer = true;
+
+//         script.onload = () => {
+//           setTimeout(() => {
+//             if (window.UnicornStudio && !window.UnicornStudio.isInitialized) {
+//               try {
+//                 window.UnicornStudio.init();
+//                 window.UnicornStudio.isInitialized = true;
+//                 console.log("UnicornStudio initialized successfully");
+//                 resolve(true);
+//               } catch (error) {
+//                 console.error("Error initializing UnicornStudio:", error);
+//                 reject(error);
+//               }
+//             }
+//           }, 100);
+//         };
+
+//         script.onerror = (error) => {
+//           console.error("Failed to load UnicornStudio:", error);
+//           reject(error);
+//         };
+
+//         document.head.appendChild(script);
+//       });
+//     };
+
+//     const timer = setTimeout(() => {
+//       cleanup();
+//       loadScript().catch((error) => {
+//         console.error("Failed to initialize UnicornStudio:", error);
+//       });
+//     }, 100);
+
+//     return () => {
+//       clearTimeout(timer);
+//       cleanup();
+//     };
+//   }, [isMounted]);
 
 //   if (!isMounted) {
 //     return null;
 //   }
 
 //   return (
-//     <>
-//       <Script
-//         src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js"
-//         strategy="afterInteractive"
-//         onLoad={handleScriptLoad}
-//       />
+//     <div className={`absolute inset-0 z-0 ${className}`}>
+//       {/* UnicornStudio container */}
+//       <div data-us-project={projectId} className="absolute inset-0" />
 
-//       <div className={`absolute inset-0 -z-10 ${className}`}>
-//         {/* UnicornStudio container */}
-//         <div data-us-project={projectId} className="absolute inset-0" />
-
-//         {/* Optional overlay */}
-//         {overlayColor && (
-//           <div
-//             className="absolute inset-0"
-//             style={{
-//               backgroundColor: overlayColor,
-//               opacity: overlayOpacity,
-//               mixBlendMode: "color",
-//               pointerEvents: "none",
-//               zIndex: 1,
-//             }}
-//           />
-//         )}
-//       </div>
-//     </>
+//       {/* Optional overlay */}
+//       {overlayColor && (
+//         <div
+//           className="absolute inset-0"
+//           style={{
+//             backgroundColor: overlayColor,
+//             opacity: overlayOpacity,
+//             mixBlendMode: "color",
+//             pointerEvents: "none",
+//             zIndex: 1,
+//           }}
+//         />
+//       )}
+//     </div>
 //   );
 // };
 
