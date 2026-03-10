@@ -23,9 +23,14 @@ export const ComponentsNavbar: SideNavbar[] = [
         icon: <Icons.pill width="16" height="16" />,
       },
       // {
-      //   title: "Gradient",
-      //   path: `${prefix}/gradient`,
-      //   icon: <Icons.home width="16" height="16" />,
+      //   title: "Kinetic Grid",
+      //   path: `${prefix}/kinetic-grid`,
+      //   icon: <Icons.pill width="16" height="16" />,
+      // },
+      // {
+      //   title: "Repelling Grid",
+      //   path: `${prefix}/repelling-grid`,
+      //   icon: <Icons.pill width="16" height="16" />,
       // },
     ],
   },
@@ -67,11 +72,6 @@ export const ComponentsNavbar: SideNavbar[] = [
         path: `${prefix}/cyberpunk-button`,
         icon: <Icons.pill width="16" height="16" />,
       },
-      // {
-      //   title: "Kinetic Grid",
-      //   path: `${prefix}/kinetic-grid`,
-      //   icon: <Icons.pill width="16" height="16" />,
-      // },
     ],
   },
   {
@@ -110,6 +110,11 @@ export const ComponentsNavbar: SideNavbar[] = [
   //     {
   //       title: "Fluid Shader",
   //       path: `${prefix}/fluid-shader`,
+  //       icon: <Icons.typeOutline width="16" height="16" />,
+  //     },
+  //     {
+  //       title: "Sphere Shader",
+  //       path: `${prefix}/sphere-shader`,
   //       icon: <Icons.typeOutline width="16" height="16" />,
   //     },
   //   ],
