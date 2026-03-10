@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useMemo, useEffect } from "react";
+import React, { useRef, useMemo, useEffect, RefObject } from "react";
 import { Canvas, useFrame, extend } from "@react-three/fiber";
 import { OrbitControls, Effects } from "@react-three/drei";
 import { UnrealBloomPass } from "three-stdlib";
@@ -9,8 +9,19 @@ import * as THREE from "three";
 // Extend Three.js with UnrealBloomPass
 extend({ UnrealBloomPass });
 
+// Declare the extended JSX elements
+declare module "@react-three/fiber" {
+  interface ThreeElements {
+    unrealBloomPass: {
+      threshold?: number;
+      strength?: number;
+      radius?: number;
+    };
+  }
+}
+
 const ParticleSwarm = () => {
-  const meshRef = useRef();
+  const meshRef = useRef<THREE.InstancedMesh>(null!);
   const count = 3000;
   const speedMult = 1;
   const dummy = useMemo(() => new THREE.Object3D(), []);
@@ -19,7 +30,7 @@ const ParticleSwarm = () => {
   const color = pColor; // Alias for user code compatibility
 
   const positions = useMemo(() => {
-    const pos = [];
+    const pos: THREE.Vector3[] = [];
     for (let i = 0; i < count; i++) {
       pos.push(
         new THREE.Vector3(
@@ -41,11 +52,15 @@ const ParticleSwarm = () => {
 
   const PARAMS = useMemo(() => ({ radius: 60, crater: 0, spin: 0.25 }), []);
 
-  const addControl = (id, l, min, max, val) => {
-    return PARAMS[id] !== undefined ? PARAMS[id] : val;
+  const addControl = (id: string, l: string, min: number, max: number, val: number): number => {
+    return PARAMS[id as keyof typeof PARAMS] !== undefined ? PARAMS[id as keyof typeof PARAMS] : val;
   };
 
-  const setInfo = () => {};
+  const setInfo = (title: string, description: string) => {
+    // Implementation for setInfo if needed
+    console.log(title, description);
+  };
+  
   const annotate = () => {};
 
   useFrame((state) => {
@@ -53,9 +68,10 @@ const ParticleSwarm = () => {
     const time = state.clock.getElapsedTime() * speedMult;
     const THREE_LIB = THREE;
 
-    if (material.uniforms && material.uniforms.uTime) {
-      material.uniforms.uTime.value = time;
-    }
+  // Fix: Check if material has uniforms property using type assertion
+  if ((material as any).uniforms && (material as any).uniforms.uTime) {
+    (material as any).uniforms.uTime.value = time;
+  }
 
     for (let i = 0; i < count; i++) {
       // USER CODE START
