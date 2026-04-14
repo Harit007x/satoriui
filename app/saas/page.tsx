@@ -44,7 +44,7 @@ const ScalableWebApp: React.FC = () => {
       ></div>
 
       {/* Navigation */}
-      <header className="w-full border-b border-zinc-900 sticky top-0 z-50 bg-zinc-950/80 backdrop-blur-md">
+      <header className="w-full border-b border-white/[0.08] sticky top-0 z-50 bg-white/[0.03] backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="text-zinc-100 font-medium tracking-tighter text-lg uppercase">
             SYSBUILD
@@ -171,7 +171,7 @@ const ScalableWebApp: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {/* Service 1 */}
-          <div className="group border border-zinc-800/60 bg-zinc-900/20 p-8 rounded-2xl hover:border-gray-900/40 hover:shadow-[0px_0px_27px_17px_rgba(255,_255,_255,_0.1)] hover:border-zinc-700 transition-all duration-300 flex flex-col h-full bg-zinc-950">
+          <div className="group border border-white/[0.08] bg-white/[0.03] backdrop-blur-md p-8 rounded-2xl hover:bg-white/[0.06] hover:shadow-[0px_0px_27px_17px_rgba(255,_255,_255,_0.1)] hover:border-zinc-700 transition-all duration-300 flex flex-col h-full">
             <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center mb-6 text-zinc-100">
               <Terminal size={24} />
             </div>
@@ -199,7 +199,7 @@ const ScalableWebApp: React.FC = () => {
           </div>
 
           {/* Service 2 */}
-          <div className="group border border-zinc-800/60 bg-zinc-900/20 p-8 rounded-2xl hover:border-gray-900/40 hover:shadow-[0px_0px_27px_17px_rgba(255,_255,_255,_0.1)] hover:border-zinc-700 transition-all duration-300 flex flex-col h-full bg-zinc-950">
+          <div className="group border border-white/[0.08] bg-white/[0.03] backdrop-blur-md p-8 rounded-2xl hover:bg-white/[0.06] hover:shadow-[0px_0px_27px_17px_rgba(255,_255,_255,_0.1)] hover:border-zinc-700 transition-all duration-300 flex flex-col h-full">
             <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center mb-6 text-zinc-100">
               <CreditCard size={24} />
             </div>
@@ -226,7 +226,7 @@ const ScalableWebApp: React.FC = () => {
           </div>
 
           {/* Service 3 */}
-          <div className="group border border-zinc-800/60 bg-zinc-900/20 p-8 rounded-2xl hover:border-gray-900/40 hover:shadow-[0px_0px_27px_17px_rgba(255,_255,_255,_0.1)] hover:border-zinc-700 transition-all duration-300 flex flex-col h-full bg-zinc-950">
+          <div className="group border border-white/[0.08] bg-white/[0.03] backdrop-blur-md p-8 rounded-2xl hover:bg-white/[0.06] hover:shadow-[0px_0px_27px_17px_rgba(255,_255,_255,_0.1)] hover:border-zinc-700 transition-all duration-300 flex flex-col h-full">
             <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center mb-6 text-zinc-100">
               <Rocket size={24} />
             </div>
@@ -253,7 +253,7 @@ const ScalableWebApp: React.FC = () => {
           </div>
 
           {/* Service 4 */}
-          <div className="group border border-zinc-800/60 bg-zinc-900/20 p-8 rounded-2xl hover:border-gray-900/40 hover:shadow-[0px_0px_27px_17px_rgba(255,_255,_255,_0.1)] hover:border-zinc-700 transition-all duration-300 flex flex-col h-full bg-zinc-950">
+          <div className="group border border-white/[0.08] bg-white/[0.03] backdrop-blur-md p-8 rounded-2xl hover:bg-white/[0.06] hover:shadow-[0px_0px_27px_17px_rgba(255,_255,_255,_0.1)] hover:border-zinc-700 transition-all duration-300 flex flex-col h-full">
             <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center mb-6 text-zinc-100">
               <CloudCheck size={24} />
             </div>
@@ -544,7 +544,7 @@ const ScalableWebApp: React.FC = () => {
                 ></div>
                 <Wallet size={48} className="text-zinc-700 relative z-10" />
               </div>
-              <div className="p-8 bg-zinc-950 hover:shadow-[0px_0px_27px_17px_rgba(255,_255,_255,_0.1)]">
+              <div className="p-8 bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.06] transition-colors hover:shadow-[0px_0px_27px_17px_rgba(255,_255,_255,_0.1)]">
                 <h3 className="text-xl font-medium tracking-tight text-zinc-100 mb-3">
                   Payment Integration System
                 </h3>
@@ -579,7 +579,7 @@ const ScalableWebApp: React.FC = () => {
                 ></div>
                 <Store size={48} className="text-zinc-700 relative z-10" />
               </div>
-              <div className="p-8 bg-zinc-950">
+              <div className="p-8 bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.06] transition-colors">
                 <h3 className="text-xl font-medium tracking-tight text-zinc-100 mb-3">
                   POS + Waiter App Integration
                 </h3>
