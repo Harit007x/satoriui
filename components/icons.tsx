@@ -256,4 +256,21 @@ export const Icons = {
     </svg>
   ),
   check: Check,
+  aws: ({ ...props }: LucideProps) => (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M14.99 15.01L19.5 20l4.5-4.99" />
+      <path d="M2.5 15.01L7 20l4.5-4.99" />
+      <path d="M12 11V3" />
+      <path d="M12 21l-3.5-3.5" />
+      <path d="M12 21l3.5-3.5" />
+    </svg>
+  ),
 };
