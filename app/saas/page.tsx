@@ -32,7 +32,7 @@ const ScalableWebApp: React.FC = () => {
   return (
     <KineticGrid
       globalColor="monochrome"
-      className="text-zinc-400 selection:bg-zinc-800 selection:text-zinc-100 min-h-screen flex flex-col relative overflow-x-hidden"
+      className="text-zinc-200 selection:bg-zinc-800 selection:text-zinc-100 min-h-screen flex flex-col relative overflow-x-hidden"
     >
       {/* Background Glow */}
       <div
@@ -44,7 +44,7 @@ const ScalableWebApp: React.FC = () => {
       ></div>
 
       {/* Navigation */}
-      <header className="w-full border-b border-white/[0.08] sticky top-0 z-50 bg-white/[0.03] backdrop-blur-md">
+      <header className="w-full border-b border-white/[0.08] sticky top-0 z-50 bg-zinc-950/60 backdrop-blur-xl border-zinc-700/50">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="text-zinc-100 font-medium tracking-tighter text-lg uppercase">
             SYSBUILD
@@ -103,7 +103,7 @@ const ScalableWebApp: React.FC = () => {
           </SlideUpReveal>
         </h1>
         <BlurReveal
-          className="mt-6 text-base md:text-lg text-zinc-400 max-w-2xl font-normal leading-relaxed"
+          className="mt-6 text-base md:text-lg text-zinc-200 max-w-2xl font-normal leading-relaxed"
           speedReveal={3}
         >
           From MVPs to production-ready systems - we help startups and
@@ -133,25 +133,25 @@ const ScalableWebApp: React.FC = () => {
       {/* 2. Trust / Positioning Strip */}
       <div className="border-y border-zinc-900 bg-zinc-950 py-8 overflow-hidden">
         <div className="max-w-6xl mx-auto px-6">
-          <p className="text-center text-sm font-medium text-zinc-500 mb-6">
+          <p className="text-center text-sm font-medium text-zinc-300 mb-6">
             Built with modern technologies. Designed for performance. Deployed
             for scale.
           </p>
-          <div className="flex flex-wrap justify-center gap-x-12 gap-y-6 text-sm font-medium tracking-tight text-zinc-600">
+          <div className="flex flex-wrap justify-center gap-x-12 gap-y-6 text-sm font-medium tracking-tight text-zinc-400">
             <span className="flex items-center gap-2">
-              <CheckCircle2 size={18} className="text-zinc-400" />
+              <CheckCircle2 size={18} className="text-zinc-200" />
               Fast delivery
             </span>
             <span className="flex items-center gap-2">
-              <Code2 size={18} className="text-zinc-400" />
+              <Code2 size={18} className="text-zinc-200" />
               Clean architecture
             </span>
             <span className="flex items-center gap-2">
-              <Server size={18} className="text-zinc-400" />
+              <Server size={18} className="text-zinc-200" />
               Production-ready systems
             </span>
             <span className="flex items-center gap-2">
-              <Cloud size={18} className="text-zinc-400" />
+              <Cloud size={18} className="text-zinc-200" />
               AWS-powered infrastructure
             </span>
           </div>
@@ -171,18 +171,18 @@ const ScalableWebApp: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {/* Service 1 */}
-          <div className="group border border-white/[0.08] bg-white/[0.03] backdrop-blur-md p-8 rounded-2xl hover:bg-white/[0.06] hover:shadow-[0px_0px_27px_17px_rgba(255,_255,_255,_0.1)] hover:border-zinc-700 transition-all duration-300 flex flex-col h-full">
+          <div className="group border border-white/[0.08] bg-zinc-950/60 backdrop-blur-xl border-zinc-700/50 p-8 rounded-2xl hover:bg-white/[0.06] hover:shadow-[0px_0px_27px_17px_rgba(255,_255,_255,_0.1)] hover:border-zinc-700 transition-all duration-300 flex flex-col h-full">
             <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center mb-6 text-zinc-100">
               <Terminal size={24} />
             </div>
             <h3 className="text-xl font-medium tracking-tight text-zinc-100 mb-3">
               Fullstack Web Development
             </h3>
-            <p className="text-sm text-zinc-400 mb-8 leading-relaxed flex-grow">
+            <p className="text-sm text-zinc-200 mb-8 leading-relaxed flex-grow">
               We design and develop end-to-end web applications tailored to your
               business needs.
             </p>
-            <ul className="space-y-3 text-sm text-zinc-500 font-medium">
+            <ul className="space-y-3 text-sm text-zinc-300 font-medium">
               <li className="flex items-center gap-3">
                 <span className="w-1 h-1 rounded-full bg-zinc-700"></span>
                 Frontend (React, Next.js)
@@ -199,17 +199,17 @@ const ScalableWebApp: React.FC = () => {
           </div>
 
           {/* Service 2 */}
-          <div className="group border border-white/[0.08] bg-white/[0.03] backdrop-blur-md p-8 rounded-2xl hover:bg-white/[0.06] hover:shadow-[0px_0px_27px_17px_rgba(255,_255,_255,_0.1)] hover:border-zinc-700 transition-all duration-300 flex flex-col h-full">
+          <div className="group border border-white/[0.08] bg-zinc-950/60 backdrop-blur-xl border-zinc-700/50 p-8 rounded-2xl hover:bg-white/[0.06] hover:shadow-[0px_0px_27px_17px_rgba(255,_255,_255,_0.1)] hover:border-zinc-700 transition-all duration-300 flex flex-col h-full">
             <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center mb-6 text-zinc-100">
               <CreditCard size={24} />
             </div>
             <h3 className="text-xl font-medium tracking-tight text-zinc-100 mb-3">
               Payment & Integration Systems
             </h3>
-            <p className="text-sm text-zinc-400 mb-8 leading-relaxed flex-grow">
+            <p className="text-sm text-zinc-200 mb-8 leading-relaxed flex-grow">
               We build systems that handle real-world transactions seamlessly.
             </p>
-            <ul className="space-y-3 text-sm text-zinc-500 font-medium">
+            <ul className="space-y-3 text-sm text-zinc-300 font-medium">
               <li className="flex items-center gap-3">
                 <span className="w-1 h-1 rounded-full bg-zinc-700"></span>
                 Payment gateway integrations
@@ -226,17 +226,17 @@ const ScalableWebApp: React.FC = () => {
           </div>
 
           {/* Service 3 */}
-          <div className="group border border-white/[0.08] bg-white/[0.03] backdrop-blur-md p-8 rounded-2xl hover:bg-white/[0.06] hover:shadow-[0px_0px_27px_17px_rgba(255,_255,_255,_0.1)] hover:border-zinc-700 transition-all duration-300 flex flex-col h-full">
+          <div className="group border border-white/[0.08] bg-zinc-950/60 backdrop-blur-xl border-zinc-700/50 p-8 rounded-2xl hover:bg-white/[0.06] hover:shadow-[0px_0px_27px_17px_rgba(255,_255,_255,_0.1)] hover:border-zinc-700 transition-all duration-300 flex flex-col h-full">
             <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center mb-6 text-zinc-100">
               <Rocket size={24} />
             </div>
             <h3 className="text-xl font-medium tracking-tight text-zinc-100 mb-3">
               MVP Development for Startups
             </h3>
-            <p className="text-sm text-zinc-400 mb-8 leading-relaxed flex-grow">
+            <p className="text-sm text-zinc-200 mb-8 leading-relaxed flex-grow">
               Launch your idea fast with a scalable foundation.
             </p>
-            <ul className="space-y-3 text-sm text-zinc-500 font-medium">
+            <ul className="space-y-3 text-sm text-zinc-300 font-medium">
               <li className="flex items-center gap-3">
                 <span className="w-1 h-1 rounded-full bg-zinc-700"></span>Rapid
                 prototyping
@@ -253,17 +253,17 @@ const ScalableWebApp: React.FC = () => {
           </div>
 
           {/* Service 4 */}
-          <div className="group border border-white/[0.08] bg-white/[0.03] backdrop-blur-md p-8 rounded-2xl hover:bg-white/[0.06] hover:shadow-[0px_0px_27px_17px_rgba(255,_255,_255,_0.1)] hover:border-zinc-700 transition-all duration-300 flex flex-col h-full">
+          <div className="group border border-white/[0.08] bg-zinc-950/60 backdrop-blur-xl border-zinc-700/50 p-8 rounded-2xl hover:bg-white/[0.06] hover:shadow-[0px_0px_27px_17px_rgba(255,_255,_255,_0.1)] hover:border-zinc-700 transition-all duration-300 flex flex-col h-full">
             <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center mb-6 text-zinc-100">
               <CloudCheck size={24} />
             </div>
             <h3 className="text-xl font-medium tracking-tight text-zinc-100 mb-3">
               Cloud Deployment & DevOps
             </h3>
-            <p className="text-sm text-zinc-400 mb-8 leading-relaxed flex-grow">
+            <p className="text-sm text-zinc-200 mb-8 leading-relaxed flex-grow">
               We ensure your product runs smoothly in production.
             </p>
-            <ul className="space-y-3 text-sm text-zinc-500 font-medium">
+            <ul className="space-y-3 text-sm text-zinc-300 font-medium">
               <li className="flex items-center gap-3">
                 <span className="w-1 h-1 rounded-full bg-zinc-700"></span>AWS
                 (EC2, S3, RDS, CloudFront)
@@ -284,7 +284,7 @@ const ScalableWebApp: React.FC = () => {
       {/* 4. How We Work */}
       <section
         id="process"
-        className="py-24 border-y border-zinc-900 bg-zinc-950/30 px-6"
+        className="py-24 border-y border-zinc-900 bg-zinc-950/80 px-6"
       >
         <div className="max-w-6xl mx-auto w-full">
           <h2 className="text-3xl md:text-4xl font-semibold tracking-tighter text-zinc-50 mb-16">
@@ -303,7 +303,7 @@ const ScalableWebApp: React.FC = () => {
               <h4 className="text-base font-medium tracking-tight text-zinc-100 mb-2 text-center md:text-left">
                 Understand
               </h4>
-              <p className="text-xs text-zinc-500 leading-relaxed text-center md:text-left">
+              <p className="text-xs text-zinc-300 leading-relaxed text-center md:text-left">
                 We deeply understand your product, users, and business goals.
               </p>
             </div>
@@ -316,7 +316,7 @@ const ScalableWebApp: React.FC = () => {
               <h4 className="text-base font-medium tracking-tight text-zinc-100 mb-2 text-center md:text-left">
                 Plan
               </h4>
-              <p className="text-xs text-zinc-500 leading-relaxed text-center md:text-left">
+              <p className="text-xs text-zinc-300 leading-relaxed text-center md:text-left">
                 We design scalable architecture and define clear milestones.
               </p>
             </div>
@@ -329,7 +329,7 @@ const ScalableWebApp: React.FC = () => {
               <h4 className="text-base font-medium tracking-tight text-zinc-100 mb-2 text-center md:text-left">
                 Build
               </h4>
-              <p className="text-xs text-zinc-500 leading-relaxed text-center md:text-left">
+              <p className="text-xs text-zinc-300 leading-relaxed text-center md:text-left">
                 We develop fast, clean, and production-ready systems.
               </p>
             </div>
@@ -342,7 +342,7 @@ const ScalableWebApp: React.FC = () => {
               <h4 className="text-base font-medium tracking-tight text-zinc-100 mb-2 text-center md:text-left">
                 Deploy
               </h4>
-              <p className="text-xs text-zinc-500 leading-relaxed text-center md:text-left">
+              <p className="text-xs text-zinc-300 leading-relaxed text-center md:text-left">
                 We deploy on AWS with performance, security, and reliability in
                 mind.
               </p>
@@ -356,7 +356,7 @@ const ScalableWebApp: React.FC = () => {
               <h4 className="text-base font-medium tracking-tight text-zinc-100 mb-2 text-center md:text-left">
                 Scale
               </h4>
-              <p className="text-xs text-zinc-500 leading-relaxed text-center md:text-left">
+              <p className="text-xs text-zinc-300 leading-relaxed text-center md:text-left">
                 We support you in scaling your product as your business grows.
               </p>
             </div>
@@ -374,65 +374,65 @@ const ScalableWebApp: React.FC = () => {
             </h2>
             <div className="space-y-8">
               <div>
-                <h4 className="text-xs font-medium tracking-wider uppercase text-zinc-500 mb-4">
+                <h4 className="text-xs font-medium tracking-wider uppercase text-zinc-300 mb-4">
                   Frontend
                 </h4>
                 <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1.5 rounded-md border border-zinc-800 bg-zinc-900/50 text-xs text-zinc-300">
+                  <span className="px-3 py-1.5 rounded-md border border-zinc-800 bg-zinc-900/50 text-xs text-zinc-100">
                     React.js
                   </span>
-                  <span className="px-3 py-1.5 rounded-md border border-zinc-800 bg-zinc-900/50 text-xs text-zinc-300">
+                  <span className="px-3 py-1.5 rounded-md border border-zinc-800 bg-zinc-900/50 text-xs text-zinc-100">
                     Next.js
                   </span>
-                  <span className="px-3 py-1.5 rounded-md border border-zinc-800 bg-zinc-900/50 text-xs text-zinc-300">
+                  <span className="px-3 py-1.5 rounded-md border border-zinc-800 bg-zinc-900/50 text-xs text-zinc-100">
                     Tailwind CSS
                   </span>
-                  <span className="px-3 py-1.5 rounded-md border border-zinc-800 bg-zinc-900/50 text-xs text-zinc-300">
+                  <span className="px-3 py-1.5 rounded-md border border-zinc-800 bg-zinc-900/50 text-xs text-zinc-100">
                     shadcn UI
                   </span>
                 </div>
               </div>
               <div>
-                <h4 className="text-xs font-medium tracking-wider uppercase text-zinc-500 mb-4">
+                <h4 className="text-xs font-medium tracking-wider uppercase text-zinc-300 mb-4">
                   Backend
                 </h4>
                 <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1.5 rounded-md border border-zinc-800 bg-zinc-900/50 text-xs text-zinc-300">
+                  <span className="px-3 py-1.5 rounded-md border border-zinc-800 bg-zinc-900/50 text-xs text-zinc-100">
                     FastAPI
                   </span>
-                  <span className="px-3 py-1.5 rounded-md border border-zinc-800 bg-zinc-900/50 text-xs text-zinc-300">
+                  <span className="px-3 py-1.5 rounded-md border border-zinc-800 bg-zinc-900/50 text-xs text-zinc-100">
                     Node.js
                   </span>
-                  <span className="px-3 py-1.5 rounded-md border border-zinc-800 bg-zinc-900/50 text-xs text-zinc-300">
+                  <span className="px-3 py-1.5 rounded-md border border-zinc-800 bg-zinc-900/50 text-xs text-zinc-100">
                     Express.js
                   </span>
-                  <span className="px-3 py-1.5 rounded-md border border-zinc-800 bg-zinc-900/50 text-xs text-zinc-300">
+                  <span className="px-3 py-1.5 rounded-md border border-zinc-800 bg-zinc-900/50 text-xs text-zinc-100">
                     Django
                   </span>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-8">
                 <div>
-                  <h4 className="text-xs font-medium tracking-wider uppercase text-zinc-500 mb-4">
+                  <h4 className="text-xs font-medium tracking-wider uppercase text-zinc-300 mb-4">
                     Database
                   </h4>
                   <div className="flex flex-col gap-2">
-                    <span className="text-sm text-zinc-400 flex items-center gap-2">
+                    <span className="text-sm text-zinc-200 flex items-center gap-2">
                       <span className="w-1 h-1 rounded-full bg-zinc-700"></span>{" "}
                       PostgreSQL
                     </span>
-                    <span className="text-sm text-zinc-400 flex items-center gap-2">
+                    <span className="text-sm text-zinc-200 flex items-center gap-2">
                       <span className="w-1 h-1 rounded-full bg-zinc-700"></span>{" "}
                       MongoDB
                     </span>
                   </div>
                 </div>
                 <div>
-                  <h4 className="text-xs font-medium tracking-wider uppercase text-zinc-500 mb-4">
+                  <h4 className="text-xs font-medium tracking-wider uppercase text-zinc-300 mb-4">
                     Design
                   </h4>
                   <div className="flex flex-col gap-2">
-                    <span className="text-sm text-zinc-400 flex items-center gap-2">
+                    <span className="text-sm text-zinc-200 flex items-center gap-2">
                       <span className="w-1 h-1 rounded-full bg-zinc-700"></span>{" "}
                       Figma
                     </span>
@@ -440,11 +440,11 @@ const ScalableWebApp: React.FC = () => {
                 </div>
               </div>
               <div>
-                <h4 className="text-xs font-medium tracking-wider uppercase text-zinc-500 mb-4">
+                <h4 className="text-xs font-medium tracking-wider uppercase text-zinc-300 mb-4">
                   Cloud
                 </h4>
                 <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1.5 rounded-md border border-zinc-800 bg-zinc-900/50 text-xs text-zinc-300">
+                  <span className="px-3 py-1.5 rounded-md border border-zinc-800 bg-zinc-900/50 text-xs text-zinc-100">
                     AWS (EC2, S3, RDS, CloudFront)
                   </span>
                 </div>
@@ -460,13 +460,13 @@ const ScalableWebApp: React.FC = () => {
             <div className="space-y-8">
               <div className="flex gap-4">
                 <div className="mt-1 flex-shrink-0">
-                  <ShieldCheck size={20} className="text-zinc-300" />
+                  <ShieldCheck size={20} className="text-zinc-100" />
                 </div>
                 <div>
                   <h4 className="text-base font-medium tracking-tight text-zinc-100 mb-1">
                     Production-Focused Development
                   </h4>
-                  <p className="text-sm text-zinc-500 leading-relaxed">
+                  <p className="text-sm text-zinc-300 leading-relaxed">
                     We don't just build features — we build systems that work in
                     real-world conditions.
                   </p>
@@ -475,13 +475,13 @@ const ScalableWebApp: React.FC = () => {
 
               <div className="flex gap-4">
                 <div className="mt-1 flex-shrink-0">
-                  <Zap size={20} className="text-zinc-300" />
+                  <Zap size={20} className="text-zinc-100" />
                 </div>
                 <div>
                   <h4 className="text-base font-medium tracking-tight text-zinc-100 mb-1">
                     Speed + Quality
                   </h4>
-                  <p className="text-sm text-zinc-500 leading-relaxed">
+                  <p className="text-sm text-zinc-300 leading-relaxed">
                     Fast delivery without compromising clean architecture.
                   </p>
                 </div>
@@ -489,13 +489,13 @@ const ScalableWebApp: React.FC = () => {
 
               <div className="flex gap-4">
                 <div className="mt-1 flex-shrink-0">
-                  <Share2 size={20} className="text-zinc-300" />
+                  <Share2 size={20} className="text-zinc-100" />
                 </div>
                 <div>
                   <h4 className="text-base font-medium tracking-tight text-zinc-100 mb-1">
                     Real Integration Experience
                   </h4>
-                  <p className="text-sm text-zinc-500 leading-relaxed">
+                  <p className="text-sm text-zinc-300 leading-relaxed">
                     We've worked with payment systems, QR flows, and POS
                     integrations.
                   </p>
@@ -504,13 +504,13 @@ const ScalableWebApp: React.FC = () => {
 
               <div className="flex gap-4">
                 <div className="mt-1 flex-shrink-0">
-                  <TrendingUp size={20} className="text-zinc-300" />
+                  <TrendingUp size={20} className="text-zinc-100" />
                 </div>
                 <div>
                   <h4 className="text-base font-medium tracking-tight text-zinc-100 mb-1">
                     Scalable Systems
                   </h4>
-                  <p className="text-sm text-zinc-500 leading-relaxed">
+                  <p className="text-sm text-zinc-300 leading-relaxed">
                     Built to grow with your business — not break under pressure.
                   </p>
                 </div>
@@ -523,7 +523,7 @@ const ScalableWebApp: React.FC = () => {
       {/* 7. Case Study Section */}
       <section
         id="work"
-        className="py-24 border-y border-zinc-900 bg-zinc-950/30 px-6"
+        className="py-24 border-y border-zinc-900 bg-zinc-950/80 px-6"
       >
         <div className="max-w-6xl mx-auto w-full">
           <h2 className="text-3xl md:text-4xl font-semibold tracking-tighter text-zinc-50 mb-16">
@@ -532,7 +532,7 @@ const ScalableWebApp: React.FC = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Case Study 1 */}
-            <div className="group border border-zinc-800 rounded-2xl overflow-hidden bg-zinc-900/20 hover:border-zinc-700 transition-colors">
+            <div className="group border border-zinc-800 rounded-2xl overflow-hidden bg-zinc-900/40 hover:border-zinc-700 transition-colors">
               <div className="bg-zinc-950 h-48 w-full border-b border-zinc-800 bg-zinc-900/50 flex items-center justify-center p-6 relative overflow-hidden">
                 <div
                   className="absolute inset-0 opacity-10"
@@ -544,15 +544,15 @@ const ScalableWebApp: React.FC = () => {
                 ></div>
                 <Wallet size={48} className="text-zinc-700 relative z-10" />
               </div>
-              <div className="p-8 bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.06] transition-colors hover:shadow-[0px_0px_27px_17px_rgba(255,_255,_255,_0.1)]">
+              <div className="p-8 bg-zinc-950/60 backdrop-blur-xl border-zinc-700/50 hover:bg-white/[0.06] transition-colors hover:shadow-[0px_0px_27px_17px_rgba(255,_255,_255,_0.1)]">
                 <h3 className="text-xl font-medium tracking-tight text-zinc-100 mb-3">
                   Payment Integration System
                 </h3>
-                <p className="text-sm text-zinc-400 mb-6 leading-relaxed">
+                <p className="text-sm text-zinc-200 mb-6 leading-relaxed">
                   Built a full payment flow with QR-based transactions and
                   gateway integrations.
                 </p>
-                <div className="flex flex-wrap gap-2 text-xs font-medium text-zinc-500">
+                <div className="flex flex-wrap gap-2 text-xs font-medium text-zinc-300">
                   <span className="bg-zinc-900 px-2.5 py-1 rounded-md border border-zinc-800">
                     Real-time payment handling
                   </span>
@@ -567,7 +567,7 @@ const ScalableWebApp: React.FC = () => {
             </div>
 
             {/* Case Study 2 */}
-            <div className="group border border-zinc-800 rounded-2xl overflow-hidden bg-zinc-900/20 hover:border-zinc-700 transition-colors">
+            <div className="group border border-zinc-800 rounded-2xl overflow-hidden bg-zinc-900/40 hover:border-zinc-700 transition-colors">
               <div className="bg-zinc-950 h-48 w-full border-b border-zinc-800 bg-zinc-900/50 flex items-center justify-center p-6 relative overflow-hidden">
                 <div
                   className="absolute inset-0 opacity-10"
@@ -579,14 +579,14 @@ const ScalableWebApp: React.FC = () => {
                 ></div>
                 <Store size={48} className="text-zinc-700 relative z-10" />
               </div>
-              <div className="p-8 bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.06] transition-colors">
+              <div className="p-8 bg-zinc-950/60 backdrop-blur-xl border-zinc-700/50 hover:bg-white/[0.06] transition-colors">
                 <h3 className="text-xl font-medium tracking-tight text-zinc-100 mb-3">
                   POS + Waiter App Integration
                 </h3>
-                <p className="text-sm text-zinc-400 mb-6 leading-relaxed">
+                <p className="text-sm text-zinc-200 mb-6 leading-relaxed">
                   Developed a system for handling payments and order workflows.
                 </p>
-                <div className="flex flex-wrap gap-2 text-xs font-medium text-zinc-500">
+                <div className="flex flex-wrap gap-2 text-xs font-medium text-zinc-300">
                   <span className="bg-zinc-900 px-2.5 py-1 rounded-md border border-zinc-800">
                     Multi-payment support
                   </span>
@@ -609,7 +609,7 @@ const ScalableWebApp: React.FC = () => {
           <h2 className="text-3xl md:text-4xl font-semibold tracking-tighter text-zinc-50 mb-4">
             Engagement Models
           </h2>
-          <p className="text-sm text-zinc-500 font-medium">
+          <p className="text-sm text-zinc-300 font-medium">
             Custom pricing based on project scope
           </p>
         </div>
@@ -617,11 +617,11 @@ const ScalableWebApp: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Model 1 */}
           <div className="border border-zinc-800 rounded-2xl p-8 bg-zinc-950 flex flex-col items-center text-center">
-            <Rocket size={24} className="text-zinc-300 mb-6" />
+            <Rocket size={24} className="text-zinc-100 mb-6" />
             <h3 className="text-lg font-medium tracking-tight text-zinc-100 mb-3">
               MVP Build
             </h3>
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm text-zinc-300">
               Perfect for startups launching their first version.
             </p>
           </div>
@@ -633,18 +633,18 @@ const ScalableWebApp: React.FC = () => {
             <h3 className="text-lg font-medium tracking-tight text-zinc-100 mb-3">
               Full Product Development
             </h3>
-            <p className="text-sm text-zinc-400">
+            <p className="text-sm text-zinc-200">
               Complete end-to-end system development.
             </p>
           </div>
 
           {/* Model 3 */}
           <div className="border border-zinc-800 rounded-2xl p-8 bg-zinc-950 flex flex-col items-center text-center">
-            <Infinity size={24} className="text-zinc-300 mb-6" />
+            <Infinity size={24} className="text-zinc-100 mb-6" />
             <h3 className="text-lg font-medium tracking-tight text-zinc-100 mb-3">
               Ongoing Development
             </h3>
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm text-zinc-300">
               Continuous improvements, scaling, and support.
             </p>
           </div>
@@ -667,7 +667,7 @@ const ScalableWebApp: React.FC = () => {
           <h2 className="text-4xl md:text-5xl font-semibold tracking-tighter text-zinc-50 mb-6">
             Let's Build Something Powerful
           </h2>
-          <p className="text-base text-zinc-400 mb-10">
+          <p className="text-base text-zinc-200 mb-10">
             Have an idea or need to scale your product? Let's talk and make it
             happen.
           </p>
@@ -695,40 +695,40 @@ const ScalableWebApp: React.FC = () => {
             SYSBUILD
           </div>
 
-          <nav className="flex gap-6 text-sm text-zinc-500 font-medium">
-            <a href="#" className="hover:text-zinc-300 transition-colors">
+          <nav className="flex gap-6 text-sm text-zinc-300 font-medium">
+            <a href="#" className="hover:text-zinc-100 transition-colors">
               About
             </a>
             <a
               href="#services"
-              className="hover:text-zinc-300 transition-colors"
+              className="hover:text-zinc-100 transition-colors"
             >
               Services
             </a>
             <a
               href="#contact"
-              className="hover:text-zinc-300 transition-colors"
+              className="hover:text-zinc-100 transition-colors"
             >
               Contact
             </a>
           </nav>
 
-          <div className="flex gap-6 text-sm text-zinc-500 font-medium">
+          <div className="flex gap-6 text-sm text-zinc-300 font-medium">
             <a
               href="#"
-              className="hover:text-zinc-300 transition-colors flex items-center gap-2"
+              className="hover:text-zinc-100 transition-colors flex items-center gap-2"
             >
               <Linkedin size={16} /> LinkedIn
             </a>
             <a
               href="#"
-              className="hover:text-zinc-300 transition-colors flex items-center gap-2"
+              className="hover:text-zinc-100 transition-colors flex items-center gap-2"
             >
               <Github size={16} /> GitHub
             </a>
             <a
               href="mailto:hello@example.com"
-              className="hover:text-zinc-300 transition-colors flex items-center gap-2"
+              className="hover:text-zinc-100 transition-colors flex items-center gap-2"
             >
               <Mail size={16} /> Email
             </a>

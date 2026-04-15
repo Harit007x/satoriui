@@ -167,6 +167,19 @@
           "target": "components/satori-ui/shimmer-text.tsx"
         }
       ]
+    },
+    {
+      "name": "kinetic-grid",
+      "type": "registry:component",
+      "title": "Kinetic Grid",
+      "description": "Kinetic grid animation.",
+      "files": [
+        {
+          "path": "packages/kinetic-grid/kinetic-grid.tsx",
+          "type": "registry:component",
+          "target": "components/satori-ui/kinetic-grid.tsx"
+        }
+      ]
     }
   ]
 }
