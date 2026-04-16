@@ -14,6 +14,13 @@ export const metadata: Metadata = {
     "A comprehensive suite of high-fidelity, interactive, accessible and extensible components to use with shadcn/ui.",
   keywords:
     "component library, satoriu, shadcn, react components, tailwindcss, tailwind components, ui components, accessible components, interactive components, extensible components, design system, frontend development, web development, user interface",
+  openGraph: {
+    images: ["/1.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/1.png"],
+  },
 };
 
 export default function RootLayout({
