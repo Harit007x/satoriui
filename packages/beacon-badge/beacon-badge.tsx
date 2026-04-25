@@ -27,16 +27,16 @@ export interface BeaconBadgeProps {
   border?: BorderSize;
 }
 
-const colorMap: Record<BeaconColor, string> = {
-  green: "bg-emerald-500 dark:bg-emerald-400",
-  blue: "bg-sky-500 dark:bg-sky-400",
-  purple: "bg-purple-500 dark:bg-purple-400",
-  yellow: "bg-yellow-500 dark:bg-yellow-400",
-  pink: "bg-pink-500 dark:bg-pink-400",
-  orange: "bg-orange-500 dark:bg-orange-400",
-  red: "bg-red-500 dark:bg-red-400",
-  white: "bg-zinc-200 dark:bg-white",
-  black: "bg-black dark:bg-zinc-800",
+const colorMap: Record<BeaconColor, { light: string; dark: string }> = {
+  green: { light: "bg-emerald-500", dark: "bg-emerald-400" },
+  blue: { light: "bg-sky-500", dark: "bg-sky-400" },
+  purple: { light: "bg-purple-500", dark: "bg-purple-400" },
+  yellow: { light: "bg-yellow-500", dark: "bg-yellow-400" },
+  pink: { light: "bg-pink-500", dark: "bg-pink-400" },
+  orange: { light: "bg-orange-500", dark: "bg-orange-400" },
+  red: { light: "bg-red-500", dark: "bg-red-400" },
+  white: { light: "bg-zinc-200", dark: "bg-white" },
+  black: { light: "bg-black", dark: "bg-zinc-800" },
 };
 
 const borderMap: Record<BorderSize, string> = {
@@ -86,10 +86,10 @@ const BeaconBadge = ({
           : "text-black/60 dark:text-white/60",
     beacon:
       staticTheme === "dark"
-        ? (colorClass.split(" ").pop() || "").replace("dark:", "")
+        ? colorClass.dark
         : staticTheme === "light"
-          ? colorClass.split(" ")[0]
-          : colorClass,
+          ? colorClass.light
+          : `${colorClass.light} dark:${colorClass.dark}`,
   };
 
   return (
@@ -102,7 +102,7 @@ const BeaconBadge = ({
       }}
       className={`inline-flex items-center gap-2 px-3 py-1.5 border backdrop-blur-sm ${borderMap[border]} ${themeClasses.container} ${className || ""}`}
     >
-      <span className="relative flex h-1.5 w-1.5">
+      <span className="relative flex h-1.5 w-1.5 shrink-0">
         {beconPulses && (
           <span
             className={`animate-ping absolute inline-flex h-full w-full rounded-full ${themeClasses.beacon} opacity-75`}
