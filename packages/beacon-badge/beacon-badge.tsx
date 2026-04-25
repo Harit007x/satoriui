@@ -1,6 +1,5 @@
 "use client";
 import { motion } from "motion/react";
-import BlurReveal from "../blur-reveal/blur-reveal";
 
 export type BeaconColor =
   | "green"
@@ -112,12 +111,41 @@ const BeaconBadge = ({
           className={`relative inline-flex rounded-full h-1.5 w-1.5 ${themeClasses.beacon}`}
         />
       </span>
-      <BlurReveal
+      <motion.span
+        variants={{
+          hidden: { opacity: 0 },
+          visible: {
+            opacity: 1,
+            transition: {
+              staggerChildren: 0.03 / speedReveal,
+              delayChildren: 0.1,
+            },
+          },
+        }}
+        initial="hidden"
+        animate="visible"
         className={`text-[11px] tracking-widest uppercase font-medium ${themeClasses.text}`}
-        speedReveal={speedReveal}
       >
-        {label}
-      </BlurReveal>
+        {label.split("").map((char, index) => (
+          <motion.span
+            key={index}
+            variants={{
+              hidden: { opacity: 0, filter: "blur(10px)", y: 5 },
+              visible: {
+                opacity: 1,
+                filter: "blur(0px)",
+                y: 0,
+                transition: {
+                  duration: 0.4,
+                },
+              },
+            }}
+            className="inline-block"
+          >
+            {char === " " ? "\u00A0" : char}
+          </motion.span>
+        ))}
+      </motion.span>
     </motion.div>
   );
 };
