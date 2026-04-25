@@ -9,6 +9,7 @@ import ProButton from "@/packages/pro-button/pro-button";
 import BlurReveal from "@/packages/blur-reveal/blur-reveal";
 import { motion } from "motion/react";
 import ShimmerText from "@/packages/shimmer-text/shimmer-text";
+import BeaconBadge from "@/packages/beacon-badge/beacon-badge";
 
 export default function Home() {
   return (
@@ -102,26 +103,7 @@ export default function Home() {
       <main className="relative z-10 flex-grow flex flex-col items-center justify-center min-h-screen px-6 pt-14">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto space-y-6">
           {/* Status badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.5,
-              ease: "easeOut",
-            }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.03] backdrop-blur-sm"
-          >
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-sky-400" />
-            </span>
-            <BlurReveal
-              className="text-white text-[11px] tracking-widest uppercase text-white/60"
-              speedReveal={3}
-            >
-              50+ Components Available
-            </BlurReveal>
-          </motion.div>
+          <BeaconBadge label="50+ Components Available" staticTheme="dark" />
 
           {/* Headline with TypewriterLoop */}
           <div className="flex items-center justify-center">
@@ -146,13 +128,22 @@ export default function Home() {
 
           {/* Subtitle with EncodedReveal */}
 
-          <ShimmerText className="text-base sm:text-lg text-white/80 leading-relaxed max-w-xl">
+          <BlurReveal
+            className="mt-6 text-base md:text-lg text-zinc-200 max-w-2xl font-normal leading-relaxed"
+            speedReveal={3}
+          >
             A collection of production-ready, interactive UI components with
             physics-based motion. Copy, paste, and ship.
-          </ShimmerText>
+          </BlurReveal>
 
           {/* CTA row */}
-          <div className="flex flex-col sm:flex-row items-center gap-3 pt-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+            className="mt-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
+          >
+
             <Link href="/components/dotted-modern">
               <ProButton text="Access Components" size="sm" pixelColor="sky" />
             </Link>
@@ -163,25 +154,54 @@ export default function Home() {
               <Icons.terminal className="h-4 w-4" />
               Documentation
             </Link> */}
-          </div>
+          </motion.div>
 
           {/* Stats row */}
-          <div className="flex items-center gap-10 pt-6 text-center">
+          <motion.div
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.1,
+                  delayChildren: 0.5,
+                },
+              },
+            }}
+            initial="hidden"
+            animate="visible"
+            className="flex items-center gap-10 pt-6 text-center"
+          >
             {[
               { value: "50+", label: "Components" },
               { value: "100%", label: "Accessible" },
               { value: "MIT", label: "License" },
             ].map((stat) => (
-              <div key={stat.label} className="flex flex-col">
+              <motion.div
+                key={stat.label}
+                variants={{
+                  hidden: { opacity: 0, filter: "blur(10px)", y: 20 },
+                  visible: {
+                    opacity: 1,
+                    filter: "blur(0px)",
+                    y: 0,
+                    transition: {
+                      duration: 0.8,
+                      ease: [0.2, 0.0, 0.2, 1],
+                    },
+                  },
+                }}
+                className="flex flex-col"
+              >
                 <span className="text-xl font-display font-bold text-white/90">
                   {stat.value}
                 </span>
                 <span className="text-[11px] text-white/30 tracking-wider uppercase mt-0.5">
                   {stat.label}
                 </span>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </main>
 

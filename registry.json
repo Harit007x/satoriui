@@ -180,6 +180,22 @@
           "target": "components/satori-ui/kinetic-grid.tsx"
         }
       ]
+    },
+    {
+      "name": "beacon-badge",
+      "type": "registry:component",
+      "title": "Beacon Badge",
+      "description": "A status badge with a customizable beacon (ping) animation and blur reveal text.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/beacon-badge/beacon-badge.tsx",
+          "type": "registry:component",
+          "target": "components/satori-ui/beacon-badge.tsx"
+        }
+      ]
     }
   ]
 }
