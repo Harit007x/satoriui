@@ -77,6 +77,11 @@ export const ComponentsNavbar: SideNavbar[] = [
         path: `${prefix}/beacon-badge`,
         icon: <Icons.pill width="16" height="16" />,
       },
+      {
+        title: "Pulse Button",
+        path: `${prefix}/pulse-button`,
+        icon: <Icons.pill width="16" height="16" />,
+      },
     ],
   },
   {

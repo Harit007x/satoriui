@@ -196,6 +196,22 @@
           "target": "components/satori-ui/beacon-badge.tsx"
         }
       ]
+    },
+    {
+      "name": "pulse-button",
+      "type": "registry:component",
+      "title": "Pulse Button",
+      "description": "A high-impact, beautifully animated button with pulsing dot patterns and smooth interactions.",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "packages/pulse-button/pulse-button.tsx",
+          "type": "registry:component",
+          "target": "components/satori-ui/pulse-button.tsx"
+        }
+      ]
     }
   ]
 }

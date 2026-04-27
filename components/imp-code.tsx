@@ -163,38 +163,18 @@ declare global {
 
 const AuraBackground = () => {
   const [isMounted, setIsMounted] = useState(false);
-  const [isLowPower, setIsLowPower] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setIsMounted(true);
-    
-    // Performance detection
-    const cores = navigator.hardwareConcurrency || 4;
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
-    if (cores < 4 || isMobile) {
-      setIsLowPower(true);
-    }
-
-    // WebGL support check
-    try {
-      const canvas = document.createElement("canvas");
-      const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
-      if (!gl) {
-        console.warn("WebGL not supported, falling back to static background");
-        setIsLowPower(true);
-      }
-    } catch (e) {
-      setIsLowPower(true);
-    }
   }, []);
 
   useEffect(() => {
-    if (!isMounted || isLowPower) return;
+    if (!isMounted) return;
 
     // Clean up any existing instances
     const cleanup = () => {
+      // Reset UnicornStudio
       if (window.UnicornStudio) {
         window.UnicornStudio.isInitialized = false;
       }
@@ -206,6 +186,7 @@ const AuraBackground = () => {
       }
     };
 
+    // Load script locally with error handling
     const loadScript = () => {
       return new Promise((resolve, reject) => {
         if (window.UnicornStudio?.isInitialized) {
@@ -224,47 +205,42 @@ const AuraBackground = () => {
               try {
                 window.UnicornStudio.init();
                 window.UnicornStudio.isInitialized = true;
+                console.log("UnicornStudio initialized successfully");
                 resolve(true);
               } catch (error) {
+                console.error("Error initializing UnicornStudio:", error);
                 reject(error);
               }
             }
           }, 100);
         };
 
-        script.onerror = reject;
+        script.onerror = (error) => {
+          console.error("Failed to initialize UnicornStudio:", error);
+          reject(error);
+        };
+
         document.head.appendChild(script);
       });
     };
 
+    // Add a small delay before loading to ensure DOM is ready
     const timer = setTimeout(() => {
       cleanup();
       loadScript().catch((error) => {
         console.error("Failed to initialize UnicornStudio:", error);
-        setIsLowPower(true); // Fallback on load error
       });
-    }, 200); // Slightly longer delay for stability
+    }, 100);
 
     return () => {
       clearTimeout(timer);
       cleanup();
     };
-  }, [isMounted, isLowPower]);
+  }, [isMounted]);
 
+  // Don't render anything on server
   if (!isMounted) {
     return null;
-  }
-
-  // Fallback for low-end systems: just a solid background or gradient
-  if (isLowPower) {
-    return (
-      <div 
-        className="fixed top-0 left-0 z-0 w-full h-full bg-[#000000]"
-        style={{
-          background: "radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000000 100%)",
-        }}
-      />
-    );
   }
 
   return (
@@ -275,23 +251,22 @@ const AuraBackground = () => {
         position: "fixed",
         overflow: "hidden",
         pointerEvents: "none",
-        backgroundColor: "#000000",
       }}
     >
+      {/* Red overlay with blend mode */}
       <div
         className="absolute top-0 left-0 w-full h-full"
         style={{
-          backgroundColor: "rgba(0, 89, 255, 0.3)", // Reduced opacity for performance
+          backgroundColor: "rgba(0, 89, 255, 0.5)",
           mixBlendMode: "color",
           zIndex: 1,
           pointerEvents: "none",
         }}
       />
 
+      {/* UnicornStudio container */}
       <div
         data-us-project="tPmIIl0vKqHO9yqmtge2"
-        data-us-dpi="1" // Force 1x DPI for performance
-        data-us-disable-on-mobile="true"
         className="absolute w-full h-full left-0 top-0"
         style={{ zIndex: 0 }}
       />
