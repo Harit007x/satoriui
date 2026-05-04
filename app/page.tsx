@@ -2,7 +2,7 @@
 import Footer from "@/components/footer";
 import { Icons } from "@/components/icons";
 import Link from "next/link";
-import KineticGrid from "../packages/kinetic-grid/kinetic-grid";
+import AuraBackground from "@/components/imp-code";
 import TypewriterLoop from "../packages/typewriter-loop/typewriter-loop";
 import KeyboardUI from "../packages/keyboard/keyboard";
 import ProButton from "@/packages/pro-button/pro-button";
@@ -13,7 +13,8 @@ import BeaconBadge from "@/packages/beacon-badge/beacon-badge";
 
 export default function Home() {
   return (
-    <KineticGrid className="antialiased flex flex-col selection:bg-[#4a9eff]/30 selection:text-white">
+    <div className="antialiased flex flex-col selection:bg-[#4a9eff]/30 selection:text-white min-h-screen bg-[#0a0a0a]">
+      <AuraBackground />
       {/* ── Floating Capsule Navbar ────────────────────────────────────── */}
       <div className="fixed w-full z-50 top-6 px-4 flex justify-center transition-all duration-300">
         <nav className="relative flex items-center justify-between w-full max-w-5xl px-4 py-3 rounded-xl bg-[#111111]/70 backdrop-blur-2xl border border-white/[0.08] shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]">
@@ -291,6 +292,6 @@ export default function Home() {
       </section>
 
       <Footer />
-    </KineticGrid>
+    </div>
   );
 }
