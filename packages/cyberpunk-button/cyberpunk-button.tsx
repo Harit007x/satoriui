@@ -9,16 +9,18 @@ interface CyberpunkButtonProps {
   buttonColor?: PixelColor;
   pixelColor?: PixelShade;
   buttonText?: string;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 const colorMap: Record<PixelColor, string> = {
-  lime: "#ccff00",
+  lime: "#00b56fff",
   bloodred: "#f03030",
   sky: "#007bff",
 };
 
 const gradientMap: Record<PixelColor, string> = {
-  lime: "linear-gradient(to bottom, #ccff00, #b3e600)",
+  lime: "linear-gradient(to bottom, #00b56fff, #008254ff)",
   bloodred: "linear-gradient(to bottom, #f03030, #e11d2e)",
   sky: "linear-gradient(to bottom, #007bff, #0056b3)",
 };
@@ -39,6 +41,8 @@ const CyberpunkButton = ({
   buttonColor = "lime",
   pixelColor = "black",
   buttonText = "Book a demo",
+  className = "",
+  style = {},
 }: CyberpunkButtonProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [shimmerPhase, setShimmerPhase] = useState(0);
@@ -90,6 +94,7 @@ const CyberpunkButton = ({
 
   return (
     <button
+      className={className}
       style={{
         position: "relative",
         display: "flex",
@@ -103,6 +108,7 @@ const CyberpunkButton = ({
         transition: "border-color 0.3s",
         outline: "none",
         overflow: "hidden",
+        ...style,
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

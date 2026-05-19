@@ -57,7 +57,7 @@ export default function KineticGrid({
 }: {
   children?: ReactNode;
   className?: string;
-  globalColor?: "default" | "monochrome";
+  globalColor?: "default" | "monochrome" | "vislo";
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -156,6 +156,13 @@ export default function KineticGrid({
           nodeActive: { r: 255, g: 255, b: 255, a: 1.00 },
           glow: "255,255,255",
           ripple: "255,255,255",
+        },
+        vislo: {
+          bg: "#0B0C0E",
+          lineActive: { r: 0, g: 224, b: 145, a: 0.90 },
+          nodeActive: { r: 0, g: 224, b: 145, a: 1.00 },
+          glow: "0,224,145",
+          ripple: "0,224,145",
         }
       }[globalColor ?? "default"];
 
@@ -339,8 +346,14 @@ export default function KineticGrid({
 
   // ── Render ──────────────────────────────────────────────────────────────────
 
+  const bgClass = {
+    default: "bg-[#161618]",
+    monochrome: "bg-[#000000]",
+    vislo: "bg-[#0B0C0E]",
+  }[globalColor ?? "default"];
+
   return (
-    <div className={cn("relative w-full min-h-screen overflow-hidden", globalColor === "monochrome" ? "bg-[#000000]" : "bg-[#161618]", className)}>
+    <div className={cn("relative w-full min-h-screen overflow-hidden", bgClass, className)}>
       <canvas ref={canvasRef} className="fixed inset-0 w-full h-full z-0 pointer-events-none" />
 
       <div className="relative z-10 w-full h-full">

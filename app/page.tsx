@@ -1,77 +1,44 @@
 "use client";
-import Footer from "@/components/footer";
 import { Icons } from "@/components/icons";
 import Link from "next/link";
-import AuraBackground from "@/components/imp-code";
 import TypewriterLoop from "../packages/typewriter-loop/typewriter-loop";
-import KeyboardUI from "../packages/keyboard/keyboard";
 import ProButton from "@/packages/pro-button/pro-button";
 import BlurReveal from "@/packages/blur-reveal/blur-reveal";
 import { motion } from "motion/react";
 import ShimmerText from "@/packages/shimmer-text/shimmer-text";
 import BeaconBadge from "@/packages/beacon-badge/beacon-badge";
+import CyberpunkButton from "../packages/cyberpunk-button/cyberpunk-button";
 
 export default function Home() {
   return (
-    <div className="antialiased flex flex-col selection:bg-[#4a9eff]/30 selection:text-white min-h-screen bg-[#0a0a0a]">
-      <AuraBackground />
+    <div className="relative min-h-screen w-full overflow-hidden bg-[#0B0C0E] text-white flex flex-col selection:bg-[#00E091]/30 selection:text-white">
+      {/* Vislo Dot Grid Pattern Overlay */}
+      <div 
+        className="pointer-events-none absolute inset-0 opacity-[0.07] z-0" 
+        style={{
+          backgroundImage: "radial-gradient(circle, #00e091 1px, transparent 1px)",
+          backgroundSize: "20px 20px"
+        }}
+      />
+      
+
       {/* ── Floating Capsule Navbar ────────────────────────────────────── */}
       <div className="fixed w-full z-50 top-6 px-4 flex justify-center transition-all duration-300">
-        <nav className="relative flex items-center justify-between w-full max-w-5xl px-4 py-3 rounded-xl bg-[#111111]/70 backdrop-blur-2xl border border-white/[0.08] shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]">
+        <nav className="relative flex items-center justify-between w-full max-w-5xl px-4 py-3 rounded-xl bg-[#0B0C0E]/70 backdrop-blur-2xl border border-white/[0.08] shadow-[0_8px_32px_0_rgba(0,0,0,0.5)]">
           {/* Logo */}
           <div className="flex items-center gap-2.5 group select-none cursor-pointer pl-2">
-            <div className="w-6 h-6 flex items-center justify-center">
-              <svg
-                viewBox="0 0 512 512"
-                fill="none"
-                className="w-full h-full rounded-xs"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g>
-                  <path
-                    d="M0 0C168.96 0 337.92 0 512 0C512 168.96 512 337.92 512 512C343.04 512 174.08 512 0 512C0 343.04 0 174.08 0 0Z"
-                    fill="#ffffff"
-                  />
-                  <path
-                    d="M252.438 70.875C255 73 255 73 256 75C256.117 77.0305 256.17 79.0649 256.193 81.0986C256.209 82.3805 256.225 83.6623 256.242 84.983C256.253 86.3897 256.264 87.7964 256.273 89.2031C256.279 89.9109 256.284 90.6187 256.29 91.348C256.316 95.0961 256.336 98.8441 256.35 102.592C256.363 105.691 256.391 108.788 256.432 111.886C256.482 115.63 256.506 119.373 256.513 123.117C256.52 124.541 256.535 125.965 256.559 127.389C256.758 139.931 256.758 139.931 253.589 143.84C249.438 147.303 246.353 148.213 241.062 149.188C225.746 152.635 212.498 162.269 203.715 175.184C194.935 189.603 191.293 206.448 194.407 223.189C198.637 240.256 208.14 254.666 223 264C230.638 268.537 238.037 271.027 246.652 272.848C250.538 274.185 252.331 275.928 255 279C255.33 279.33 255.66 279.66 256 280C256.12 281.992 256.17 283.989 256.193 285.985C256.209 287.267 256.225 288.549 256.242 289.87C256.253 291.282 256.264 292.694 256.273 294.105C256.279 294.814 256.284 295.523 256.29 296.253C256.316 300.008 256.336 303.762 256.35 307.517C256.367 311.39 256.411 315.262 256.462 319.134C256.496 322.115 256.508 325.096 256.513 328.078C256.52 329.505 256.535 330.932 256.559 332.358C256.758 344.928 256.758 344.928 253.654 348.88C248.64 352.885 243.095 351.594 237 351C200.866 346.731 167.705 325.984 145 298C131.964 280.715 123.165 261.059 118.458 239.966C118.158 238.676 117.824 237.394 117.456 236.122C115.305 228.146 115.605 219.885 115.625 211.688C115.625 210.885 115.625 210.082 115.626 209.255C115.658 196.775 116.457 185.035 120 173C120.182 172.344 120.364 171.688 120.551 171.013C130.552 135.46 155.195 105.313 186.875 86.8125C201.49 78.7205 216.412 73.277 232.875 70.25C233.565 70.1221 234.254 69.9941 234.965 69.8623C241.043 68.823 246.857 67.8313 252.438 70.875Z"
-                    fill="var(--primary)"
-                    style={{
-                      transformBox: "fill-box",
-                      transformOrigin: "center",
-                      transform: "scale(1, 0.9)",
-                    }}
-                  />
-                  <path
-                    style={{
-                      transformBox: "fill-box",
-                      transformOrigin: "center",
-                      transform: "scale(1, 0.9)",
-                    }}
-                    d="M317.438 174.219C351.124 191.062 377.956 220.117 390 256C391.933 262.264 393.589 268.598 395 275C395.188 275.827 395.375 276.654 395.569 277.507C397.152 285.177 397.347 292.684 397.313 300.5C397.309 301.488 397.309 301.488 397.306 302.495C397.099 342.013 381.718 377.524 353.67 405.376C339.427 419.224 322.351 428.68 304 436C302.956 436.42 301.912 436.84 300.836 437.273C290.081 441.214 273.349 445.717 262 443C258.864 440.449 257.193 438.943 256.372 434.927C256.371 433.78 256.37 432.634 256.369 431.453C256.357 430.148 256.344 428.843 256.331 427.499C256.343 426.083 256.357 424.666 256.371 423.25C256.37 421.789 256.368 420.329 256.364 418.868C256.361 415.812 256.376 412.756 256.403 409.699C256.437 405.788 256.431 401.879 256.413 397.968C256.402 394.953 256.411 391.938 256.426 388.924C256.431 387.482 256.431 386.04 256.424 384.599C256.419 382.581 256.442 380.564 256.467 378.547C256.473 377.401 256.479 376.254 256.485 375.073C257.109 371.35 258.409 369.693 261 367C263.94 365.1 266.841 364.551 270.25 363.875C286.824 359.823 300.572 350.274 310 336C318.283 321.916 321.75 304.619 318.094 288.531C315.937 280.279 313.017 272.962 308 266C307.233 264.851 307.233 264.851 306.449 263.68C297.673 251.321 282.274 242.726 267.438 240.125C263.426 239.272 260.951 237.951 258 235C256.607 232.215 256.85 229.91 256.823 226.794C256.81 225.489 256.797 224.183 256.784 222.839C256.776 221.407 256.769 219.975 256.762 218.543C256.758 217.823 256.754 217.103 256.75 216.361C256.729 212.549 256.714 208.737 256.705 204.925C256.694 200.991 256.66 197.057 256.62 193.123C256.594 190.095 256.585 187.068 256.582 184.04C256.577 182.59 256.565 181.14 256.547 179.69C256.522 177.659 256.526 175.626 256.53 173.594C256.524 172.439 256.518 171.284 256.512 170.093C257.107 166.32 258.317 164.674 261 162C276.795 156.735 302.764 167.682 317.438 174.219Z"
-                    fill="#111111"
-                  />
-                </g>
-                <defs>
-                  <clipPath id="clip0_12_3">
-                    <rect width="512" height="512" fill="white" />
-                  </clipPath>
-                </defs>
-              </svg>
-            </div>
-            <span className="font-display font-semibold text-[17px] tracking-tight text-white group-hover:text-white/90 transition-colors">
-              Satori
-              <span className="text-white/50 font-normal ml-[1px] !text-primary">
-                UI
-              </span>
+            <img src="/vislo.jpeg" alt="Vislo Logo" className="w-6 h-6 rounded-sm object-cover border border-white/[0.08]" />
+            <span className="font-display font-semibold text-[19px] tracking-tight text-white group-hover:text-white/90 transition-colors">
+              vislo<span className="text-[#00E091]">.ai</span>
             </span>
           </div>
 
           {/* Links */}
           <div className="hidden md:flex items-center gap-7 text-sm font-medium absolute left-1/2 -translate-x-1/2">
             {[
-              { href: "/components/dotted-modern", label: "Components" },
-              { href: "/interactions", label: "Interactions" },
-              { href: "/foundations", label: "Foundations" },
+              { href: "#features", label: "Features" },
+              { href: "#showcase", label: "Showcase" },
+              { href: "#pricing", label: "Pricing" },
             ].map((link) => (
               <Link
                 key={link.href}
@@ -85,15 +52,15 @@ export default function Home() {
 
           {/* Actions */}
           <div className="flex items-center gap-3">
-            {/* <Link
-              href="/login"
+            <Link
+              href="https://app.vislo.ai/login"
               className="text-[13px] font-medium text-white/70 hover:text-white transition-colors px-3 py-2 rounded-full border border-transparent hover:border-white/10 hidden sm:block"
             >
-              Sign In
-            </Link> */}
-            <Link href="/components/dotted-modern">
-              <button className="text-[13px] font-medium bg-white text-black hover:bg-white/90 px-4 py-2 rounded-md transition-all shadow-sm">
-                Get Started
+              Log In
+            </Link>
+            <Link href="https://app.vislo.ai/signup">
+              <button className="text-[13px] font-medium bg-[#00E091] text-black hover:bg-[#00E091]/95 px-4 py-2 rounded-md transition-all shadow-[0_0_20px_rgba(0,224,145,0.2)] hover:shadow-[0_0_25px_rgba(0,224,145,0.4)]">
+                Start Free
               </button>
             </Link>
           </div>
@@ -101,40 +68,49 @@ export default function Home() {
       </div>
 
       {/* ── Hero ───────────────────────────────────────────────────── */}
-      <main className="relative z-10 flex-grow flex flex-col items-center justify-center min-h-screen px-6 pt-14">
+      <main className="relative z-10 flex-grow flex flex-col items-center justify-center min-h-screen px-6 pt-24">
+        {/* Vislo Center Glow Radial Blur Overlay */}
+        <div 
+          className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full -z-10" 
+          style={{
+            width: "550px",
+            height: "550px",
+            backgroundColor: "#00E091",
+            opacity: 0.15,
+            filter: "blur(130px)",
+          }}
+        />
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto space-y-6">
           {/* Status badge */}
-          <BeaconBadge label="50+ Components Available" staticTheme="dark" />
+          <BeaconBadge label="AI-Powered generation" beconColor="green" staticTheme="dark" />
 
           {/* Headline with TypewriterLoop */}
-          <div className="flex items-center justify-center">
+          <div className="flex flex-col items-center justify-center gap-y-3">
             <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] text-white">
-              Build
+              Turn raw ideas into
             </h1>
             <TypewriterLoop
               LeadText=""
               morphingText={[
-                "Beautiful.",
-                "Extensible.",
-                "Premium.",
-                "Accessible.",
+                "Infographics.",
+                "Visual Content.",
+                "Stunning Slides.",
+                "Scroll-Stoppers.",
               ]}
               className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight justify-center"
               LeadTextClassName="text-white"
-              interval={5000}
-              staticColor="blue"
+              interval={4000}
+              staticColor="green"
               darkGradientBackgroundLock={true}
             />
           </div>
 
           {/* Subtitle with EncodedReveal */}
-
           <BlurReveal
-            className="mt-6 text-base md:text-lg text-zinc-200 max-w-2xl font-normal leading-relaxed"
+            className="mt-6 text-base md:text-lg text-zinc-300 max-w-2xl font-normal leading-relaxed"
             speedReveal={3}
           >
-            A collection of production-ready, interactive UI components with
-            physics-based motion. Copy, paste, and ship.
+            Describe what you want, and Vislo's AI generates polished, share-ready visuals in seconds. No design skills needed.
           </BlurReveal>
 
           {/* CTA row */}
@@ -142,19 +118,17 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-            className="mt-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
+            className="mt-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center"
           >
-
-            <Link href="/components/dotted-modern">
-              <ProButton text="Access Components" size="sm" pixelColor="sky" />
+            <Link href="https://app.vislo.ai/signup">
+              <ProButton text="Start Creating for Free" size="sm" pixelColor="emerald" />
             </Link>
-            {/* <Link
-              href="/components/dotted-modern"
-              className="px-6 py-4.5 rounded-xl text-sm font-medium text-white/60 border border-white/[0.08] hover:bg-white/[0.04] hover:text-white transition-all flex items-center gap-2 backdrop-blur-sm"
+            <Link
+              href="#showcase"
+              className="px-6 py-3.5 rounded-xl text-sm font-medium text-white/70 border border-white/[0.08] hover:bg-white/[0.04] hover:text-white transition-all flex items-center justify-center gap-2 backdrop-blur-sm"
             >
-              <Icons.terminal className="h-4 w-4" />
-              Documentation
-            </Link> */}
+              See Examples
+            </Link>
           </motion.div>
 
           {/* Stats row */}
@@ -171,12 +145,12 @@ export default function Home() {
             }}
             initial="hidden"
             animate="visible"
-            className="flex items-center gap-10 pt-6 text-center"
+            className="flex items-center gap-10 pt-8 text-center"
           >
             {[
-              { value: "50+", label: "Components" },
-              { value: "100%", label: "Accessible" },
-              { value: "MIT", label: "License" },
+              { value: "3s", label: "Avg Generation" },
+              { value: "100+", label: "Layouts" },
+              { value: "20k+", label: "Creators" },
             ].map((stat) => (
               <motion.div
                 key={stat.label}
@@ -194,10 +168,10 @@ export default function Home() {
                 }}
                 className="flex flex-col"
               >
-                <span className="text-xl font-display font-bold text-white/90">
+                <span className="text-xl font-display font-bold text-white/95">
                   {stat.value}
                 </span>
-                <span className="text-[11px] text-white/30 tracking-wider uppercase mt-0.5">
+                <span className="text-[10px] text-white/40 tracking-wider uppercase mt-0.5">
                   {stat.label}
                 </span>
               </motion.div>
@@ -206,80 +180,169 @@ export default function Home() {
         </div>
       </main>
 
-      {/* ── Component Showcase ─────────────────────────────────────── */}
-      <section className="hidden sm:block relative z-10 py-28 px-6">
+      {/* ── Customer Reviews Bento Grid ────────────────────────────────── */}
+      <section id="showcase" className="relative z-10 py-28 px-6">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16 space-y-4">
+            <BeaconBadge label="REVIEWS" beconColor="green" staticTheme="dark" />
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight">
-              Crafted with precision
+              What Vislo customers are saying
             </h2>
-            <p className="text-white/40 max-w-md mx-auto text-sm">
-              Every component is designed to feel alive. Here are a few from the
-              collection.
+            <p className="text-white/40 max-w-xl mx-auto text-sm">
+              Creators, brands, and agency teams using Vislo to turn raw ideas into scroll-stopping visuals — automatically.
             </p>
           </div>
 
-          {/* Keyboard showcase in a glass card */}
-          <div className="relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 via-purple-500/10 to-emerald-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-            <div className="relative bg-white/[0.03] border border-white/[0.06] rounded-2xl p-6 sm:p-10 backdrop-blur-sm overflow-hidden">
-              <div className="flex items-center gap-2 mb-6">
-                <div className="w-3 h-3 rounded-full bg-white/10" />
-                <div className="w-3 h-3 rounded-full bg-white/10" />
-                <div className="w-3 h-3 rounded-full bg-white/10" />
-                <span className="ml-3 text-xs text-white/30 font-mono">
-                  keyboard-ui.tsx
-                </span>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-[1px] bg-white/[0.08] border border-white/[0.08] rounded-2xl overflow-hidden shadow-2xl">
+            {[
+              {
+                text: "I used to spend hours designing infographics for LinkedIn. Now Vislo generates a polished post in seconds. My content reach doubled in the first month without hiring a designer.",
+                name: "Amaya Santos",
+                role: "Founder, Linework Studio",
+                initials: "AS",
+                hasQuote: true
+              },
+              {
+                text: "Our content-to-lead flow started converting the day we launched. Vislo replaced three design tools we were duct-taping together and our cost-per-post dropped by half.",
+                name: "Priya Shah",
+                role: "Growth Lead, Meadow & Mane",
+                initials: "PS",
+                hasQuote: false
+              },
+              {
+                text: "LinkedIn-first gating alone grew our audience by 18k in six weeks. The generator keeps firing even when my team is asleep — it genuinely runs in the background.",
+                name: "Marcus Obi",
+                role: "Founder, Drip Studio",
+                initials: "MO",
+                hasQuote: false
+              },
+              {
+                text: "We moved off our old design tool and saved about $200 a month. No more per-seat pricing surprises, and the templates just keep updating with our branding automatically.",
+                name: "Elena Varga",
+                role: "Ops Manager, Kiln Ceramics",
+                initials: "EV",
+                hasQuote: false
+              },
+              {
+                text: "We launched a carousel on Monday and had 400 downloads of our guide by Tuesday morning. My team was out that day and everything ran itself. That's the whole product for me.",
+                name: "Kofi Mensah",
+                role: "Owner, Saffron & Salt",
+                initials: "KM",
+                hasQuote: true
+              },
+              {
+                text: "The brand kit is the real unlock. Four of us edit without stepping on each other and every graphic has the correct colors + logo. My consulting business finally scaled past me.",
+                name: "Dani Reyes",
+                role: "Coach, Reyes Training",
+                initials: "DR",
+                hasQuote: false
+              },
+              {
+                text: "Building Vislo came from scratching my own itch — I kept spending hours on slides overnight. Seeing creators rely on it every day to actually close sales is the best part of this job.",
+                name: "Hovin Kalathiya",
+                role: "Founder, Vislo",
+                initials: "HK",
+                hasQuote: false
+              },
+              {
+                text: "Campaign analytics in Vislo show graphics downloaded, click-through rates, and social conversions in one place. We finally know which templates actually drove revenue, not just likes.",
+                name: "Tomás Ribeiro",
+                role: "Performance Marketer, Onda Agency",
+                initials: "TR",
+                hasQuote: false
+              },
+              {
+                text: "Setup took me fifteen minutes. I'm not technical at all. My brand is fully loaded and I generate lead-gen infographics before I even open my laptop in the morning.",
+                name: "Iris Kowalski",
+                role: "Coach, Kindling Pilates",
+                initials: "IK",
+                hasQuote: true
+              }
+            ].map((review, idx) => (
+              <div key={idx} className="bg-[#0B0C0E]/95 p-8 flex flex-col justify-between min-h-[260px] hover:bg-[#121419]/90 transition-colors duration-300">
+                <div>
+                  {review.hasQuote && (
+                    <div className="text-[#00E091] text-4xl font-serif leading-none mb-3 -mt-2">”</div>
+                  )}
+                  <p className="text-white/80 text-xs sm:text-[13px] leading-relaxed font-normal">
+                    “{review.text}”
+                  </p>
+                </div>
+                <div className="flex items-center gap-3 mt-6">
+                  <div className="w-8 h-8 rounded-full bg-zinc-800 border border-white/[0.08] flex items-center justify-center font-display text-[11px] font-bold text-[#00E091] shrink-0">
+                    {review.initials}
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs font-semibold text-white">{review.name}</span>
+                    <span className="text-[10px] text-white/40">{review.role}</span>
+                  </div>
+                </div>
               </div>
-              <div className="dark">
-                <KeyboardUI />
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ── Features ───────────────────────────────────────────────── */}
-      <section className="relative z-10 py-24 px-6 border-t border-white/[0.06]">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mb-3">
-              Built for developers
+      <section id="features" className="relative z-10 py-28 px-6 border-t border-white/[0.06]">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-20 space-y-4">
+            <BeaconBadge label="Features" beconColor="green" staticTheme="dark" />
+            <h2 className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight">
+              Everything you need to create stunning visuals
             </h2>
             <p className="text-white/40 max-w-lg mx-auto text-sm">
-              Everything you need to build beautiful interfaces, faster.
+              No design skills required. Our AI agent takes care of the layout, style, and formatting.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-4">
+          <div className="grid md:grid-cols-3 gap-6">
             {[
               {
-                icon: Icons.code,
-                title: "Copy & Paste",
+                icon: Icons.sparkles,
+                title: "AI-Powered Generation",
                 description:
-                  "Just copy the code and paste it into your project. No complex setup required.",
+                  "Describe your idea in plain text and watch it transform into a polished infographic in seconds.",
+              },
+              {
+                icon: Icons.layers,
+                title: "100+ Adaptable Templates",
+                description:
+                  "Choose from a massive library of professionally designed layouts that automatically adapt to your content.",
               },
               {
                 icon: Icons.palette,
-                title: "Fully Customizable",
+                title: "Brand Consistency",
                 description:
-                  "Every component is designed to be customized to match your brand perfectly.",
+                  "Upload your brand kit. Every infographic, chart, and graphic automatically matches your colors and fonts.",
               },
               {
                 icon: Icons.pointer,
-                title: "Physics-Based Motion",
+                title: "Visual Editing Suite",
                 description:
-                  "Smooth, natural animations powered by spring physics for a tactile feel.",
+                  "Fine-tune every element with a powerful drag-and-drop editor. Adjust text, colors, layouts, and shapes.",
+              },
+              {
+                icon: Icons.downloadArrow || Icons.chevronDown,
+                title: "High-Res PNG Export",
+                description:
+                  "Download crystal-clear, high-resolution PNG images optimized for LinkedIn, X (Twitter), and presentations.",
+              },
+              {
+                icon: Icons.messageSquare,
+                title: "Agentic Refinement",
+                description:
+                  "An AI agent that iterates with you. Give feedback in plain English and watch it refine your design dynamically.",
               },
             ].map((feature, index) => (
               <div
                 key={index}
-                className="group p-6 rounded-xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-300 backdrop-blur-sm"
+                className="group p-8 rounded-xl border border-white/[0.06] bg-[#0E0F12]/60 hover:bg-[#121419]/80 hover:border-[#00E091]/30 transition-all duration-300 backdrop-blur-sm"
               >
-                <div className="w-9 h-9 rounded-lg bg-white/[0.06] flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors text-white/70 group-hover:text-primary">
-                  <feature.icon className="h-4 w-4" />
+                <div className="w-11 h-11 rounded-lg bg-white/[0.04] flex items-center justify-center mb-6 group-hover:bg-[#00E091]/10 transition-colors text-white/70 group-hover:text-[#00E091] shadow-inner">
+                  <feature.icon className="h-5 w-5" />
                 </div>
-                <h3 className="font-display font-semibold text-white text-sm mb-1.5">
+                <h3 className="font-display font-semibold text-white text-base mb-2 group-hover:text-[#00E091] transition-colors">
                   {feature.title}
                 </h3>
                 <p className="text-xs text-white/40 leading-relaxed">
@@ -291,7 +354,118 @@ export default function Home() {
         </div>
       </section>
 
-      <Footer />
+      {/* ── Pricing Section ─────────────────────────────────────────── */}
+      <section id="pricing" className="relative z-10 py-28 px-6 border-t border-white/[0.06] bg-[#090A0D]/40">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-16 space-y-4">
+            <BeaconBadge label="Pricing" beconColor="green" staticTheme="dark" />
+            <h2 className="font-display text-3xl sm:text-4xl font-bold text-white tracking-tight">
+              One plan. Everything included.
+            </h2>
+            <p className="text-white/40 max-w-md mx-auto text-sm">
+              Lock in the founding member price before it's gone.
+            </p>
+          </div>
+
+          <div className="relative max-w-md mx-auto group">
+            <div className="absolute -inset-1 bg-gradient-to-b from-[#00E091]/35 to-transparent rounded-2xl blur-xl opacity-20 group-hover:opacity-40 transition duration-1000" />
+            <div className="relative bg-[#0B0C0E]/90 border border-white/[0.08] hover:border-[#00E091]/25 transition-all duration-300 rounded-2xl p-8 sm:p-10 backdrop-blur-md">
+              <div className="flex justify-between items-start mb-6">
+                <div>
+                  <ShimmerText variant="green" className="font-semibold text-xs tracking-wider uppercase mb-1">
+                    Founding Member
+                  </ShimmerText>
+                  <h3 className="text-xl font-bold text-white">Lifetime Rate</h3>
+                </div>
+                <div className="text-right">
+                  <div className="text-4xl font-extrabold text-white">$19<span className="text-sm font-normal text-white/40">/mo</span></div>
+                  <div className="text-[10px] text-[#00E091] font-semibold tracking-wider uppercase mt-1">Saves 60%</div>
+                </div>
+              </div>
+
+              <div className="h-px bg-white/[0.08] my-6" />
+
+              <ul className="space-y-4 mb-8 text-xs text-white/70">
+                {[
+                  "Unlimited infographics & visuals",
+                  "All 100+ templates & layouts",
+                  "Brand kit upload (colors, fonts, logo)",
+                  "High-res PNG export optimized for LinkedIn",
+                  "Full visual canvas editor",
+                  "Priority AI generation speed",
+                  "Email support"
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-center gap-3">
+                    <svg className="w-3.5 h-3.5 text-[#00E091] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <Link href="https://app.vislo.ai/signup" className="block w-full">
+                <CyberpunkButton buttonText="Get Started Now" pixelColor="white" buttonColor="lime" className="w-full justify-center" />
+              </Link>
+              <p className="text-center text-[10px] text-white/40 mt-4">
+                Start free, upgrade when you're ready. Cancel anytime.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Ready to Create Section ───────────────────────────────────── */}
+      <section className="relative z-10 py-28 px-6 border-t border-white/[0.06] text-center overflow-hidden">
+        {/* Background glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-[#00E091]/5 rounded-full blur-[100px] pointer-events-none z-0" />
+        
+        <div className="relative z-10 max-w-3xl mx-auto space-y-6">
+          <h2 className="font-display text-3xl sm:text-5xl font-bold text-white tracking-tight">
+            Ready to create your first infographic?
+          </h2>
+          <p className="text-white/60 max-w-lg mx-auto text-sm sm:text-base">
+            Start with 3 free generations. No credit card required.
+          </p>
+          <div className="pt-4 flex justify-center">
+            <Link href="https://app.vislo.ai/signup">
+              <ProButton text="Start Creating for Free" size="sm" pixelColor="emerald" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Footer ─────────────────────────────────────────────────── */}
+      <footer className="relative z-10 w-full border-t border-white/[0.08] bg-[#090A0D]/60 backdrop-blur-sm pt-16 pb-8 text-white mt-auto">
+        <div className="relative mx-auto max-w-5xl px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="flex flex-col items-center sm:items-start gap-3">
+            {/* Logo */}
+            <div className="flex items-center gap-2 group select-none cursor-pointer">
+              <img src="/vislo.jpeg" alt="Vislo Logo" className="w-5 h-5 rounded-sm object-cover border border-white/[0.08]" />
+              <span className="font-display font-semibold text-base tracking-tight text-white group-hover:text-white/90 transition-colors">
+                vislo<span className="text-[#00E091]">.ai</span>
+              </span>
+            </div>
+            <p className="text-white/40 text-xs max-w-sm text-center sm:text-left leading-relaxed">
+              AI-powered visual content that wins hearts (and pipeline) on LinkedIn.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center gap-6 text-xs text-white/50">
+            <div className="flex gap-6">
+              <a href="#features" className="hover:text-white transition-colors">Features</a>
+              <a href="#showcase" className="hover:text-white transition-colors">Showcase</a>
+              <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
+              <a href="https://linkedin.com/company/vislo" target="_blank" rel="noopener noreferrer" className="hover:text-[#00E091] transition-colors flex items-center gap-1">
+                <Icons.linkedin className="w-3.5 h-3.5" />
+                LinkedIn
+              </a>
+            </div>
+            <span className="hidden sm:inline text-white/10">|</span>
+            <p>&copy; {new Date().getFullYear()} Vislo. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

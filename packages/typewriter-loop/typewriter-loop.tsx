@@ -14,7 +14,7 @@ interface TypewriterLoopProps {
   morphingTextClassName?: string;
   backgroundClassName?: string;
   cursorClassName?: string;
-  staticColor?: "violet" | "blue" | "emerald" | "amber" | "rose" | "fuchsia";
+  staticColor?: "violet" | "blue" | "emerald" | "amber" | "rose" | "fuchsia" | "green";
   darkGradientBackgroundLock?: boolean; // New prop
 }
 
@@ -72,7 +72,6 @@ const TypewriterLoop = ({
     "bg-fuchsia-500",
   ];
 
-  // Color mapping for static colors
   const staticGradientMap = {
     violet:
       "from-violet-400 to-violet-800 dark:from-violet-400 dark:to-violet-600",
@@ -83,6 +82,7 @@ const TypewriterLoop = ({
     rose: "from-rose-400 to-rose-800 dark:from-rose-400 dark:to-rose-600",
     fuchsia:
       "from-fuchsia-400 to-fuchsia-800 dark:from-fuchsia-400 dark:to-fuchsia-600",
+    green: "from-[#00E091] to-[#00A36C] dark:from-[#00E091] dark:to-[#00A36C]",
   };
 
   const staticBackgroundMap = {
@@ -96,6 +96,8 @@ const TypewriterLoop = ({
     rose: "from-transparent via-rose-200/30 to-rose-200 dark:from-transparent dark:via-rose-950/30 dark:to-rose-950/60",
     fuchsia:
       "from-transparent via-fuchsia-200/30 to-fuchsia-200 dark:from-transparent dark:via-fuchsia-950/30 dark:to-fuchsia-950/60",
+    green:
+      "from-transparent via-emerald-200/30 to-emerald-200 dark:from-transparent dark:via-[#00E091]/10 dark:to-[#00E091]/25",
   };
 
   // Dark-only static background map
@@ -106,6 +108,7 @@ const TypewriterLoop = ({
     amber: "from-transparent via-amber-950/30 to-amber-950/60",
     rose: "from-transparent via-rose-950/30 to-rose-950/60",
     fuchsia: "from-transparent via-fuchsia-950/30 to-fuchsia-950/60",
+    green: "from-transparent via-[#00E091]/10 to-[#00E091]/25",
   };
 
   const staticCursorMap = {
@@ -115,6 +118,7 @@ const TypewriterLoop = ({
     amber: "bg-amber-500",
     rose: "bg-rose-500",
     fuchsia: "bg-fuchsia-500",
+    green: "bg-[#00E091]",
   };
 
   // Determine which gradient to use
