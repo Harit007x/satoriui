@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
 
 type PixelColor = "lime" | "bloodred" | "sky";
 type PixelShade = "white" | "black";
+type ButtonSize = "xs" | "sm" | "md" | "lg";
 
 interface CyberpunkButtonProps {
   buttonColor?: PixelColor;
@@ -11,6 +13,7 @@ interface CyberpunkButtonProps {
   buttonText?: string;
   className?: string;
   style?: React.CSSProperties;
+  size?: ButtonSize;
 }
 
 const colorMap: Record<PixelColor, string> = {
@@ -37,24 +40,77 @@ const pixelShadeMap: Record<PixelShade, { active: string; inactive: string }> =
     },
   };
 
+const sizeConfig = {
+  xs: {
+    button: "h-[32px] sm:h-[40px] lg:h-[48px] rounded-[8px] sm:rounded-[10px] lg:rounded-[12px] p-[2px] sm:p-[2px] lg:p-[4px]",
+    boxInset: "left-[2px] top-[2px] bottom-[2px] sm:left-[2px] sm:top-[2px] sm:bottom-[2px] lg:left-[4px] lg:top-[4px] lg:bottom-[4px]",
+    boxWidth: "w-6 sm:w-8 lg:w-10",
+    boxWidthHovered: "w-[calc(100%-4px)] sm:w-[calc(100%-4px)] lg:w-[calc(100%-8px)]",
+    boxBorderRadius: "rounded-[4px] sm:rounded-[6px] lg:rounded-[8px]",
+    textContainer: "pl-9 sm:pl-12 lg:pl-15 pr-3 sm:pr-4 lg:pr-5",
+    text: "text-[10px] sm:text-[12px] lg:text-[14px]",
+    pixelSize: "w-[1.5px] h-[1.5px] sm:w-[2px] sm:h-[2px] lg:w-[2.5px] lg:h-[2.5px]",
+    gridGap: "gap-[0.5px] sm:gap-[1px] lg:gap-[1px]",
+    colsHovered: 20,
+    arrowCols: 5,
+  },
+  sm: {
+    button: "h-[40px] sm:h-[48px] lg:h-[60px] rounded-[12px] sm:rounded-[14px] lg:rounded-[16px] p-[4px] sm:p-[4px] lg:p-[6px]",
+    boxInset: "left-[4px] top-[4px] bottom-[4px] sm:left-[4px] sm:top-[4px] sm:bottom-[4px] lg:left-[6px] lg:top-[6px] lg:bottom-[6px]",
+    boxWidth: "w-8 sm:w-10 lg:w-12",
+    boxWidthHovered: "w-[calc(100%-8px)] sm:w-[calc(100%-8px)] lg:w-[calc(100%-12px)]",
+    boxBorderRadius: "rounded-[6px] sm:rounded-[8px] lg:rounded-[10px]",
+    textContainer: "pl-12 sm:pl-15 lg:pl-18 pr-4 sm:pr-5 lg:pr-6",
+    text: "text-[12px] sm:text-[14px] lg:text-[16px]",
+    pixelSize: "w-[2px] h-[2px] sm:w-[3px] sm:h-[3px] lg:w-[3px] lg:h-[3px]",
+    gridGap: "gap-[1px] sm:gap-[1.5px] lg:gap-[2px]",
+    colsHovered: 25,
+    arrowCols: 5,
+  },
+  md: {
+    button: "h-[48px] sm:h-[68px] lg:h-[80px] rounded-[16px] sm:rounded-[18px] lg:rounded-[20px] p-[4px] sm:p-[6px] lg:p-[6px]",
+    boxInset: "left-[4px] sm:left-[6px] lg:left-[6px] top-[4px] sm:top-[6px] lg:top-[6px] bottom-[4px] sm:bottom-[6px] lg:bottom-[6px]",
+    boxWidth: "w-10 sm:w-14 lg:w-16",
+    boxWidthHovered: "w-[calc(100%-8px)] sm:w-[calc(100%-12px)] lg:w-[calc(100%-12px)]",
+    boxBorderRadius: "rounded-[8px] sm:rounded-[12px] lg:rounded-[14px]",
+    textContainer: "pl-15 sm:pl-20 lg:pl-24 pr-6 sm:pr-8 lg:pr-10",
+    text: "text-[16px] sm:text-[18px] lg:text-[22px]",
+    pixelSize: "w-[3px] h-[3px] sm:w-[4px] sm:h-[4px] lg:w-[4px] lg:h-[4px]",
+    gridGap: "gap-[1.5px] sm:gap-[2px] lg:gap-[2px]",
+    colsHovered: 30,
+    arrowCols: 5,
+  },
+  lg: {
+    button: "h-[76px] sm:h-[92px] lg:h-[112px] rounded-[20px] sm:rounded-[24px] lg:rounded-[28px] p-[6px] sm:p-[8px] lg:p-[8px]",
+    boxInset: "left-[6px] sm:left-[8px] lg:left-[8px] top-[6px] sm:top-[8px] lg:top-[8px] bottom-[6px] sm:bottom-[8px] lg:bottom-[8px]",
+    boxWidth: "w-16 sm:w-20 lg:w-24",
+    boxWidthHovered: "w-[calc(100%-12px)] sm:w-[calc(100%-16px)] lg:w-[calc(100%-16px)]",
+    boxBorderRadius: "rounded-[14px] sm:rounded-[18px] lg:rounded-[20px]",
+    textContainer: "pl-24 sm:pl-28 lg:pl-36 pr-8 sm:pr-10 lg:pr-14",
+    text: "text-[22px] sm:text-[26px] lg:text-[32px]",
+    pixelSize: "w-[4px] h-[4px] sm:w-[5px] sm:h-[5px] lg:w-[6px] lg:h-[6px]",
+    gridGap: "gap-[2px] sm:gap-[3px] lg:gap-[4px]",
+    colsHovered: 35,
+    arrowCols: 5,
+  },
+};
+
 const CyberpunkButton = ({
   buttonColor = "lime",
   pixelColor = "black",
   buttonText = "Book a demo",
   className = "",
   style = {},
+  size = "sm",
 }: CyberpunkButtonProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [shimmerPhase, setShimmerPhase] = useState(0);
   const [activeArrow, setActiveArrow] = useState(0);
 
+  const s = sizeConfig[size];
   const rows = 5;
-  const pixelSize = 3;
-  const gap = 2;
   const spacing = 5;
   const centerRow = 2;
-  const colsHovered = 30;
-  const arrowCols = spacing;
 
   useEffect(() => {
     if (isHovered) return;
@@ -66,12 +122,12 @@ const CyberpunkButton = ({
 
   useEffect(() => {
     if (!isHovered) return;
-    const totalArrows = Math.floor(colsHovered / spacing);
+    const totalArrows = Math.floor(s.colsHovered / spacing);
     const timer = setInterval(() => {
       setActiveArrow((prev) => (prev + 1) % totalArrows);
     }, 120);
     return () => clearInterval(timer);
-  }, [isHovered]);
+  }, [isHovered, s.colsHovered]);
 
   const isPixelActiveHovered = (r: number, c: number) => {
     const rowOffset = r - centerRow;
@@ -94,44 +150,28 @@ const CyberpunkButton = ({
 
   return (
     <button
-      className={className}
-      style={{
-        position: "relative",
-        display: "flex",
-        alignItems: "center",
-        backgroundColor: "#0a0a0a",
-        borderRadius: "12px",
-        padding: "4px",
-        border: "1px solid #262626",
-        height: "64px",
-        cursor: "pointer",
-        transition: "border-color 0.3s",
-        outline: "none",
-        overflow: "hidden",
-        ...style,
-      }}
+      className={cn(
+        "relative flex items-center bg-[#0a0a0a] cursor-pointer transition-[border-color] duration-300 outline-none overflow-hidden border border-[#262626]",
+        s.button,
+        className
+      )}
+      style={style}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* TEXT (now flexible) */}
+      {/* TEXT */}
       <div
-        style={{
-          paddingLeft: "72px",
-          paddingRight: "24px",
-          whiteSpace: "nowrap",
-          transition: "opacity 0.3s, transform 0.3s",
-          opacity: isHovered ? 0 : 1,
-          transform: isHovered ? "translateX(-8px)" : "translateX(0)",
-        }}
+        className={cn(
+          "whitespace-nowrap transition-[opacity,transform] duration-300",
+          s.textContainer,
+          isHovered ? "-translate-x-2 opacity-0" : "translate-x-0 opacity-100"
+        )}
       >
         <span
-          style={{
-            color: "white",
-            fontSize: "18px",
-            fontWeight: 500,
-            letterSpacing: "-0.02em",
-            fontFamily: "system-ui",
-          }}
+          className={cn(
+            "text-white font-medium tracking-[-0.02em] font-sans",
+            s.text
+          )}
         >
           {buttonText}
         </span>
@@ -139,36 +179,32 @@ const CyberpunkButton = ({
 
       {/* COLORED BOX */}
       <div
+        className={cn(
+          "absolute transition-[width,left,right,top,bottom] duration-500 ease-[cubic-bezier(0.2,0,0,1)] flex items-center justify-center overflow-hidden",
+          s.boxInset,
+          s.boxBorderRadius,
+          isHovered ? s.boxWidthHovered : s.boxWidth
+        )}
         style={{
-          position: "absolute",
-          left: "4px",
-          top: "4px",
-          bottom: "4px",
-          width: isHovered ? "calc(100% - 8px)" : "56px",
-          transition: "width 0.5s cubic-bezier(0.2,0,0,1)",
-          borderRadius: "8px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          overflow: "hidden",
           backgroundColor: colorMap[buttonColor],
           backgroundImage: isHovered ? gradientMap[buttonColor] : "none",
         }}
       >
         {isHovered ? (
-          <div style={{ display: "grid", gap: `${gap}px` }}>
+          <div className={cn("grid", s.gridGap)}>
             {Array.from({ length: rows }).map((_, r) => (
-              <div key={r} style={{ display: "flex", gap: `${gap}px` }}>
-                {Array.from({ length: colsHovered }).map((_, c) => {
+              <div key={r} className="flex gap-[inherit]">
+                {Array.from({ length: s.colsHovered }).map((_, c) => {
                   const { active, arrowIndex } = isPixelActiveHovered(r, c);
                   const isHighlighted = arrowIndex === activeArrow;
                   return (
                     <div
                       key={`${r}-${c}`}
+                      className={cn(
+                        "rounded-[1px] shrink-0",
+                        s.pixelSize,
+                      )}
                       style={{
-                        width: `${pixelSize}px`,
-                        height: `${pixelSize}px`,
-                        borderRadius: "1px",
                         backgroundColor: active
                           ? isHighlighted
                             ? pixelColors.active
@@ -182,10 +218,10 @@ const CyberpunkButton = ({
             ))}
           </div>
         ) : (
-          <div style={{ display: "grid", gap: `${gap}px` }}>
+          <div className={cn("grid", s.gridGap)}>
             {Array.from({ length: rows }).map((_, r) => (
-              <div key={r} style={{ display: "flex", gap: `${gap}px` }}>
-                {Array.from({ length: arrowCols }).map((_, c) => {
+              <div key={r} className="flex gap-[inherit]">
+                {Array.from({ length: s.arrowCols }).map((_, c) => {
                   const { active } = isPixelActiveHovered(r, c);
                   const shimCol = shimmerPhase % spacing;
                   const phase = c % spacing;
@@ -194,10 +230,11 @@ const CyberpunkButton = ({
                   return (
                     <div
                       key={`${r}-${c}`}
+                      className={cn(
+                        "rounded-[1px] shrink-0",
+                        s.pixelSize,
+                      )}
                       style={{
-                        width: `${pixelSize}px`,
-                        height: `${pixelSize}px`,
-                        borderRadius: "1px",
                         backgroundColor: active
                           ? isShimmering
                             ? pixelColors.active
